@@ -5,7 +5,7 @@ const meetupSchema = new Schema({
 	postedBy: { type: String },
 	city: { type: String },
 	cityWeather: { type: String },
-	date: { type: Number }, //таймстамп старта
+	date: { type: Number }, //таймстамп старта (дата и время)
 	distance: { type: Number },
 	speed: { type: Number },
 	difficultyLevel: { type: String },
