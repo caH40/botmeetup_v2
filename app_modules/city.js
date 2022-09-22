@@ -1,3 +1,7 @@
 export async function editCity(ctx) {
-	await ctx.reply('hi');
+	try {
+		await ctx.reply('hi');
+	} catch (error) {
+		console.log(error);
+	}
 }

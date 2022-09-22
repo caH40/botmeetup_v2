@@ -1,5 +1,9 @@
 import { commandsMessage } from './texts.js';
 
 export async function help(ctx) {
-	ctx.reply(commandsMessage);
+	try {
+		await ctx.reply(commandsMessage);
+	} catch (error) {
+		console.log(error);
+	}
 }
