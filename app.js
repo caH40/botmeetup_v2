@@ -12,7 +12,9 @@ bot.command('/help', async ctx => help(ctx));
 // bot.command('/rideOn', async ctx => rideOn(ctx));
 // bot.command('/rating', async ctx => rating(ctx));
 // bot.command('/delete', async ctx => deletePost(ctx));
+// bot.command('/setup', async ctx => setup(ctx));
 bot.command('/city', async ctx => editCity(ctx));
+// bot.on('callback_query', async ctx => callbackQuery(ctx));
 
 bot.launch();
 
