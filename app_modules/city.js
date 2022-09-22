@@ -1,6 +1,8 @@
+import { adminVerify } from './admin-verify.js';
+
 export async function editCity(ctx) {
 	try {
-		await ctx.reply('hi');
+		const isAdmin = await adminVerify(ctx);
 	} catch (error) {
 		console.log(error);
 	}

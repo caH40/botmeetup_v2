@@ -7,14 +7,14 @@ import { help } from './app_modules/help.js';
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-bot.command('/start', async ctx => start(ctx));
-bot.command('/help', async ctx => help(ctx));
-// bot.command('/rideOn', async ctx => rideOn(ctx));
-// bot.command('/rating', async ctx => rating(ctx));
-// bot.command('/delete', async ctx => deletePost(ctx));
-// bot.command('/setup', async ctx => setup(ctx));
-bot.command('/city', async ctx => editCity(ctx));
-// bot.on('callback_query', async ctx => callbackQuery(ctx));
+bot.command('/start', async ctx => await start(ctx));
+bot.command('/help', async ctx => await help(ctx));
+// bot.command('/rideOn', async ctx => await rideOn(ctx));
+// bot.command('/rating', async ctx => await rating(ctx));
+// bot.command('/delete', async ctx => await deletePost(ctx));
+// bot.command('/setup', async ctx => await setup(ctx));
+bot.command('/city', async ctx => await editCity(ctx));
+// bot.on('callback_query', async ctx => await callbackQuery(ctx));
 
 bot.launch();
 
