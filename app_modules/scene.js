@@ -19,5 +19,4 @@ export const setupScene = new Scenes.BaseScene('setup');
 setupScene.enter(async ctx => await ctx.reply(setupMessage, { disable_web_page_preview: true }));
 setupScene.leave(async ctx => await ctx.reply('До свидания!'));
 setupScene.command('quit', leave('setup'));
-setupScene.command('test', async ctx => await ctx.reply('test'));
 setupScene.on('message', async ctx => await apiWeather(ctx));
