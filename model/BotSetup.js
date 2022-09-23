@@ -5,8 +5,8 @@ const { Schema, model } = pkg;
 const BotSetupSchema = new Schema({
 	channelOwnerId: { type: Number },
 	channelId: { type: Number, unique: true },
-	channelName: { type: String },
 	channelTitle: { type: String },
+	channelName: { type: String },
 	groupId: { type: Number, unique: true },
 	groupTitle: { type: String },
 	city: [{ type: String }],

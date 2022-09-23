@@ -1,6 +1,7 @@
 import { Scenes } from 'telegraf';
 
 import { setupMessage } from './texts.js';
+import { apiWeather } from './api-weather.js';
 
 const { leave } = Scenes.Stage;
 
@@ -19,11 +20,4 @@ setupScene.enter(async ctx => await ctx.reply(setupMessage, { disable_web_page_p
 setupScene.leave(async ctx => await ctx.reply('До свидания!'));
 setupScene.command('quit', leave('setup'));
 setupScene.command('test', async ctx => await ctx.reply('test'));
-setupScene.on('message', async ctx => {
-	const message = ctx.message.text;
-	if (message.includes('API ') && message.length == 36) {
-		await ctx.reply('Отлично, ключ сохранен в базе данных.');
-	} else {
-		await ctx.reply('Неверный формат ввода ключа, попробуйте еще.');
-	}
-});
+setupScene.on('message', async ctx => await apiWeather(ctx));
