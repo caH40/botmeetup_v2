@@ -1,4 +1,5 @@
 import { Scenes } from 'telegraf';
+
 import { setupMessage } from './texts.js';
 
 const { leave } = Scenes.Stage;

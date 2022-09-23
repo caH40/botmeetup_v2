@@ -3,13 +3,14 @@ import pkg from 'mongoose';
 const { Schema, model } = pkg;
 
 const BotSetupSchema = new Schema({
+	channelOwnerId: { type: Number },
 	channelId: { type: Number, unique: true },
 	channelName: { type: String },
 	channelTitle: { type: String },
 	groupId: { type: Number, unique: true },
-	groupName: { type: String },
 	groupTitle: { type: String },
 	city: [{ type: String }],
+	apiWeather: { type: String },
 });
 
-export default model('BotSetup', BotSetupSchema);
+export const BotSetup = model('BotSetup', BotSetupSchema);

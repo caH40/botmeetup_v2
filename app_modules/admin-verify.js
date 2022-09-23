@@ -1,4 +1,5 @@
 export async function adminVerify(ctx) {
+	//сделать проверку что общение в группе/канале, а не с ботом
 	try {
 		const userId = ctx.message.from.id;
 		const chatId = ctx.message.chat.id;
