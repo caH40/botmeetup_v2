@@ -12,7 +12,7 @@ cityScene.on('message', ctx => {
 	ctx.reply('Вижу ваше сообщение в Сцене - ' + ctx.message.text);
 });
 
-//this is a scene for editing an array of cities
+//this scene edits the bot data
 export const setupScene = new Scenes.BaseScene('setup');
 setupScene.enter(async ctx => await ctx.reply(setupMessage, { disable_web_page_preview: true }));
 setupScene.leave(async ctx => await ctx.reply('До свидания!'));

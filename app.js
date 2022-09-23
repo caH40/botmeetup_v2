@@ -1,11 +1,17 @@
 import 'dotenv/config';
 import { Scenes, session, Telegraf } from 'telegraf';
+import mongoose from 'mongoose';
 
 import { editCity } from './app_modules/city.js';
 import { setup } from './app_modules/setup.js';
 import { start } from './app_modules/start.js';
 import { help } from './app_modules/help.js';
 import { cityScene, setupScene } from './app_modules/scene.js';
+
+await mongoose
+	.connect(process.env.MONGODB)
+	.then(() => console.log('Connected to Mongo..'))
+	.catch(error => console.log(error));
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
