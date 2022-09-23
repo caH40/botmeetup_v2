@@ -7,6 +7,7 @@ import { setup } from './controllers/setup.js';
 import { updateSetupChannel } from './controllers/update-setup.js';
 import { start } from './controllers/start.js';
 import { help } from './controllers/help.js';
+import { rideOn } from './controllers/rideon.js';
 import { cityScene, setupScene } from './app_modules/scene.js';
 
 await mongoose
@@ -23,7 +24,7 @@ bot.use(stage.middleware());
 
 bot.command('start', async ctx => await start(ctx));
 bot.command('help', async ctx => await help(ctx));
-// bot.command('/rideOn', async ctx => await rideOn(ctx));
+bot.command('/rideon', async ctx => await rideOn(ctx));
 // bot.command('/rating', async ctx => await rating(ctx));
 // bot.command('/delete', async ctx => await deletePost(ctx));
 bot.command('city', async ctx => await editCity(ctx));
