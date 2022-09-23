@@ -27,6 +27,11 @@ export async function updateSetupGroup(ctx) {
 
 export async function updateSetupChannel(ctx) {
 	try {
+		if (!ctx.message.forward_from_chat) {
+			const chatId = ctx.message.chat.id;
+			return await ctx.telegram.sendMessage(chatId, 'Данная команда предназначена для channel');
+		}
+
 		const channelId = ctx.message.forward_from_chat.id;
 		const channelTitle = ctx.message.forward_from_chat.title;
 		const channelName = ctx.message.forward_from_chat.username;
@@ -43,10 +48,7 @@ export async function updateSetupChannel(ctx) {
 			}
 		);
 		if (response) {
-			await ctx.telegram.sendMessage(
-				channelId,
-				'Данные канала, можно удалить последние сообщения.'
-			);
+			await ctx.telegram.sendMessage(channelId, 'Данные канала обновились.');
 		} else {
 			await ctx.telegram.sendMessage(channelId, 'Произошла ошибка при обновлении данных.');
 		}
