@@ -4,7 +4,6 @@ import { Scenes, session, Telegraf } from 'telegraf';
 import { editCity } from './app_modules/city.js';
 import { start } from './app_modules/start.js';
 import { help } from './app_modules/help.js';
-
 import { cityScene } from './app_modules/scene.js';
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
