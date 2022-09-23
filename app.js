@@ -2,11 +2,11 @@ import 'dotenv/config';
 import { Scenes, session, Telegraf } from 'telegraf';
 import mongoose from 'mongoose';
 
-import { editCity } from './app_modules/city.js';
-import { setup } from './app_modules/setup.js';
-import { updateSetupGroup, updateSetupChannel } from './app_modules/update-setup.js';
-import { start } from './app_modules/start.js';
-import { help } from './app_modules/help.js';
+import { editCity } from './controllers/city.js';
+import { setup } from './controllers/setup.js';
+import { updateSetupGroup, updateSetupChannel } from './controllers/update-setup.js';
+import { start } from './controllers/start.js';
+import { help } from './controllers/help.js';
 import { cityScene, setupScene } from './app_modules/scene.js';
 
 await mongoose
@@ -26,9 +26,10 @@ bot.command('help', async ctx => await help(ctx));
 // bot.command('/rideOn', async ctx => await rideOn(ctx));
 // bot.command('/rating', async ctx => await rating(ctx));
 // bot.command('/delete', async ctx => await deletePost(ctx));
-bot.command('setup', async ctx => await setup(ctx));
 bot.command('city', async ctx => await editCity(ctx));
 // bot.on('callback_query', async ctx => await callbackQuery(ctx));
+//первоначальная настройка бота. замена API key погоды.
+bot.command('setup', async ctx => await setup(ctx));
 bot.command('updateDataGroup', async ctx => await updateSetupGroup(ctx));
 bot.command('updateDataChannel', async ctx => await updateSetupChannel(ctx));
 

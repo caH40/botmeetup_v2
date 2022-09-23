@@ -1,4 +1,4 @@
-import { adminVerify } from './admin-verify.js';
+import { adminVerify } from '../app_modules/admin-verify.js';
 
 //This is a scene for editing an array of cites
 //создать функционал добавления/удаления городов (инлайн клавиатуры)

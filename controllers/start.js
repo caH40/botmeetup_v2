@@ -1,4 +1,4 @@
-import { startMessage } from './texts.js';
+import { startMessage } from '../app_modules/texts.js';
 
 export async function start(ctx) {
 	try {

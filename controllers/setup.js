@@ -1,5 +1,5 @@
 import { BotSetup } from '../model/BotSetup.js';
-import { adminVerify } from './admin-verify.js';
+import { adminVerify } from '../app_modules/admin-verify.js';
 
 //настройка бота для канала, данные сохраняются в БД
 //определиться где добавляются города, из общего чата или из сессии сетап

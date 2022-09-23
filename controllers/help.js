@@ -1,4 +1,4 @@
-import { commandsMessage } from './texts.js';
+import { commandsMessage } from '../app_modules/texts.js';
 
 export async function help(ctx) {
 	try {
