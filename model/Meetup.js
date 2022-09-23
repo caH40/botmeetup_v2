@@ -1,7 +1,10 @@
+import mongoose from 'mongoose';
 import pkg from 'mongoose';
+
 const { Schema, model } = pkg;
 
 const meetupSchema = new Schema({
+	botId: { type: mongoose.Schema.Types.ObjectId, ref: 'BotSetupUser' },
 	postedBy: { type: String },
 	city: { type: String },
 	cityWeather: { type: String },
