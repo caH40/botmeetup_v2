@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 import { editCity } from './controllers/city.js';
 import { setup } from './controllers/setup.js';
-import { updateSetupGroup, updateSetupChannel } from './controllers/update-setup.js';
+import { updateSetupChannel } from './controllers/update-setup.js';
 import { start } from './controllers/start.js';
 import { help } from './controllers/help.js';
 import { cityScene, setupScene } from './app_modules/scene.js';
@@ -30,7 +30,6 @@ bot.command('city', async ctx => await editCity(ctx));
 // bot.on('callback_query', async ctx => await callbackQuery(ctx));
 //первоначальная настройка бота. замена API key погоды.
 bot.command('setup', async ctx => await setup(ctx));
-bot.command('updateDataGroup', async ctx => await updateSetupGroup(ctx));
 bot.command('updateDataChannel', async ctx => await updateSetupChannel(ctx));
 
 bot.launch();
