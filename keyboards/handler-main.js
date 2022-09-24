@@ -1,5 +1,5 @@
+import { finalPost } from '../app_modules/froms.js';
 import {
-	keyboardMain,
 	getKeyboardDays,
 	keyboardLocations,
 	keyboardMeetingTimes,
@@ -7,8 +7,6 @@ import {
 	keyboardSpeed,
 	keyboardDifficulty,
 	keyboardSummary,
-	keyboardBack,
-	getKeyboardForDelPost,
 } from './keyboards.js';
 
 export async function handlerMainMenu(ctx, cbqData) {
@@ -43,6 +41,24 @@ export async function handlerMainMenu(ctx, cbqData) {
 	// меню описания заезда
 	if (cbqData === 'meetDescription') {
 		await ctx.scene.enter('getDescription');
+	}
+	// вывод меню сводных данных по заезду, публикация или редактирование
+	if (cbqData === 'meetSummary') {
+		if (ctx.session.photoId) {
+			await ctx
+				.replyWithPhoto(ctx.session.photoId, {
+					caption: finalPost(ctx),
+					parse_mode: 'html',
+					reply_markup: { inline_keyboard: keyboardSummary },
+				})
+				.catch(error => console.log(error));
+		} else {
+			await ctx
+				.replyWithHTML(finalPost(ctx), {
+					reply_markup: { inline_keyboard: keyboardSummary },
+				})
+				.catch(error => console.log(error));
+		}
 	}
 }
 

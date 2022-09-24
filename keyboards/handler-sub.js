@@ -1,15 +1,6 @@
 import { getFullDay } from '../utility/utilites.js';
 import { mainMenu } from './mainmenu.js';
-import {
-	creatDayArr,
-	timesArr,
-	distanceArr,
-	speedArr,
-	levelArr,
-	dateSecToday,
-	daySec,
-	locations,
-} from './buttons.js';
+import { creatDayArr, timesArr, distanceArr, speedArr, levelArr, locations } from './buttons.js';
 
 export async function handlerSubMenu(ctx, cbqData) {
 	// редактирование создаваемого объявления

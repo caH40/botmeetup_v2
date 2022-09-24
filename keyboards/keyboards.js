@@ -1,13 +1,4 @@
-import {
-	creatDayArr,
-	timesArr,
-	distanceArr,
-	speedArr,
-	levelArr,
-	dateSecToday,
-	daySec,
-	locations,
-} from './buttons.js';
+import { creatDayArr, timesArr, distanceArr, speedArr, levelArr, locations } from './buttons.js';
 
 const keyboardMain = [
 	[
