@@ -14,7 +14,7 @@ export async function sendFinalPost(ctx) {
 		const { channelId } = await BotSetup.findOne();
 
 		const messageChannel = await ctx.telegram.sendPhoto(channelId, ctx.session.photoId, {
-			caption: 'meetStr',
+			caption: finalPost,
 			parse_mode: 'html',
 		});
 		// // подсчет количества созданных объявлений
