@@ -12,7 +12,7 @@ export async function sendFinalPost(ctx) {
 			reply_markup: { inline_keyboard: keyboardBack },
 		});
 	} else {
-		const { channelId } = await BotSetup.findOne();
+		const { channelId, channelName } = await BotSetup.findOne();
 		if (!channelId) return await ctx.reply('Не нашел id канала для размещения объявления');
 
 		const messageChannel = await ctx.telegram.sendPhoto(channelId, ctx.session.photoId, {
@@ -20,7 +20,8 @@ export async function sendFinalPost(ctx) {
 			parse_mode: 'html',
 		});
 		// сообщение о размещении объявления на канале
-		await ctx.reply(posted);
+		const postMessage = posted(channelName);
+		await ctx.reply(postMessage);
 		//номер сообщения в канале
 		const messageId = messageChannel.message_id;
 

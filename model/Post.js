@@ -17,6 +17,7 @@ const postSchema = new Schema({
 	photoId: { type: String },
 	description: { type: String },
 	messageId: { type: Number },
+	messageIdGroup: { type: Number },
 	locationWeather: { type: String },
 });
 

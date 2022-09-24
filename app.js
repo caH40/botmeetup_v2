@@ -11,6 +11,7 @@ import { rideOn } from './controllers/rideon.js';
 import { callbackQuery } from './controllers/callback-query.js';
 import { cityScene, setupScene } from './app_modules/scene.js';
 import { photoWizard, descriptionWizard } from './app_modules/wizard-scene.js';
+import { controlMessage } from './controllers/controlMessage.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -30,6 +31,7 @@ bot.command('/rideon', async ctx => await rideOn(ctx));
 // bot.command('/rating', async ctx => await rating(ctx));
 // bot.command('/delete', async ctx => await deletePost(ctx));
 bot.command('city', async ctx => await editCity(ctx));
+bot.on('message', async ctx => await controlMessage(ctx));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 //первоначальная настройка бота. замена API key погоды.
 bot.command('setup', async ctx => await setup(ctx));
