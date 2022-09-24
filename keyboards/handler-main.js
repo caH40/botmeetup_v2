@@ -36,10 +36,18 @@ export async function handlerMainMenu(ctx, cbqData) {
 	if (cbqData === 'meetLevel') {
 		getKeyboard(ctx, 'Уровень сложности заезда', keyboardDifficulty);
 	}
-
-	async function getKeyboard(ctx, title, keyboard) {
-		await ctx.reply(title, {
-			reply_markup: { inline_keyboard: keyboard },
-		});
+	// меню загрузки картинки
+	if (cbqData === 'meetCover') {
+		await ctx.scene.enter('getPhoto');
 	}
+	// меню описания заезда
+	if (cbqData === 'meetDescription') {
+		await ctx.scene.enter('getDescription');
+	}
+}
+
+async function getKeyboard(ctx, title, keyboard) {
+	await ctx.reply(title, {
+		reply_markup: { inline_keyboard: keyboard },
+	});
 }

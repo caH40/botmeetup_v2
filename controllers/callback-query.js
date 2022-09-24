@@ -4,7 +4,8 @@ export async function callbackQuery(ctx) {
 	const userName = ctx.update.callback_query.from.username;
 	const cbqData = ctx.update.callback_query.data;
 
-	console.log(cbqData); //for dev
+	// удаление меню инлайн клавиатуры после нажатия любой кнопки
+	await ctx.deleteMessage(ctx.update.callback_query.message.message_id);
 
 	handlerMainMenu(ctx, cbqData);
 }
