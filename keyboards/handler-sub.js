@@ -10,32 +10,32 @@ export async function handlerSubMenu(ctx, cbqData) {
 		}
 		// обработка данных всех подменю
 		if (creatDayArr().includes(cbqData)) {
-			ctx.session.dateM = getFullDay(cbqData);
+			ctx.session.date = getFullDay(cbqData);
 			ctx.session.start[0][0].text = 'Дата заезда ✔️';
 			mainMenu(ctx);
 		}
 		if (timesArr.includes(cbqData)) {
-			ctx.session.timeM = cbqData;
+			ctx.session.time = cbqData;
 			ctx.session.start[0][1].text = 'Время старта ✔️';
 			mainMenu(ctx);
 		}
 		if (locations.includes(cbqData)) {
-			ctx.session.locationsM = cbqData;
+			ctx.session.locations = cbqData;
 			ctx.session.start[1][0].text = 'Место старта ✔️';
 			mainMenu(ctx);
 		}
 		if (distanceArr.includes(cbqData)) {
-			ctx.session.distanceM = cbqData;
+			ctx.session.distance = cbqData;
 			ctx.session.start[1][1].text = 'Дистанция, км ✔️';
 			mainMenu(ctx);
 		}
 		if (speedArr.includes(cbqData)) {
-			ctx.session.speedM = cbqData;
+			ctx.session.speed = cbqData;
 			ctx.session.start[2][0].text = 'Средняя скорость ✔️';
 			mainMenu(ctx);
 		}
 		if (levelArr.includes(cbqData)) {
-			ctx.session.levelM = cbqData;
+			ctx.session.level = cbqData;
 			ctx.session.start[2][1].text = 'Сложность заезда ✔️';
 			mainMenu(ctx);
 		}

@@ -2,14 +2,14 @@
 export function formFinalPost(ctx) {
 	try {
 		const userName = ctx.update.callback_query.from.username;
-		ctx.session.creatM = '@' + userName;
+		ctx.session.leader = '@' + userName;
 		return `${ctx.session.description ?? 'Детали заезда:'}\nМесто старта: ${
-			ctx.session.locationsM ?? '---'
-		}\nДата заезда: ${ctx.session.dateM ?? '---'}\nВремя старта: ${
-			ctx.session.timeM ?? '---'
-		}\nДистанция: ${ctx.session.distanceM ?? '---'} \nTемп: ${
-			ctx.session.speedM ?? '---'
-		}\nСложность: ${ctx.session.levelM ?? '---'}\nОрганизатор заезда: ${ctx.session.creatM}`;
+			ctx.session.locations ?? '---'
+		}\nДата заезда: ${ctx.session.date ?? '---'}\nВремя старта: ${
+			ctx.session.time ?? '---'
+		}\nДистанция: ${ctx.session.distance ?? '---'} \nTемп: ${
+			ctx.session.speed ?? '---'
+		}\nСложность: ${ctx.session.level ?? '---'}\nОрганизатор заезда: ${ctx.session.leader}`;
 	} catch (error) {
 		console.log(error);
 	}
