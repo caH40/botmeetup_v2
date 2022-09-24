@@ -1,4 +1,5 @@
 import { handlerMainMenu } from '../keyboards/handler-main.js';
+import { handlerSubMenu } from '../keyboards/handler-sub.js';
 
 export async function callbackQuery(ctx) {
 	const userName = ctx.update.callback_query.from.username;
@@ -7,5 +8,6 @@ export async function callbackQuery(ctx) {
 	// удаление меню инлайн клавиатуры после нажатия любой кнопки
 	await ctx.deleteMessage(ctx.update.callback_query.message.message_id);
 
-	handlerMainMenu(ctx, cbqData);
+	await handlerMainMenu(ctx, cbqData);
+	await handlerSubMenu(ctx, cbqData);
 }
