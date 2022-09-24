@@ -4,7 +4,7 @@ export function formFinalPost(ctx) {
 		const userName = ctx.update.callback_query.from.username;
 		ctx.session.leader = '@' + userName;
 		return `${ctx.session.description ?? 'Детали заезда:'}\nМесто старта: ${
-			ctx.session.locations ?? '---'
+			ctx.session.locationStart ?? '---'
 		}\nДата заезда: ${ctx.session.date ?? '---'}\nВремя старта: ${
 			ctx.session.time ?? '---'
 		}\nДистанция: ${ctx.session.distance ?? '---'} \nTемп: ${

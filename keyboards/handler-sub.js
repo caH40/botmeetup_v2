@@ -20,7 +20,7 @@ export async function handlerSubMenu(ctx, cbqData) {
 			mainMenu(ctx);
 		}
 		if (locations.includes(cbqData)) {
-			ctx.session.locations = cbqData;
+			ctx.session.locationStart = cbqData;
 			ctx.session.start[1][0].text = 'Место старта ✔️';
 			mainMenu(ctx);
 		}

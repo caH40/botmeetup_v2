@@ -10,13 +10,14 @@ const postSchema = new Schema({
 	date: { type: String },
 	time: { type: String },
 	leader: { type: String },
-	locations: { type: String },
+	locationStart: { type: String },
 	distance: { type: String },
 	level: { type: String },
 	speed: { type: String },
 	photoId: { type: String },
 	description: { type: String },
 	messageId: { type: Number },
+	locationWeather: { type: String },
 });
 
 export const Post = model('Post', postSchema);

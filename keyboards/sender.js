@@ -26,7 +26,7 @@ export async function sendFinalPost(ctx) {
 			date: ctx.session.date,
 			time: ctx.session.time,
 			leader: ctx.session.leader,
-			locations: ctx.session.locations,
+			locationStart: ctx.session.locationStart,
 			distance: ctx.session.distance,
 			level: ctx.session.level,
 			speed: ctx.session.speed,
