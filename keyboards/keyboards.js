@@ -7,7 +7,7 @@ import {
 	dateSecToday,
 	daySec,
 	locations,
-} from './datain.js';
+} from './buttons.js';
 
 const keyboardMain = [
 	[
