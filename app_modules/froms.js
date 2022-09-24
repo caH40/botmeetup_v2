@@ -10,3 +10,7 @@ export function finalPost(ctx) {
 		ctx.session.speedM ?? '---'
 	}\nСложность: ${ctx.session.levelM ?? '---'}\nОрганизатор заезда: ${ctx.session.creatM}`;
 }
+
+export function viewConfig(configFromDB) {
+	return `<b>channelOwnerId:</b> ${configFromDB.channelOwnerId}\n<b>channelId:</b> ${configFromDB.channelId}\n<b>channelTitle:</b> ${configFromDB.channelTitle}\n<b>channelName:</b> ${configFromDB.channelName}\n<b>groupId:</b> ${configFromDB.groupId}\n<b>groupTitle:</b> ${configFromDB.groupTitle}\n<b>apiWeather:</b> ${configFromDB.apiWeather}\n`;
+}
