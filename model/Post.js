@@ -16,6 +16,7 @@ const postSchema = new Schema({
 	speed: { type: String },
 	photoId: { type: String },
 	description: { type: String },
+	messageId: { type: Number },
 });
 
-export default model('Post', postSchema);
+export const Post = model('Post', postSchema);

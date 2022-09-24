@@ -1,13 +1,12 @@
 import { BotSetup } from '../model/BotSetup.js';
+import { Post } from '../model/Post.js';
 import { formFinalPost } from '../app_modules/froms.js';
 import { keyboardBack } from './keyboards.js';
 
 export async function sendFinalPost(ctx) {
 	//проверка на заполненность всех полей объявления, краткое описание заезда может не заполняться
-	console.log(ctx.session);
 	const finalPost = formFinalPost(ctx);
 	if (finalPost.includes('---') || !ctx.session.photoId) {
-		console.log(finalPost);
 		await ctx.reply('Не все поля заполнены!!!', {
 			reply_markup: { inline_keyboard: keyboardBack },
 		});
@@ -19,6 +18,25 @@ export async function sendFinalPost(ctx) {
 			caption: finalPost,
 			parse_mode: 'html',
 		});
+		//номер сообщения в канале
+		const messageId = messageChannel.message_id;
+
+		const post = new Post({
+			channelId,
+			date: ctx.session.date,
+			time: ctx.session.time,
+			leader: ctx.session.leader,
+			locations: ctx.session.locations,
+			distance: ctx.session.distance,
+			level: ctx.session.level,
+			speed: ctx.session.speed,
+			photoId: ctx.session.photoId,
+			description: ctx.session.description,
+			messageId,
+		});
+
+		const response = await post.save();
+
 		// // подсчет количества созданных объявлений
 		// await creatRating(userName);
 		// // сообщение о размещении объявления на канале
