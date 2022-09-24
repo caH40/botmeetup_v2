@@ -9,7 +9,7 @@ export const startMessage = `\nСоздаю объявления для инфо
 
 export const setupMessage = `-При первоначальном запуске /setup сохраняется id владельца группы/канала/бота в БД\n-Сохранение данных группы в БД /updateDataGroup\n-В строке введите ключ в строке в формате "API ваш_ключ"\n-Сохраненные настройки /configuration\n-Для выхода введите /quit`;
 
-// const textPost = `Ваше объявление о заезде опубликовано на канале https://t.me/meetupkmv`;
+export const posted = `Ваше объявление о заезде опубликовано на канале https://t.me/meetupkmv`;
 
 // const button = `Кнопка`;
 

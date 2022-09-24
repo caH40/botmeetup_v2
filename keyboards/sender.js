@@ -2,6 +2,7 @@ import { BotSetup } from '../model/BotSetup.js';
 import { Post } from '../model/Post.js';
 import { formFinalPost } from '../app_modules/froms.js';
 import { keyboardBack } from './keyboards.js';
+import { posted } from '../app_modules/texts.js';
 
 export async function sendFinalPost(ctx) {
 	//проверка на заполненность всех полей объявления, краткое описание заезда может не заполняться
@@ -18,6 +19,8 @@ export async function sendFinalPost(ctx) {
 			caption: finalPost,
 			parse_mode: 'html',
 		});
+		// сообщение о размещении объявления на канале
+		await ctx.reply(posted);
 		//номер сообщения в канале
 		const messageId = messageChannel.message_id;
 
