@@ -8,6 +8,7 @@ import {
 	keyboardDifficulty,
 	keyboardSummary,
 } from './keyboards.js';
+import { sendFinalPost } from './sender.js';
 
 export async function handlerMainMenu(ctx, cbqData) {
 	// меню время
@@ -59,6 +60,11 @@ export async function handlerMainMenu(ctx, cbqData) {
 				})
 				.catch(error => console.log(error));
 		}
+	}
+	// отправка итогового объявления на канал объявлений
+	if (cbqData === 'meetSend') {
+		// проверка заполнения всех полей
+		await sendFinalPost(ctx);
 	}
 }
 
