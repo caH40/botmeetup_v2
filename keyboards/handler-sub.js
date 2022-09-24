@@ -1,41 +1,54 @@
+import { getFullDay } from '../utility/utilites.js';
+import { mainMenu } from './mainmenu.js';
+import {
+	creatDayArr,
+	timesArr,
+	distanceArr,
+	speedArr,
+	levelArr,
+	dateSecToday,
+	daySec,
+	locations,
+} from './buttons.js';
+
 export async function handlerSubMenu(ctx, cbqData) {
 	// редактирование создаваемого объявления
-	if (cbData === 'meetEdit') {
-		output();
+	if (cbqData === 'meetEdit') {
+		mainMenu(ctx);
 	}
 	// обработка данных всех подменю
-	if (datain.creatDayArr().includes(cbData)) {
-		ctx.session.dateM = getFullDay(cbData);
+	if (creatDayArr().includes(cbqData)) {
+		ctx.session.dateM = getFullDay(cbqData);
 		ctx.session.start[0][0].text = 'Дата заезда ✔️';
-		output();
+		mainMenu(ctx);
 	}
-	if (datain.timesArr.includes(cbData)) {
-		ctx.session.timeM = cbData;
+	if (timesArr.includes(cbqData)) {
+		ctx.session.timeM = cbqData;
 		ctx.session.start[0][1].text = 'Время старта ✔️';
-		output();
+		mainMenu(ctx);
 	}
-	if (datain.locations.includes(cbData)) {
-		ctx.session.locationsM = cbData;
+	if (locations.includes(cbqData)) {
+		ctx.session.locationsM = cbqData;
 		ctx.session.start[1][0].text = 'Место старта ✔️';
-		output();
+		mainMenu(ctx);
 	}
-	if (datain.distanceArr.includes(cbData)) {
-		ctx.session.distanceM = cbData;
+	if (distanceArr.includes(cbqData)) {
+		ctx.session.distanceM = cbqData;
 		ctx.session.start[1][1].text = 'Дистанция, км ✔️';
-		output();
+		mainMenu(ctx);
 	}
-	if (datain.speedArr.includes(cbData)) {
-		ctx.session.speedM = cbData;
+	if (speedArr.includes(cbqData)) {
+		ctx.session.speedM = cbqData;
 		ctx.session.start[2][0].text = 'Средняя скорость ✔️';
-		output();
+		mainMenu(ctx);
 	}
-	if (datain.levelArr.includes(cbData)) {
-		ctx.session.levelM = cbData;
+	if (levelArr.includes(cbqData)) {
+		ctx.session.levelM = cbqData;
 		ctx.session.start[2][1].text = 'Сложность заезда ✔️';
-		output();
+		mainMenu(ctx);
 	}
-	// блок удаления автором ненужных объявлений с канала объявлений
-	if (cbData.includes('ffmi')) {
-		await deletePost(cbData, ctx).catch(error => console.log(error));
-	}
+	// // блок удаления автором ненужных объявлений с канала объявлений
+	// if (cbqData.includes('ffmi')) {
+	// 	await deletePost(cbqData, ctx).catch(error => console.log(error));
+	// }
 }

@@ -2,6 +2,8 @@ import { handlerMainMenu } from '../keyboards/handler-main.js';
 import { handlerSubMenu } from '../keyboards/handler-sub.js';
 
 export async function callbackQuery(ctx) {
+	console.log(ctx.session); //for dev
+
 	const userName = ctx.update.callback_query.from.username;
 	const cbqData = ctx.update.callback_query.data;
 
