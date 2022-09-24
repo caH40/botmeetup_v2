@@ -1,4 +1,4 @@
-import { finalPost } from '../app_modules/froms.js';
+import { formFinalPost } from '../app_modules/froms.js';
 import {
 	getKeyboardDays,
 	keyboardLocations,
@@ -47,14 +47,14 @@ export async function handlerMainMenu(ctx, cbqData) {
 		if (ctx.session.photoId) {
 			await ctx
 				.replyWithPhoto(ctx.session.photoId, {
-					caption: finalPost(ctx),
+					caption: formFinalPost(ctx),
 					parse_mode: 'html',
 					reply_markup: { inline_keyboard: keyboardSummary },
 				})
 				.catch(error => console.log(error));
 		} else {
 			await ctx
-				.replyWithHTML(finalPost(ctx), {
+				.replyWithHTML(formFinalPost(ctx), {
 					reply_markup: { inline_keyboard: keyboardSummary },
 				})
 				.catch(error => console.log(error));

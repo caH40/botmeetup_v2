@@ -1,5 +1,5 @@
 //итоговое объявление о заезде
-export function finalPost(ctx) {
+export function formFinalPost(ctx) {
 	const userName = ctx.update.callback_query.from.username;
 	ctx.session.creatM = '@' + userName;
 	return `${ctx.session.description ?? 'Детали заезда:'}\nМесто старта: ${
@@ -11,6 +11,6 @@ export function finalPost(ctx) {
 	}\nСложность: ${ctx.session.levelM ?? '---'}\nОрганизатор заезда: ${ctx.session.creatM}`;
 }
 
-export function viewConfig(configFromDB) {
+export function formConfig(configFromDB) {
 	return `<b>channelOwnerId:</b> ${configFromDB.channelOwnerId}\n<b>channelId:</b> ${configFromDB.channelId}\n<b>channelTitle:</b> ${configFromDB.channelTitle}\n<b>channelName:</b> ${configFromDB.channelName}\n<b>groupId:</b> ${configFromDB.groupId}\n<b>groupTitle:</b> ${configFromDB.groupTitle}\n<b>apiWeather:</b> ${configFromDB.apiWeather}\n`;
 }

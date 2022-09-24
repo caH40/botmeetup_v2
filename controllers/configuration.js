@@ -1,4 +1,4 @@
-import { viewConfig } from '../app_modules/froms.js';
+import { formConfig } from '../app_modules/froms.js';
 import { BotSetup } from '../model/BotSetup.js';
 
 export async function configuration(ctx) {
@@ -6,7 +6,7 @@ export async function configuration(ctx) {
 		const configFromDB = await BotSetup.findOne();
 		if (!configFromDB) return await ctx.reply('Конфигурация бота не найдена');
 
-		await ctx.reply(viewConfig(configFromDB), { parse_mode: 'html' });
+		await ctx.reply(formConfig(configFromDB), { parse_mode: 'html' });
 	} catch (error) {
 		console.log(error);
 	}
