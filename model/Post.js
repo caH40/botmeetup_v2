@@ -18,7 +18,12 @@ const postSchema = new Schema({
 	description: { type: String },
 	messageId: { type: Number },
 	messageIdGroup: { type: Number },
+	poll: { type: Object },
 	locationWeather: { type: String },
+	//кто проголосовал за ответ "ДА"
+	pollUsers: [{ type: Object }],
+
+	pollQuantity: { type: Number, default: 0 },
 });
 
 export const Post = model('Post', postSchema);
