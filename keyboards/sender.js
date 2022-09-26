@@ -1,6 +1,6 @@
 import { BotSetup } from '../model/BotSetup.js';
 import { Post } from '../model/Post.js';
-import { formFinalPost } from '../app_modules/froms.js';
+import { formFinalPost } from '../app_modules/forms.js';
 import { keyboardBack } from './keyboards.js';
 import { posted } from '../app_modules/texts.js';
 

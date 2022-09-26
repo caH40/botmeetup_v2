@@ -1,6 +1,6 @@
 import { WeatherWeek } from '../model/WeatherWeek.js';
 
-import { formWeather } from '../app_modules/froms.js';
+import { formWeather } from '../app_modules/forms.js';
 
 //!! делается запрос погоды из базы при каждой итерации(количество объявлений), необходимо это исправить
 
