@@ -40,13 +40,9 @@ export async function sendFinalPost(ctx) {
 			messageId,
 		});
 
-		const response = await post.save();
+		await post.save();
 
 		// // подсчет количества созданных объявлений
 		// await creatRating(userName);
-		// // сообщение о размещении объявления на канале
-		// await ctx.reply(text.textPost);
-		// //запись в базу данных
-		// await logsMessagesChannel(messageChannel);
 	}
 }

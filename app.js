@@ -15,6 +15,7 @@ import { controlMessage } from './controllers/controlMessage.js';
 import { poll } from './controllers/poll.js';
 import { getWeatherDb } from './weather/getweatherDb.js';
 import { weatherUpdate } from './weather/weatherupdate.js';
+import { updatePost } from './app_modules/update-post.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -30,7 +31,7 @@ bot.use(stage.middleware());
 
 bot.command('start', async ctx => await start(ctx));
 bot.command('help', async ctx => await help(ctx));
-bot.command('/rideon', async ctx => await rideOn(ctx));
+bot.command('rideon', async ctx => await rideOn(ctx));
 // bot.command('/rating', async ctx => await rating(ctx));
 // bot.command('/delete', async ctx => await deletePost(ctx));
 bot.command('city', async ctx => await editCity(ctx));
@@ -48,6 +49,8 @@ bot.launch().then(async () => {
 		// getWeatherDb();
 		//получение данных о погоде
 		weatherUpdate(bot);
+		//обновление постов на канале
+		updatePost(bot);
 	}, 60000);
 });
 
