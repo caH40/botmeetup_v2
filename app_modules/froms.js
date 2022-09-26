@@ -23,7 +23,7 @@ export function formConfig(configFromDB) {
 	}
 }
 
-export function weather(weatherCurrent) {
+export function formWeather(weatherCurrent) {
 	return `Температура утром: ${weatherCurrent.tempMorn ?? '---'}°C\nТемпература днём: ${
 		weatherCurrent.tempDay ?? '---'
 	}°C\nТемпература вечером: ${weatherCurrent.tempEve ?? '---'}°C\nВлажность: ${

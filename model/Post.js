@@ -6,7 +6,6 @@ const { Schema, model } = pkg;
 
 const postSchema = new Schema({
 	botId: { type: mongoose.Schema.Types.ObjectId, ref: 'BotSetup' },
-	weatherDayId: { type: mongoose.Schema.Types.ObjectId, ref: 'WeatherDay' },
 	channelId: { type: Number },
 	date: { type: String },
 	time: { type: String },
@@ -25,6 +24,10 @@ const postSchema = new Schema({
 	//кто проголосовал за ответ "ДА"
 	pollUsers: [{ type: Object }],
 	pollQuantity: { type: Number, default: 0 },
+	//погода: температура днем, влажность, описание
+	tempDay: { type: String },
+	humidity: { type: String },
+	descriptionWeather: { type: String },
 });
 
 export const Post = model('Post', postSchema);
