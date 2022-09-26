@@ -7,6 +7,7 @@ import {
 	keyboardSpeed,
 	keyboardDifficulty,
 	keyboardSummary,
+	keyboardLocationsWeather,
 } from './keyboards.js';
 import { sendFinalPost } from './sender.js';
 
@@ -32,10 +33,14 @@ export async function handlerMainMenu(ctx, cbqData) {
 		if (cbqData === 'meetSpeed') {
 			getKeyboard(ctx, 'Средняя скорость заезда, км/ч', keyboardSpeed);
 		}
-		// меню сложности
-		if (cbqData === 'meetLevel') {
-			getKeyboard(ctx, 'Уровень сложности заезда', keyboardDifficulty);
+		// меню погода
+		if (cbqData === 'meetWeather') {
+			getKeyboard(ctx, 'Укажите место для прогноза погоды', keyboardLocationsWeather);
 		}
+		// // меню сложности
+		// if (cbqData === 'meetLevel') {
+		// 	getKeyboard(ctx, 'Уровень сложности заезда', keyboardDifficulty);
+		// }
 		// меню загрузки картинки
 		if (cbqData === 'meetCover') {
 			await ctx.scene.enter('getPhoto');

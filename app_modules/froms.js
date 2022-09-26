@@ -9,7 +9,7 @@ export function formFinalPost(ctx) {
 			ctx.session.time ?? '---'
 		}\nДистанция: ${ctx.session.distance ?? '---'} \nTемп: ${
 			ctx.session.speed ?? '---'
-		}\nСложность: ${ctx.session.level ?? '---'}\nОрганизатор заезда: ${ctx.session.leader}`;
+		}\nОрганизатор заезда: ${ctx.session.leader}`;
 	} catch (error) {
 		console.log(error);
 	}

@@ -11,6 +11,7 @@ const postSchema = new Schema({
 	time: { type: String },
 	leader: { type: String },
 	locationStart: { type: String },
+	locationWeather: { type: String },
 	distance: { type: String },
 	level: { type: String },
 	speed: { type: String },
@@ -19,7 +20,6 @@ const postSchema = new Schema({
 	messageId: { type: Number },
 	messageIdGroup: { type: Number },
 	poll: { type: Object },
-	locationWeather: { type: String },
 	//кто проголосовал за ответ "ДА"
 	pollUsers: [{ type: Object }],
 

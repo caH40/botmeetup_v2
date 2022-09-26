@@ -20,7 +20,8 @@ export async function rideOn(ctx) {
 			],
 			[
 				{ text: 'Средняя скорость', callback_data: 'meetSpeed' },
-				{ text: 'Сложность заезда', callback_data: 'meetLevel' },
+				{ text: 'Погода', callback_data: 'meetWeather' },
+				// { text: 'Сложность заезда', callback_data: 'meetLevel' },
 			],
 			[
 				{ text: 'Картинка', callback_data: 'meetCover' },

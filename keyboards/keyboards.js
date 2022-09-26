@@ -1,4 +1,12 @@
-import { creatDayArr, timesArr, distanceArr, speedArr, levelArr, locations } from './buttons.js';
+import {
+	creatDayArr,
+	timesArr,
+	distanceArr,
+	speedArr,
+	levelArr,
+	locations,
+	locationsWeather,
+} from './buttons.js';
 
 const keyboardMain = [
 	[
@@ -11,7 +19,8 @@ const keyboardMain = [
 	],
 	[
 		{ text: 'Средняя скорость', callback_data: 'meetSpeed' },
-		{ text: 'Сложность заезда', callback_data: 'meetLevel' },
+		{ text: 'Погода', callback_data: 'meetWeather' },
+		// { text: 'Сложность заезда', callback_data: 'meetLevel' },
 	],
 	[
 		{ text: 'Картинка', callback_data: 'meetCover' },
@@ -46,6 +55,13 @@ for (let i = 0; i < locations.length; i = i + 2) {
 	keyboardLocations.push([
 		{ text: locations[i], callback_data: locations[i] },
 		{ text: locations[i + 1], callback_data: locations[i + 1] },
+	]);
+}
+const keyboardLocationsWeather = [];
+for (let i = 0; i < locations.length; i = i + 2) {
+	keyboardLocationsWeather.push([
+		{ text: locationsWeather[i], callback_data: locationsWeather[i] },
+		{ text: locationsWeather[i + 1], callback_data: locationsWeather[i + 1] },
 	]);
 }
 const keyboardDistances = [];
@@ -114,6 +130,7 @@ export {
 	keyboardMain,
 	getKeyboardDays,
 	keyboardLocations,
+	keyboardLocationsWeather,
 	keyboardMeetingTimes,
 	keyboardDistances,
 	keyboardSpeed,
