@@ -48,7 +48,7 @@ bot.launch().then(async () => {
 		getWeatherDb();
 		//получение данных о погоде
 		weatherUpdate(bot);
-	}, millisecondsInHour);
+	}, 360000);
 });
 
 // Enable graceful stop

@@ -62,8 +62,6 @@ export async function controlMessage(ctx) {
 			optionalOptions
 		);
 
-		console.log(messageWeather);
-
 		const messageIdWeather = messageWeather.message_id;
 		await Post.findOneAndUpdate({ _id }, { $set: { messageIdWeather } });
 	}

@@ -24,7 +24,6 @@ const postSchema = new Schema({
 	poll: { type: Object },
 	//кто проголосовал за ответ "ДА"
 	pollUsers: [{ type: Object }],
-
 	pollQuantity: { type: Number, default: 0 },
 });
 
