@@ -1,4 +1,4 @@
-import { formFinalPost } from '../app_modules/froms.js';
+import { formFinalPost } from '../app_modules/forms.js';
 import {
 	getKeyboardDays,
 	keyboardLocations,

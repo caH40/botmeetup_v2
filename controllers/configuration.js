@@ -1,4 +1,4 @@
-import { formConfig } from '../app_modules/froms.js';
+import { formConfig } from '../app_modules/forms.js';
 import { BotSetup } from '../model/BotSetup.js';
 
 export async function configuration(ctx) {
