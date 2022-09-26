@@ -1,5 +1,7 @@
 import { BotSetup } from '../model/BotSetup.js';
 import { Post } from '../model/Post.js';
+import { WeatherDay } from '../model/WeatherDay.js';
+import { getWeather } from '../weather/getweather.js';
 
 export async function controlMessage(ctx) {
 	// проводить проверку по номеру сообщения, сохраненного в БД
@@ -8,7 +10,10 @@ export async function controlMessage(ctx) {
 		const { groupId, channelId, channelName } = await BotSetup.findOne();
 		const messageId = ctx.update.message.forward_from_message_id;
 		const messageIdGroup = ctx.update.message.message_id;
-		const postDB = await Post.findOneAndUpdate({ messageId }, { $set: { messageIdGroup } });
+		const { date, locationWeather, _id } = await Post.findOneAndUpdate(
+			{ messageId },
+			{ $set: { messageIdGroup } }
+		);
 
 		// отправляем голосование в группу дискуссий "прикрепляя" его к переадресованному сообщению reply_to_message_id
 		const pollAnswers = ['Участвую!', 'Не участвую!', 'Ищу возможность!'];
@@ -28,17 +33,33 @@ export async function controlMessage(ctx) {
 
 		const poll = messagePoll.poll;
 		await Post.findOneAndUpdate({ messageId }, { $set: { poll } });
-		// // добавление сообщения о погоде в дискуссию о заезде
-		// let dateClear = members.dateM.slice(-10);
-		// const messageIdWeather = await ctx.telegram.sendMessage(
-		// 	process.env.GROUP_TELEGRAM,
-		// 	(await getWeatherStart(dateClear, members.locationsM)) ?? 'нет данных',
-		// 	optionalOptions
-		// );
-		// await updateMessage(
-		// 	messageIdPoll.reply_to_message.forward_from_message_id,
-		// 	messageIdPoll,
-		// 	messageIdWeather
-		// );
+
+		// добавление сообщения о погоде в дискуссию о заезде
+		let dateClear = date.slice(-10);
+		const { formWeather, weatherCurrent } = await getWeather(dateClear, locationWeather);
+
+		const weatherDay = new WeatherDay({
+			postId: _id,
+			dateUpdate: weatherCurrent.dateUpdate,
+			date: weatherCurrent.date,
+			dateString: weatherCurrent.dateString,
+			city: weatherCurrent.city,
+			tempMorn: weatherCurrent.tempMorn,
+			tempDay: weatherCurrent.tempDay,
+			tempEve: weatherCurrent.tempEve,
+			humidity: weatherCurrent.humidity,
+			windSpeed: weatherCurrent.windSpeed,
+			description: weatherCurrent.description,
+		});
+		const responseSave = await weatherDay.save();
+		//добавление id коллекции погоды в коллекцию Пост(объявления)
+		const weatherDayId = responseSave._id;
+		await Post.findOneAndUpdate({ _id }, { $set: { weatherDayId } });
+
+		const messageIdWeather = await ctx.telegram.sendMessage(
+			groupId,
+			formWeather ?? 'нет данных',
+			optionalOptions
+		);
 	}
 }

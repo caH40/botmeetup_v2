@@ -16,7 +16,6 @@ export async function handlerSubMenu(ctx, cbqData) {
 		if (cbqData === 'meetEdit') {
 			mainMenu(ctx);
 		}
-		console.log(cbqData);
 		// обработка данных всех подменю
 		if (creatDayArr().includes(cbqData)) {
 			ctx.session.date = getFullDay(cbqData);

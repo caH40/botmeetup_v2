@@ -22,3 +22,11 @@ export function formConfig(configFromDB) {
 		console.log(error);
 	}
 }
+
+export function weather(weatherCurrent) {
+	return `Температура утром: ${weatherCurrent.tempMorn ?? '---'}°C\nТемпература днём: ${
+		weatherCurrent.tempDay ?? '---'
+	}°C\nТемпература вечером: ${weatherCurrent.tempEve ?? '---'}°C\nВлажность: ${
+		weatherCurrent.humidity ?? '---'
+	}%\nСкорость ветра: ${weatherCurrent.windSpeed ?? '---'}м/с\n${weatherCurrent.desc ?? '---'}`;
+}

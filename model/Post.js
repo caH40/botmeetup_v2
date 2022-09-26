@@ -6,6 +6,7 @@ const { Schema, model } = pkg;
 
 const postSchema = new Schema({
 	botId: { type: mongoose.Schema.Types.ObjectId, ref: 'BotSetup' },
+	weatherDayId: { type: mongoose.Schema.Types.ObjectId, ref: 'WeatherDay' },
 	channelId: { type: Number },
 	date: { type: String },
 	time: { type: String },
