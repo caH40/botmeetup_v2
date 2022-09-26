@@ -20,6 +20,7 @@ const postSchema = new Schema({
 	description: { type: String },
 	messageId: { type: Number },
 	messageIdGroup: { type: Number },
+	messageIdWeather: { type: Number },
 	poll: { type: Object },
 	//кто проголосовал за ответ "ДА"
 	pollUsers: [{ type: Object }],

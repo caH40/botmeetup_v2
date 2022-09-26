@@ -16,3 +16,14 @@ export function getFullDay(date) {
 		console.log(error);
 	}
 }
+
+//в прошедшем заезде не обновлять погоду
+export function isActualDate(date) {
+	const dateArr = date.split('.');
+	const lag = 80000000;
+	let dateNewFormat = [dateArr[1], dateArr[0], dateArr[2]].join('.');
+	let dateMilliseconds = new Date(dateNewFormat).getTime() + lag;
+	let todayMilliseconds = new Date().getTime();
+
+	return dateMilliseconds > todayMilliseconds;
+}

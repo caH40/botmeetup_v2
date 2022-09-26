@@ -56,10 +56,15 @@ export async function controlMessage(ctx) {
 		const weatherDayId = responseSave._id;
 		await Post.findOneAndUpdate({ _id }, { $set: { weatherDayId } });
 
-		const messageIdWeather = await ctx.telegram.sendMessage(
+		const messageWeather = await ctx.telegram.sendMessage(
 			groupId,
 			formWeather ?? 'нет данных',
 			optionalOptions
 		);
+
+		console.log(messageWeather);
+
+		const messageIdWeather = messageWeather.message_id;
+		await Post.findOneAndUpdate({ _id }, { $set: { messageIdWeather } });
 	}
 }
