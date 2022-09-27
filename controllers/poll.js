@@ -1,5 +1,6 @@
 import { updatePost } from '../app_modules/update-post.js';
 import { Post } from '../model/Post.js';
+import { BotSetup } from '../model/BotSetup.js';
 
 export async function poll(ctx) {
 	try {
@@ -13,7 +14,22 @@ export async function poll(ctx) {
 			'poll.id': pollId,
 		});
 		if (!postDB) return console.log('в документе нет объекта poll');
+
 		let pollUsers = postDB.pollUsers;
+		const { groupId } = await BotSetup.findOne();
+		const { isLastUpdate, messageIdGroup } = postDB;
+		const firstName = ctx.update.poll_answer.user.first_name;
+
+		if (isLastUpdate) {
+			const optionalOptions = {
+				reply_to_message_id: messageIdGroup,
+			};
+			return await ctx.telegram.sendMessage(
+				groupId,
+				`${firstName}, Вы опоздали с голосованием, заезд уже состоялся!`,
+				optionalOptions
+			);
+		}
 
 		// исключение дублирование голосования одним и тем же пользователем
 		// если уже есть в массиве то условие не выполняется !pollUserIds.includes(pollUserId)
