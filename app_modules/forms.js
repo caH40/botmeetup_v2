@@ -5,13 +5,13 @@ export function formFinalPost(ctx) {
 	try {
 		const userName = ctx.update.callback_query.from.username;
 		ctx.session.leader = '@' + userName;
-		return `${ctx.session.description ?? 'Детали заезда:'}\nМесто старта: ${
+		return `${ctx.session.description ?? 'Детали заезда:'}\n<b>Место старта:</b> ${
 			ctx.session.locationStart ?? '---'
-		}\nДата заезда: ${ctx.session.date ?? '---'}\nВремя старта: ${
+		};\n<b>Дата заезда:</b> ${ctx.session.date ?? '---'};\n<b>Время старта:</b> ${
 			ctx.session.time ?? '---'
-		}\nДистанция: ${ctx.session.distance ?? '---'} \nTемп: ${
+		};\n<b>Дистанция:</b> ${ctx.session.distance ?? '---'};\n<b>Tемп:</b> ${
 			ctx.session.speed ?? '---'
-		}\nОрганизатор заезда: ${ctx.session.leader}`;
+		};\n<b>Организатор заезда:</b> ${ctx.session.leader}`;
 	} catch (error) {
 		console.log(error);
 	}
