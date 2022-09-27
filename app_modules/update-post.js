@@ -11,7 +11,7 @@ export async function updatePost(bot, postId) {
 			return;
 		}
 		// обновление всех постов по таймауту
-		const postsDB = await Post.find({ isLastUpdate: false });
+		const postsDB = await Post.find({ isLastUpdated: false });
 
 		for (let index = 0; index < postsDB.length; index++) {
 			await editMessageTelegram(bot, postsDB[index]);
@@ -31,14 +31,15 @@ async function editMessageTelegram(bot, post) {
 			.catch(error =>
 				console.log(
 					new Date().toLocaleString(),
-					'ошибка при обновлении постов, старый пост такой же как и обновлённый'
+					'ошибка при обновлении постов, старый пост такой же как и обновлённый',
+					'module - update-posts.js'
 				)
 			);
 		let date = post.date;
 		let time = post.time;
 		//это последнее обновление поста
 		if (!isActualDate(date, time)) {
-			await Post.findOneAndUpdate({ _id: post }, { $set: { isLastUpdate: true } });
+			await Post.findOneAndUpdate({ _id: post }, { $set: { isLastUpdated: true } });
 		}
 	} catch (error) {
 		console.log(error);

@@ -28,7 +28,7 @@ const postSchema = new Schema({
 	tempDay: { type: String },
 	humidity: { type: String },
 	descriptionWeather: { type: String },
-	isLastUpdate: { type: Boolean },
+	isLastUpdated: { type: Boolean },
 });
 
 export const Post = model('Post', postSchema);

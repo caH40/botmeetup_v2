@@ -13,14 +13,19 @@ export async function poll(ctx) {
 		let postDB = await Post.findOne({
 			'poll.id': pollId,
 		});
-		if (!postDB) return console.log('в документе нет объекта poll');
+		if (!postDB)
+			return console.log(
+				new Date().toLocaleString(),
+				'в документе нет объекта poll',
+				'module - poll.js'
+			);
 
 		let pollUsers = postDB.pollUsers;
 		const { groupId } = await BotSetup.findOne();
-		const { isLastUpdate, messageIdGroup } = postDB;
+		const { isLastUpdated, messageIdGroup } = postDB;
 		const firstName = ctx.update.poll_answer.user.first_name;
 
-		if (isLastUpdate) {
+		if (isLastUpdated) {
 			const optionalOptions = {
 				reply_to_message_id: messageIdGroup,
 			};
