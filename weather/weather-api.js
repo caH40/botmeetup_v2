@@ -27,7 +27,6 @@ export async function weatherFromApi() {
 			const weatherWindSpeed = data.daily[indexDay].wind_speed;
 			const weatherDescription = data.daily[indexDay].weather[0].description;
 			const dayWeather = new Date(data.daily[indexDay].dt * 1000).getDay();
-			const dayWeatherToday = new Date(data.daily[indexDay].dt * 1000).toLocaleDateString();
 			const dateUpdate = new Date().toLocaleString();
 
 			const dayMyObj = {
@@ -39,28 +38,12 @@ export async function weatherFromApi() {
 				6: 'Суббота',
 				0: 'Воскресенье',
 			};
-			// weatherDateRus = dayMyObj[dayWeather] + ' ' + weatherDate;
 
-			const cityMyObj = {
-				Kislovodsk: 'Кисловодск',
-				Pyatigorsk: 'Пятигорск',
-				Karachayevsk: 'Карачаевск',
-				Alagir: 'Алагир',
-				Arkhyz: 'Архыз',
-				Baksan: 'Баксан',
-				'Nal’chik': 'Нальчик',
-				'Mineralnye Vody': 'Минеральные Воды',
-				Barashek: 'Барашек',
-				Yessentuki: 'Ессентуки',
-				Vladikavkaz: 'Владикавказ',
-				Teberda: 'Теберда',
-			};
-
-			const zap = {
+			const dayWeatherForDB = {
 				dateUpdate: dateUpdate,
 				date: weatherDate,
 				dateString: dayMyObj[dayWeather],
-				city: cityMyObj[cityMy[indexCity]],
+				city: cityMy[indexCity],
 				tempMorn: weatherTempMorn,
 				tempDay: weatherTempDay,
 				tempEve: weatherTempEve,
@@ -69,19 +52,19 @@ export async function weatherFromApi() {
 				desc: weatherDescription,
 			};
 			// формирование массива погоды с отфильтрованными данными
-			arrayWeather.push(zap);
+			arrayWeather.push(dayWeatherForDB);
 		}
-		//обновление данных о погоде в базе данных, если нет, то создает новую коллекцию
-		await getWeatherWeek();
+	}
+	//обновление данных о погоде в базе данных, если нет, то создает новую коллекцию
+	await getWeatherWeek();
 
-		async function getWeatherWeek() {
-			const savedWeather = await WeatherWeek.findOne();
-			if (savedWeather) {
-				await WeatherWeek.findByIdAndUpdate(savedWeather.id, { list: arrayWeather });
-			} else {
-				const weatherWeek = new WeatherWeek({ list: arrayWeather });
-				await weatherWeek.save();
-			}
+	async function getWeatherWeek() {
+		const savedWeather = await WeatherWeek.findOne();
+		if (savedWeather) {
+			await WeatherWeek.findByIdAndUpdate(savedWeather.id, { list: arrayWeather });
+		} else {
+			const weatherWeek = new WeatherWeek({ list: arrayWeather });
+			await weatherWeek.save();
 		}
 	}
 }
