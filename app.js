@@ -42,13 +42,13 @@ bot.command('setup', async ctx => await setup(ctx));
 bot.command('updateDataChannel', async ctx => await updateSetupChannel(ctx));
 bot.on('poll_answer', async ctx => await poll(ctx));
 
-bot.launch().then(async () => {
+bot.launch().then(() => {
 	// await bot.telegram.sendMessage(process.env.MY_TELEGRAM_ID, 'restart...');
-	setInterval(() => {
+	setInterval(async () => {
 		//запуск таймера обновления данных о погоде в день старта заезда
-		weatherFromApi();
+		await weatherFromApi();
 		//получение данных о погоде
-		weatherUpdate(bot);
+		await weatherUpdate(bot);
 	}, 3600000);
 	setInterval(() => {
 		//обновление постов на канале

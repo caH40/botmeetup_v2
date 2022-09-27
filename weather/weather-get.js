@@ -8,6 +8,8 @@ export async function getWeather(date, location) {
 	try {
 		const weatherDB = await WeatherWeek.findOne();
 
+		if (!weatherDB) return;
+
 		let weatherCurrent = weatherDB.list.find(elm => elm.date == date && elm.city === location);
 		weatherCurrent ??= [];
 		weatherCurrent.desc ??= 'Предсказываю погоду на более близкие даты...';
