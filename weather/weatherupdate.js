@@ -46,7 +46,7 @@ export async function weatherUpdate(bot) {
 				);
 			}
 		});
-	} catch {
-		error => console.log(error);
+	} catch (error) {
+		console.log(error);
 	}
 }

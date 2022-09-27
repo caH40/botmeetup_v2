@@ -22,21 +22,25 @@ export async function updatePost(bot, postId) {
 }
 
 async function editMessageTelegram(bot, post) {
-	const formPostString = await formFinalPostUpdate(post);
-	await bot.telegram
-		.editMessageCaption(post.channelId, post.messageId, 'привет!', formPostString, {
-			parse_mode: 'html',
-		})
-		.catch(error =>
-			console.log(
-				new Date().toLocaleDateString(),
-				'ошибку при обновлении постов, старый пост такой же как и обновлённый'
-			)
-		);
-	let date = post.date;
-	let time = post.time;
-	//это последнее обновление поста
-	if (!isActualDate(date, time)) {
-		await Post.findOneAndUpdate({ _id: post }, { $set: { isLastUpdate: true } });
+	try {
+		const formPostString = await formFinalPostUpdate(post);
+		await bot.telegram
+			.editMessageCaption(post.channelId, post.messageId, 'привет!', formPostString, {
+				parse_mode: 'html',
+			})
+			.catch(error =>
+				console.log(
+					new Date().toLocaleDateString(),
+					'ошибку при обновлении постов, старый пост такой же как и обновлённый'
+				)
+			);
+		let date = post.date;
+		let time = post.time;
+		//это последнее обновление поста
+		if (!isActualDate(date, time)) {
+			await Post.findOneAndUpdate({ _id: post }, { $set: { isLastUpdate: true } });
+		}
+	} catch (error) {
+		console.log(error);
 	}
 }
