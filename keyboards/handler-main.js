@@ -9,7 +9,7 @@ import {
 	keyboardSummary,
 	keyboardLocationsWeather,
 } from './keyboards.js';
-import { sendFinalPost } from './sender.js';
+import { sendFinalPost } from '../app_modules/sender.js';
 
 export async function handlerMainMenu(ctx, cbqData) {
 	try {

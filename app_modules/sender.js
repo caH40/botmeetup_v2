@@ -1,8 +1,8 @@
 import { BotSetup } from '../model/BotSetup.js';
 import { Post } from '../model/Post.js';
-import { formFinalPost } from '../app_modules/forms.js';
-import { keyboardBack } from './keyboards.js';
-import { posted } from '../app_modules/texts.js';
+import { formFinalPost } from './forms.js';
+import { keyboardBack } from '../keyboards/keyboards.js';
+import { posted } from './texts.js';
 
 export async function sendFinalPost(ctx) {
 	try {
