@@ -1,5 +1,5 @@
 //итоговое объявление о заезде
-import { timeLeft } from '../utility/utilites.js';
+import { isActualDate, timeLeft } from '../utility/utilites.js';
 
 export function formFinalPost(ctx) {
 	try {
@@ -33,8 +33,8 @@ export async function formFinalPostUpdate(post) {
 		} = post;
 
 		let timeLeftStr = timeLeft(date, time);
-		const { isActual } = post;
-		if (!isActual) timeLeftStr = '<u>СТАРТ УЖЕ БЫЛ!!!</u>';
+
+		if (!isActualDate(date, time)) timeLeftStr = '<u>СТАРТ УЖЕ БЫЛ!!!</u>';
 
 		//если нет данных о голосовании, то не показывать количество участников на главной странице
 		let pollQuantityStr;

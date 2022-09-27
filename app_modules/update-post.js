@@ -1,5 +1,6 @@
 import { Post } from '../model/Post.js';
 import { formFinalPostUpdate } from './forms.js';
+import { isActualDate } from '../utility/utilites.js';
 
 export async function updatePost(bot) {
 	try {
@@ -16,7 +17,10 @@ export async function updatePost(bot) {
 					parse_mode: 'html',
 				}
 			);
-			if (!postsDB[index].isActual) {
+			let date = postsDB[index].date;
+			let time = postsDB[index].time;
+			//это последнее обновление поста
+			if (!isActualDate(date, time)) {
 				await Post.findOneAndUpdate({ _id: postsDB[index] }, { $set: { isLastUpdate: true } });
 			}
 		}

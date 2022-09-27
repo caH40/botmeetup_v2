@@ -28,7 +28,6 @@ const postSchema = new Schema({
 	tempDay: { type: String },
 	humidity: { type: String },
 	descriptionWeather: { type: String },
-	isActual: { type: Boolean },
 	isLastUpdate: { type: Boolean },
 });
 

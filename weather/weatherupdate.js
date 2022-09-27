@@ -44,10 +44,6 @@ export async function weatherUpdate(bot) {
 						parse_mode: 'html',
 					}
 				);
-
-				//Обновление данных в БД
-			} else {
-				await Post.findOneAndUpdate({ _id: elm._id }, { $set: { isActual: false } });
 			}
 		});
 	} catch {
