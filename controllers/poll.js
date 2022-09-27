@@ -1,3 +1,4 @@
+import { updatePost } from '../app_modules/update-post.js';
 import { Post } from '../model/Post.js';
 
 export async function poll(ctx) {
@@ -12,7 +13,7 @@ export async function poll(ctx) {
 			'poll.id': pollId,
 		});
 		if (!postDB) return console.log('в документе нет объекта poll');
-		const pollUsers = postDB.pollUsers;
+		let pollUsers = postDB.pollUsers;
 
 		// исключение дублирование голосования одним и тем же пользователем
 		// если уже есть в массиве то условие не выполняется !pollUserIds.includes(pollUserId)
@@ -35,6 +36,8 @@ export async function poll(ctx) {
 			{ 'poll.id': pollId },
 			{ $set: { pollUsers, pollQuantity } }
 		);
+		// обновление постов
+		await updatePost(ctx, response._id);
 	} catch (error) {
 		console.log(error);
 	}
