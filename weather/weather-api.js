@@ -7,11 +7,12 @@ import { cityList } from './city-mylist.js';
 export async function weatherFromApi() {
 	const { apiKeyWeather } = await BotSetup.findOne();
 	const cityMy = ['Пятигорск'];
+
+	//массив для сохранения в БД
 	const arrayWeather = [];
 
 	for (let indexCity = 0; indexCity < cityMy.length; indexCity++) {
-		let lon = cityList.filter(obj => obj.name === cityMy[indexCity])[0].coord.lon;
-		let lat = cityList.filter(obj => obj.name === cityMy[indexCity])[0].coord.lat;
+		let { lon, lat } = cityList.filter(city => city.name === cityMy[indexCity])[0].coord;
 
 		const requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKeyWeather}&exclude=hourly&units=metric&lang=ru`;
 		const response = await fetch(requestUrl);
