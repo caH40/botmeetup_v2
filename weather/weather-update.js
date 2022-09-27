@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { Post } from '../model/Post.js';
 import { BotSetup } from '../model/BotSetup.js';
-import { getWeather } from './getweather.js';
+import { getWeather } from './weather-get.js';
 import { isActualDate } from '../utility/utilites.js';
 
 export async function weatherUpdate(bot) {

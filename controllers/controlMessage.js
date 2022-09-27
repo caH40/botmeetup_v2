@@ -1,6 +1,6 @@
 import { BotSetup } from '../model/BotSetup.js';
 import { Post } from '../model/Post.js';
-import { getWeather } from '../weather/getweather.js';
+import { getWeather } from '../weather/weather-get.js';
 
 export async function controlMessage(ctx) {
 	try {
