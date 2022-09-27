@@ -8,9 +8,11 @@ export async function poll(ctx) {
 		const pollUsername = ctx.update.poll_answer.user.username;
 		const pollOption = ctx.update.poll_answer.option_ids;
 
-		let { pollUsers } = await Post.findOne({
+		let postDB = await Post.findOne({
 			'poll.id': pollId,
 		});
+		if (!postDB) return console.log('в документе нет объекта poll');
+		const pollUsers = postDB.pollUsers;
 
 		// исключение дублирование голосования одним и тем же пользователем
 		// если уже есть в массиве то условие не выполняется !pollUserIds.includes(pollUserId)
