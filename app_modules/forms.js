@@ -33,10 +33,16 @@ export async function formFinalPostUpdate(post) {
 		} = post;
 
 		let timeLeftStr = timeLeft(date, time);
-
 		const { isActual } = post;
 		if (!isActual) timeLeftStr = '<u>СТАРТ УЖЕ БЫЛ!!!</u>';
-		// if (!isActual) timeLeftStr = '0ч, 0мин';
+
+		//если нет данных о голосовании, то не показывать количество участников на главной странице
+		let pollQuantityStr;
+		if (post.poll) {
+			pollQuantityStr = `\n<b>Количество участников:</b> ${pollQuantity}`;
+		} else {
+			pollQuantityStr = '';
+		}
 
 		return `${description ?? 'Детали заезда:'}\n<b>Место старта:</b> ${
 			locationStart ?? '-'
@@ -46,9 +52,7 @@ export async function formFinalPostUpdate(post) {
 			distance ?? '-'
 		};\n<b>Tемп:</b> ${speed ?? '-'};\n<b>Погода:</b> ${Math.round(tempDay) ?? '-'}°C, ${
 			humidity ?? '-'
-		}%, ${
-			descriptionWeather ?? '-'
-		};\n<b>Организатор заезда:</b> ${leader}\n<b>Количество участников:</b> ${pollQuantity ?? '?'}`;
+		}%, ${descriptionWeather ?? '-'};\n<b>Организатор заезда:</b> ${leader}${pollQuantityStr}`;
 	} catch (error) {
 		console.log(error);
 	}

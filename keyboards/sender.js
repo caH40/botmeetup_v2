@@ -38,6 +38,8 @@ export async function sendFinalPost(ctx) {
 			photoId: ctx.session.photoId,
 			description: ctx.session.description,
 			messageId,
+			isActual: true,
+			isLastUpdate: false,
 		});
 
 		await post.save();

@@ -3,12 +3,11 @@ import { formFinalPostUpdate } from './forms.js';
 
 export async function updatePost(bot) {
 	try {
-		// const postsDB = await Post.find();
 		const postsDB = await Post.find({ isLastUpdate: false });
 
 		for (let index = 0; index < postsDB.length; index++) {
+			console.log(postsDB[index].locationStart);
 			const formPostString = await formFinalPostUpdate(postsDB[index]);
-			// console.log(formPostString);
 			await bot.telegram.editMessageCaption(
 				postsDB[index].channelId,
 				postsDB[index].messageId,
