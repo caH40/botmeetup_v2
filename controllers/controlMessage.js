@@ -42,8 +42,18 @@ export async function controlMessage(ctx) {
 			formWeatherStr ?? 'нет данных',
 			optionalOptions
 		);
-
+		//добавление данных о погоде в БД
 		const messageIdWeather = messageWeather.message_id;
-		await Post.findOneAndUpdate({ _id }, { $set: { messageIdWeather } });
+		await Post.findOneAndUpdate(
+			{ _id },
+			{
+				$set: {
+					messageIdWeather,
+					tempDay: weatherCurrent.tempDay,
+					humidity: weatherCurrent.humidity,
+					descriptionWeather: weatherCurrent.desc,
+				},
+			}
+		);
 	}
 }
