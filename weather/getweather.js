@@ -14,6 +14,7 @@ export async function getWeather(date, location) {
 		weatherCurrent.desc =
 			weatherCurrent.desc.charAt(0).toUpperCase() + weatherCurrent.desc.slice(1);
 
+		//формирование строки для сообщения в телеге
 		const formWeatherStr = formWeather(weatherCurrent);
 
 		return { formWeatherStr, weatherCurrent };

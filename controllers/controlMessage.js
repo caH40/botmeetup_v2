@@ -36,29 +36,29 @@ export async function controlMessage(ctx) {
 
 		// добавление сообщения о погоде в дискуссию о заезде
 		let dateClear = date.slice(-10);
-		const { formWeather, weatherCurrent } = await getWeather(dateClear, locationWeather);
+		const { formWeatherStr, weatherCurrent } = await getWeather(dateClear, locationWeather);
 
-		const weatherDay = new WeatherDay({
-			postId: _id,
-			dateUpdate: weatherCurrent.dateUpdate,
-			date: weatherCurrent.date,
-			dateString: weatherCurrent.dateString,
-			city: weatherCurrent.city,
-			tempMorn: weatherCurrent.tempMorn,
-			tempDay: weatherCurrent.tempDay,
-			tempEve: weatherCurrent.tempEve,
-			humidity: weatherCurrent.humidity,
-			windSpeed: weatherCurrent.windSpeed,
-			description: weatherCurrent.description,
-		});
-		const responseSave = await weatherDay.save();
-		//добавление id коллекции погоды в коллекцию Пост(объявления)
-		const weatherDayId = responseSave._id;
-		await Post.findOneAndUpdate({ _id }, { $set: { weatherDayId } });
+		// const weatherDay = new WeatherDay({
+		// 	postId: _id,
+		// 	dateUpdate: weatherCurrent.dateUpdate,
+		// 	date: weatherCurrent.date,
+		// 	dateString: weatherCurrent.dateString,
+		// 	city: weatherCurrent.city,
+		// 	tempMorn: weatherCurrent.tempMorn,
+		// 	tempDay: weatherCurrent.tempDay,
+		// 	tempEve: weatherCurrent.tempEve,
+		// 	humidity: weatherCurrent.humidity,
+		// 	windSpeed: weatherCurrent.windSpeed,
+		// 	description: weatherCurrent.description,
+		// });
+		// const responseSave = await weatherDay.save();
+		// //добавление id коллекции погоды в коллекцию Пост(объявления)
+		// const weatherDayId = responseSave._id;
+		// await Post.findOneAndUpdate({ _id }, { $set: { weatherDayId } });
 
 		const messageWeather = await ctx.telegram.sendMessage(
 			groupId,
-			formWeather ?? 'нет данных',
+			formWeatherStr ?? 'нет данных',
 			optionalOptions
 		);
 
