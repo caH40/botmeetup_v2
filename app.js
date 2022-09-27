@@ -46,10 +46,10 @@ bot.launch().then(async () => {
 	await bot.telegram.sendMessage(process.env.MY_TELEGRAM_ID, 'restart...');
 	setInterval(() => {
 		//запуск таймера обновления данных о погоде в день старта заезда
-		getWeatherDb();
+		// getWeatherDb();
 		//получение данных о погоде
 		weatherUpdate(bot);
-	}, 3600000);
+	}, 10000);
 	setInterval(() => {
 		//обновление постов на канале
 		updatePost(bot);

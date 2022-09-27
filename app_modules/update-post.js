@@ -30,8 +30,8 @@ async function editMessageTelegram(bot, post) {
 			})
 			.catch(error =>
 				console.log(
-					new Date().toLocaleDateString(),
-					'ошибку при обновлении постов, старый пост такой же как и обновлённый'
+					new Date().toLocaleString(),
+					'ошибка при обновлении постов, старый пост такой же как и обновлённый'
 				)
 			);
 		let date = post.date;
