@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import { Post } from '../model/Post.js';
 import { BotSetup } from '../model/BotSetup.js';
-// import { WeatherDay } from '../model/WeatherDay.js';
 import { getWeather } from './getweather.js';
 import { isActualDate } from '../utility/utilites.js';
 
@@ -55,19 +54,3 @@ export async function weatherUpdate(bot) {
 		error => console.log(error);
 	}
 }
-
-//отдельная коллекция для погоды
-// await WeatherDay.findOneAndUpdate(
-// 	{ _id: elm.weatherDayId },
-// 	{
-// 		$set: {
-// 			dateUpdate: weatherCurrent.dateUpdate,
-// 			tempMorn: weatherCurrent.tempMorn,
-// 			tempDay: weatherCurrent.tempDay,
-// 			tempEve: weatherCurrent.tempEve,
-// 			humidity: weatherCurrent.humidity,
-// 			windSpeed: weatherCurrent.windSpeed,
-// 			descriptionWeather: weatherCurrent.desc,
-// 		},
-// 	}
-// );
