@@ -4,7 +4,7 @@ import { WeatherWeek } from '../model/WeatherWeek.js';
 import { BotSetup } from '../model/BotSetup.js';
 import { cityList } from './citylistru.js';
 
-export async function getWeatherDb() {
+export async function weatherFromApi() {
 	const { apiWeather } = await BotSetup.findOne();
 	let i = 0;
 	const cityMy = [

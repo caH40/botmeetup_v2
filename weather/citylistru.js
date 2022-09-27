@@ -1,3 +1,4 @@
+// list of cites with coordinates
 export const cityList = [
 	{
 		id: 452063,
