@@ -10,7 +10,7 @@ const BotSetupSchema = new Schema({
 	groupId: { type: Number, unique: true },
 	groupTitle: { type: String },
 	city: [{ type: String }],
-	apiWeather: { type: String },
+	apiKeyWeather: { type: String },
 });
 
 export const BotSetup = model('BotSetup', BotSetupSchema);

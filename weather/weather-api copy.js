@@ -2,10 +2,10 @@ import 'dotenv/config';
 import fetch from 'node-fetch';
 import { WeatherWeek } from '../model/WeatherWeek.js';
 import { BotSetup } from '../model/BotSetup.js';
-import { cityList } from './city-mylist.js';
+import { cityList } from './citylistru.js';
 
 export async function weatherFromApi() {
-	const { apiKeyWeather } = await BotSetup.findOne();
+	const { apiWeather } = await BotSetup.findOne();
 	let i = 0;
 	const cityMy = [
 		'Kislovodsk',
@@ -26,7 +26,7 @@ export async function weatherFromApi() {
 		let lon = cityList.filter(obj => obj.name === cityMy[x])[0].coord.lon;
 		let lat = cityList.filter(obj => obj.name === cityMy[x])[0].coord.lat;
 
-		const requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKeyWeather}&exclude=hourly&units=metric&lang=ru`;
+		const requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiWeather}&exclude=hourly&units=metric&lang=ru`;
 		fetch(requestUrl)
 			.then(function (resp) {
 				return resp.json();
@@ -67,7 +67,6 @@ export async function weatherFromApi() {
 						Barashek: 'Барашек',
 						Yessentuki: 'Ессентуки',
 						Vladikavkaz: 'Владикавказ',
-						Teberda: 'Теберда',
 					};
 
 					const zap = {
