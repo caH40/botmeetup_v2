@@ -13,9 +13,10 @@ export async function weatherUpdate(bot) {
 		postsDB.forEach(async elm => {
 			const location = elm.locationStart;
 			const date = elm.date.slice(-10);
+			const time = elm.time;
 			// исправить на if (!isActualDate(elm)) return
 
-			if (isActualDate(date)) {
+			if (isActualDate(date, time) && elm.isActual) {
 				const { formWeatherStr, weatherCurrent } = await getWeather(date, location);
 
 				await Post.findOneAndUpdate(
@@ -46,6 +47,8 @@ export async function weatherUpdate(bot) {
 				);
 
 				//Обновление данных в БД
+			} else {
+				await Post.findOneAndUpdate({ _id: elm._id }, { $set: { isActual: false } });
 			}
 		});
 	} catch {

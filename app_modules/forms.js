@@ -32,17 +32,23 @@ export async function formFinalPostUpdate(post) {
 			leader,
 		} = post;
 
-		const timeLeftStr = timeLeft(date, time);
+		let timeLeftStr = timeLeft(date, time);
 
-		return `${description ?? 'Детали заезда:'}\nМесто старта: ${
+		const { isActual } = post;
+		if (!isActual) timeLeftStr = '<u>СТАРТ УЖЕ БЫЛ!!!</u>';
+		// if (!isActual) timeLeftStr = '0ч, 0мин';
+
+		return `${description ?? 'Детали заезда:'}\n<b>Место старта:</b> ${
 			locationStart ?? '-'
-		};\nДата заезда: ${date ?? '-'};\nВремя старта: ${time ?? '-'};\nОсталось до старта: ${
-			timeLeftStr ?? '-'
-		};\nДистанция: ${distance ?? '-'};\nTемп: ${speed ?? '-'};\nПогода: ${
-			Math.round(tempDay) ?? '-'
-		}°C, ${humidity ?? '-'}%, ${
+		};\n<b>Дата заезда:</b> ${date ?? '-'};\n<b>Время старта:</b> ${
+			time ?? '-'
+		};\n<b>Осталось до старта:</b> ${timeLeftStr ?? '-'};\n<b>Дистанция:</b> ${
+			distance ?? '-'
+		};\n<b>Tемп:</b> ${speed ?? '-'};\n<b>Погода:</b> ${Math.round(tempDay) ?? '-'}°C, ${
+			humidity ?? '-'
+		}%, ${
 			descriptionWeather ?? '-'
-		};\nОрганизатор заезда: ${leader}\nКоличество участников: ${pollQuantity ?? '?'}`;
+		};\n<b>Организатор заезда:</b> ${leader}\n<b>Количество участников:</b> ${pollQuantity ?? '?'}`;
 	} catch (error) {
 		console.log(error);
 	}
