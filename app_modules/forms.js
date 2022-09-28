@@ -44,15 +44,25 @@ export async function formFinalPostUpdate(post) {
 			pollQuantityStr = '';
 		}
 
+		//строка о погоде
+		let weatherStr = '';
+		if (tempDay === '') {
+			weatherStr = `<b>Погода:</b> Нет данных;`;
+		} else {
+			weatherStr = `<b>Погода:</b> ${Math.round(tempDay) ?? '-'}°C, ${humidity ?? '-'}%, ${
+				descriptionWeather ?? '-'
+			};`;
+		}
+
 		return `${description ?? 'Детали заезда:'}\n<b>Место старта:</b> ${
 			locationStart ?? '-'
 		};\n<b>Дата заезда:</b> ${date ?? '-'};\n<b>Время старта:</b> ${
 			time ?? '-'
 		};\n<b>Осталось до старта:</b> ${timeLeftStr ?? '-'};\n<b>Дистанция:</b> ${
 			distance ?? '-'
-		};\n<b>Tемп:</b> ${speed ?? '-'};\n<b>Погода:</b> ${Math.round(tempDay) ?? '-'}°C, ${
-			humidity ?? '-'
-		}%, ${descriptionWeather ?? '-'};\n<b>Организатор заезда:</b> ${leader}${pollQuantityStr}`;
+		};\n<b>Tемп:</b> ${
+			speed ?? '-'
+		};\n${weatherStr}\n<b>Организатор заезда:</b> ${leader}${pollQuantityStr}`;
 	} catch (error) {
 		console.log(error);
 	}
@@ -71,5 +81,7 @@ export function formWeather(weatherCurrent) {
 		weatherCurrent.tempDay ?? '---'
 	}°C\nТемпература вечером: ${weatherCurrent.tempEve ?? '---'}°C\nВлажность: ${
 		weatherCurrent.humidity ?? '---'
-	}%\nСкорость ветра: ${weatherCurrent.windSpeed ?? '---'}м/с\n${weatherCurrent.desc ?? '---'}`;
+	}%\nСкорость ветра: ${weatherCurrent.windSpeed ?? '---'}м/с\n${
+		weatherCurrent.desc ?? 'Нет данных о погоде.'
+	}`;
 }

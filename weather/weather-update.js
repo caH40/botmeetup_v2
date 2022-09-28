@@ -20,7 +20,10 @@ export async function weatherUpdate(bot) {
 			const { formWeatherStr, weatherCurrent } = await getWeather(date, location);
 
 			//если нет данных в БД, то выход
-			if (!formWeatherStr) return;
+			if (!formWeatherStr) return console.log('В БД нет данных о погоде');
+			//если нет данных о погоде то обновлять на пустые строки
+			weatherCurrent.tempDay ??= '';
+			weatherCurrent.humidity ??= '';
 
 			await Post.findOneAndUpdate(
 				{ _id: elm._id },
@@ -37,13 +40,8 @@ export async function weatherUpdate(bot) {
 				groupId,
 				elm.messageIdWeather,
 				'привет!',
-				(formWeatherStr
-					? await formWeatherStr
-					: 'Необходимо подождать, скоро я смогу предсказать погоду') +
-					`\nUpdate: ${new Date().toLocaleString()}`,
+				formWeatherStr + `\nUpdate: ${new Date().toLocaleString()}`,
 				{
-					is_anonymous: false,
-					correct_option_id: 0,
 					reply_to_message_id: elm.messageIdGroup,
 					parse_mode: 'html',
 				}

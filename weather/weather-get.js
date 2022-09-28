@@ -10,15 +10,10 @@ export async function getWeather(date, location) {
 		if (!weatherDB) return {};
 
 		let weatherCurrent = weatherDB.list.find(elm => elm.date == date && elm.city === location);
-		weatherCurrent ??= [];
-		weatherCurrent.desc ??= 'Предсказываю погоду на более близкие даты...';
-		weatherCurrent.desc =
-			weatherCurrent.desc.charAt(0).toUpperCase() + weatherCurrent.desc.slice(1);
+		weatherCurrent ??= {};
 
 		//формирование строки для сообщения в телеге
 		const formWeatherStr = formWeather(weatherCurrent);
-
-		// console.log('weatherCurrent', weatherCurrent);
 
 		return { formWeatherStr, weatherCurrent };
 	} catch {
