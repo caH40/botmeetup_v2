@@ -6,7 +6,7 @@ import { cityList } from './city-mylist.js';
 
 export async function weatherFromApi() {
 	const { apiKeyWeather } = await BotSetup.findOne();
-	const cityMy = ['Пятигорск'];
+	const cityMy = ['Пятигорск', 'Кисловодск'];
 
 	//массив для сохранения в БД
 	const arrayWeather = [];

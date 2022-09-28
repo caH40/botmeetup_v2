@@ -19,6 +19,9 @@ export async function weatherUpdate(bot) {
 
 			const { formWeatherStr, weatherCurrent } = await getWeather(date, location);
 
+			//если нет данных в БД, то выход
+			if (!formWeatherStr) return;
+
 			await Post.findOneAndUpdate(
 				{ _id: elm._id },
 				{

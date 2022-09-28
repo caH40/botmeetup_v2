@@ -6,8 +6,8 @@ import { formWeather } from '../app_modules/forms.js';
 export async function getWeather(date, location) {
 	try {
 		const weatherDB = await WeatherWeek.findOne();
-
-		if (!weatherDB) return;
+		//если нет данных в БД, то выход
+		if (!weatherDB) return {};
 
 		let weatherCurrent = weatherDB.list.find(elm => elm.date == date && elm.city === location);
 		weatherCurrent ??= [];
@@ -17,6 +17,8 @@ export async function getWeather(date, location) {
 
 		//формирование строки для сообщения в телеге
 		const formWeatherStr = formWeather(weatherCurrent);
+
+		// console.log('weatherCurrent', weatherCurrent);
 
 		return { formWeatherStr, weatherCurrent };
 	} catch {
