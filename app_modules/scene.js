@@ -23,4 +23,4 @@ setupScene.leave(async ctx => await ctx.reply('До свидания!'));
 setupScene.command('configuration', async ctx => getConfiguration(ctx));
 setupScene.command('updateDataGroup', async ctx => await updateSetupGroup(ctx));
 setupScene.command('quit', leave('setup'));
-setupScene.on('message', async ctx => await apiWeather(ctx));
+setupScene.on('text', async ctx => await apiWeather(ctx));
