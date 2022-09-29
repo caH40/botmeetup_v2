@@ -7,6 +7,7 @@ export async function updateSetupGroup(ctx) {
 		const groupTitle = ctx.message.chat.title;
 
 		const chatType = ctx.message.chat.type;
+
 		if (chatType !== 'supergroup') {
 			return await ctx.reply('Данную команду необходимо запускать в <b>group</b>', {
 				parse_mode: 'html',
@@ -21,11 +22,13 @@ export async function updateSetupGroup(ctx) {
 				},
 			}
 		);
-
 		if (response) {
 			await ctx.telegram.sendMessage(groupId, 'Данные группы обновлены.');
 		} else {
-			await ctx.telegram.sendMessage(groupId, 'Произошла ошибка при обновлении данных.');
+			await ctx.telegram.sendMessage(
+				groupId,
+				'Произошла ошибка при обновлении данных. Необходимо быть владельцем группы, привязанной к каналу объявлений.'
+			);
 		}
 	} catch (error) {
 		console.log(error);
