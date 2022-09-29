@@ -1,12 +1,11 @@
 import { getFullDay } from '../utility/utilites.js';
 import { mainMenu } from './mainmenu.js';
 import {
-	creatDayArr,
+	createDayArr,
 	timesArr,
 	distanceArr,
 	speedArr,
 	levelArr,
-	locations,
 	locationsWeather,
 } from './buttons.js';
 
@@ -17,7 +16,7 @@ export async function handlerSubMenu(ctx, cbqData) {
 			mainMenu(ctx);
 		}
 		// обработка данных всех подменю
-		if (creatDayArr().includes(cbqData)) {
+		if (createDayArr().includes(cbqData)) {
 			ctx.session.date = getFullDay(cbqData);
 			ctx.session.start[0][0].text = 'Дата заезда ✔️';
 			mainMenu(ctx);

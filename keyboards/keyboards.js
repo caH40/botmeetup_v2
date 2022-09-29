@@ -1,5 +1,5 @@
 import {
-	creatDayArr,
+	createDayArr,
 	timesArr,
 	distanceArr,
 	speedArr,
@@ -30,7 +30,7 @@ const keyboardMain = [
 ];
 function getKeyboardDays() {
 	let date = [];
-	const days = creatDayArr();
+	const days = createDayArr();
 	for (let i = 0; i < 12; i = i + 2) {
 		date.push([
 			{ text: days[i], callback_data: days[i] },
