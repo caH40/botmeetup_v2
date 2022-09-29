@@ -5,7 +5,7 @@ import pkg from 'mongoose';
 const { Schema, model } = pkg;
 
 const citySchema = new Schema({
-	city: [String],
+	city: [{ String }],
 });
 
 export const City = model('City', citySchema);

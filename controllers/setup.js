@@ -5,14 +5,20 @@ import { adminVerify } from '../app_modules/admin-verify.js';
 //определиться где добавляются города, из общего чата или из сессии сетап
 export async function setup(ctx) {
 	try {
+		console.log(ctx.message);
 		const botSetupDB = await BotSetup.findOne();
 
-		const chatName = botSetupDB ? botSetupDB.groupTitle : '';
+		const groupTitle = botSetupDB ? botSetupDB.groupTitle : '';
 		// проверка должна осуществляться из данных DB
 		const isAdmin = await adminVerify(ctx);
-		if (!isAdmin) return await ctx.reply(`Команда доступна админам и только из группы ${chatName}`);
+		if (!isAdmin)
+			return await ctx.reply(
+				`Команда доступна только из группы <b>${groupTitle}</b>, необходимо иметь права админа.`,
+				{ parse_mode: 'html' }
+			);
 
 		const userId = ctx.message.from.id;
+		console.log(ctx.message);
 		// Если коллекция уже есть, то больше не создается. Может быть только одна коллекция BotSetup.
 		if (!botSetupDB) {
 			console.log('создаю документ botSetup');

@@ -35,12 +35,12 @@ bot.command('rideon', async ctx => await rideOn(ctx));
 // bot.command('/rating', async ctx => await rating(ctx));
 // bot.command('/delete', async ctx => await deletePost(ctx));
 bot.command('city', async ctx => await editCity(ctx));
-bot.on('message', async ctx => await controlMessage(ctx));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 //первоначальная настройка бота. замена API key погоды.
 bot.command('setup', async ctx => await setup(ctx));
 bot.command('updateDataChannel', async ctx => await updateSetupChannel(ctx));
 bot.on('poll_answer', async ctx => await poll(ctx));
+bot.on('message', async ctx => await controlMessage(ctx));
 
 bot.launch().then(() => {
 	// await bot.telegram.sendMessage(process.env.MY_TELEGRAM_ID, 'restart...');

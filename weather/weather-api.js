@@ -30,7 +30,7 @@ export async function weatherFromApi() {
 			const dayWeather = new Date(data.daily[indexDay].dt * 1000).getDay();
 			const dateUpdate = new Date().toLocaleString();
 
-			const dayMyObj = {
+			const conversionDays = {
 				1: 'Понедельник',
 				2: 'Вторник',
 				3: 'Среда',
@@ -43,7 +43,7 @@ export async function weatherFromApi() {
 			const dayWeatherForDB = {
 				dateUpdate: dateUpdate,
 				date: weatherDate,
-				dateString: dayMyObj[dayWeather],
+				dateString: conversionDays[dayWeather],
 				city: cityMy[indexCity],
 				tempMorn: weatherTempMorn,
 				tempDay: weatherTempDay,
