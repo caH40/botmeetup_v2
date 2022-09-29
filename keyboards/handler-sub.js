@@ -28,7 +28,7 @@ export async function handlerSubMenu(ctx, cbqData) {
 		}
 		if (cbqData.includes('mainLocation_')) {
 			const location = cbqData.slice(13);
-			ctx.session.locationStart = cbqData;
+			ctx.session.locationStart = location;
 			ctx.session.start[1][0].text = 'Место старта ✔️';
 			mainMenu(ctx);
 		}
