@@ -59,8 +59,8 @@ function keyboardNewLocation(cityList) {
 			cityList[i + 1].name = 'Пустое место';
 		}
 		keyboardLocations.push([
-			{ text: cityList[i].name, callback_data: cityList[i].name },
-			{ text: cityList[i + 1].name, callback_data: cityList[i + 1].name },
+			{ text: cityList[i].name, callback_data: 'addNewLocation_' + cityList[i].name },
+			{ text: cityList[i + 1].name, callback_data: 'addNewLocation_' + cityList[i + 1].name },
 		]);
 	}
 	return keyboardLocations;
