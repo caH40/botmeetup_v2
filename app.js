@@ -2,7 +2,6 @@ import 'dotenv/config';
 import { Scenes, session, Telegraf } from 'telegraf';
 import mongoose from 'mongoose';
 
-import { editCity } from './controllers/city.js';
 import { setup } from './controllers/setup.js';
 import { updateSetupChannel, updateSetupGroup } from './controllers/update-setup.js';
 import { start } from './controllers/start.js';
@@ -16,6 +15,7 @@ import { poll } from './controllers/poll.js';
 import { weatherFromApi } from './weather/weather-api.js';
 import { weatherUpdate } from './weather/weather-update.js';
 import { updatePost } from './app_modules/update-post.js';
+import { editCity } from './controllers/city.js';
 
 await mongoose
 	.connect(process.env.MONGODB)

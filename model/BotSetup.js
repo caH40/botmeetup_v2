@@ -2,7 +2,7 @@
 import pkg from 'mongoose';
 const { Schema, model } = pkg;
 
-const BotSetupSchema = new Schema({
+const botSetupSchema = new Schema({
 	channelOwnerId: { type: Number },
 	channelId: { type: Number, unique: true },
 	channelTitle: { type: String },
@@ -13,4 +13,4 @@ const BotSetupSchema = new Schema({
 	apiKeyWeather: { type: String },
 });
 
-export const BotSetup = model('BotSetup', BotSetupSchema);
+export const BotSetup = model('BotSetup', botSetupSchema);

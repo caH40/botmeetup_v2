@@ -19,6 +19,16 @@ cityScene.on('message', ctx => {
 export const setupScene = new Scenes.BaseScene('setup');
 setupScene.enter(async ctx => await ctx.reply(setupMessage, { disable_web_page_preview: true }));
 setupScene.leave(async ctx => await ctx.reply('До свидания!'));
-setupScene.command('configuration', async ctx => getConfiguration(ctx));
+setupScene.command('configuration', async ctx => await getConfiguration(ctx));
 setupScene.command('quit', leave('setup'));
 setupScene.on('text', async ctx => await apiWeather(ctx));
+
+// //this scene edits a array of city
+// export const editCityScene = new Scenes.BaseScene('editCity');
+// editCityScene.enter(async ctx => {
+// 	await getKeyboard(ctx, 'Редактирование массива городов. Выберите действие:', keyboardAddOrDel);
+// });
+// editCityScene.on('callback_query', async ctx => await callbackQuery(ctx));
+// editCityScene.leave(async ctx => await ctx.reply('До свидания!'));
+// editCityScene.command('quit', leave('setup'));
+// editCityScene.on('text', async ctx => await ctx.reply('Для выхода /quit'));
