@@ -30,7 +30,7 @@ export async function rideOn(ctx) {
 			[{ text: 'Сводные данные по заезду', callback_data: 'meetSummary' }],
 		];
 
-		await ctx.deleteMessage(messageId);
+		await ctx.deleteMessage(messageId).catch(error => console.log('ошибка при удалении сообщения'));
 		await ctx.reply('Выберите блок заполнения', {
 			reply_markup: { inline_keyboard: ctx.session.start },
 		});

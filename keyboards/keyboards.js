@@ -4,7 +4,6 @@ import {
 	distanceArr,
 	speedArr,
 	levelArr,
-	locations,
 	locationsWeather,
 } from './buttons.js';
 
@@ -107,12 +106,7 @@ function keyboardMainLocations(cityList) {
 }
 
 const keyboardLocationsWeather = [];
-for (let i = 0; i < locations.length; i = i + 2) {
-	keyboardLocationsWeather.push([
-		{ text: locationsWeather[i], callback_data: locationsWeather[i] },
-		{ text: locationsWeather[i + 1], callback_data: locationsWeather[i + 1] },
-	]);
-}
+
 const keyboardDistances = [];
 for (let i = 0; i < 12; i = i + 4) {
 	keyboardDistances.push([

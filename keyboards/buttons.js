@@ -74,6 +74,5 @@ export {
 	levelArr,
 	dateSecToday,
 	daySec,
-	locations,
 	locationsWeather,
 };
