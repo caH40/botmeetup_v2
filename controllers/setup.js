@@ -5,7 +5,6 @@ import { adminVerify } from '../app_modules/admin-verify.js';
 //определиться где добавляются города, из общего чата или из сессии сетап
 export async function setup(ctx) {
 	try {
-		console.log(ctx.message);
 		const botSetupDB = await BotSetup.findOne();
 
 		const groupTitle = botSetupDB ? botSetupDB.groupTitle : '';
@@ -18,13 +17,13 @@ export async function setup(ctx) {
 			);
 
 		const userId = ctx.message.from.id;
-		console.log(ctx.message);
 		// Если коллекция уже есть, то больше не создается. Может быть только одна коллекция BotSetup.
 		if (!botSetupDB) {
 			console.log('создаю документ botSetup');
 			const newBotSetup = new BotSetup({ channelOwnerId: userId });
 			await newBotSetup.save();
 		}
+		// Сцена для setup
 		await ctx.scene.enter('setup');
 	} catch (error) {
 		console.log(error);
