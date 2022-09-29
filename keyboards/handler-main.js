@@ -2,7 +2,7 @@ import { formFinalPost } from '../app_modules/forms.js';
 import { getKeyboard } from './keyboard-get.js';
 import {
 	getKeyboardDays,
-	keyboardLocations,
+	keyboardMainLocations,
 	keyboardMeetingTimes,
 	keyboardDistances,
 	keyboardSpeed,
@@ -11,6 +11,7 @@ import {
 	keyboardLocationsWeather,
 } from './keyboards.js';
 import { sendFinalPost } from '../app_modules/sender.js';
+import { BotSetup } from '../model/BotSetup.js';
 
 export async function handlerMainMenu(ctx, cbqData) {
 	try {
@@ -24,7 +25,18 @@ export async function handlerMainMenu(ctx, cbqData) {
 		}
 		// меню места
 		if (cbqData === 'meetLocation') {
-			getKeyboard(ctx, 'Место старта', keyboardLocations);
+			const botSetupDB = await BotSetup.findOne();
+			if (!botSetupDB)
+				return console.log(
+					new Date().toLocaleString(),
+					'в БД нет документов в коллекции BotSetup -',
+					'module handler-city.js'
+				);
+
+			let locationsDB = botSetupDB.city;
+			locationsDB ??= [];
+
+			getKeyboard(ctx, 'Место старта', keyboardMainLocations(locationsDB));
 		}
 		// меню дистанций
 		if (cbqData === 'meetDistance') {

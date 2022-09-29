@@ -92,13 +92,20 @@ const keyboardCityAbsent = [
 	[{ text: 'В базе нет городов. Выход.', callback_data: 'quitEditLocation' }],
 ];
 
-const keyboardLocations = [];
-for (let i = 0; i < locations.length; i = i + 2) {
-	keyboardLocations.push([
-		{ text: locations[i], callback_data: locations[i] },
-		{ text: locations[i + 1], callback_data: locations[i + 1] },
-	]);
+function keyboardMainLocations(cityList) {
+	const keyboardLocations = [];
+	for (let i = 0; i < cityList.length; i = i + 2) {
+		if (!cityList[i + 1]) {
+			cityList[i + 1] = '***';
+		}
+		keyboardLocations.push([
+			{ text: cityList[i], callback_data: 'mainLocation_' + cityList[i] },
+			{ text: cityList[i + 1], callback_data: 'mainLocation_' + cityList[i + 1] },
+		]);
+	}
+	return keyboardLocations;
 }
+
 const keyboardLocationsWeather = [];
 for (let i = 0; i < locations.length; i = i + 2) {
 	keyboardLocationsWeather.push([
@@ -171,7 +178,7 @@ function getKeyboardForDelPost(messageFromDb) {
 export {
 	keyboardMain,
 	getKeyboardDays,
-	keyboardLocations,
+	keyboardMainLocations,
 	keyboardLocationsWeather,
 	keyboardMeetingTimes,
 	keyboardDistances,

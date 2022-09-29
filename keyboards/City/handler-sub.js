@@ -1,6 +1,6 @@
 import { BotSetup } from '../../model/BotSetup.js';
 import { getKeyboard } from '../keyboard-get.js';
-import { keyboardAddNewLocation, keyboardCityAbsent, keyboardAddOrDel } from '../keyboards.js';
+import { keyboardAddOrDel } from '../keyboards.js';
 
 export async function handlerSubCityMenu(ctx, cbqData) {
 	//не выполнять ниже стоящий код, если нет нужных ключевых слов
