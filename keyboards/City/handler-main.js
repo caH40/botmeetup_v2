@@ -41,4 +41,7 @@ export async function handlerMainCityMenu(ctx, cbqData) {
 		const title = 'Выберите города которые необходимо удалить из inline-клавиатуры';
 		getKeyboard(ctx, title, citiesDB ? keyboardDeleteNewLocation(citiesDB) : keyboardCityAbsent);
 	}
+	if (cbqData === 'keyboardCityAbsent') {
+		console.log('keyboardCityAbsent, module - handler-main cities');
+	}
 }
