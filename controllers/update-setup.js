@@ -6,6 +6,12 @@ export async function updateSetupGroup(ctx) {
 		const groupId = ctx.message.chat.id;
 		const groupTitle = ctx.message.chat.title;
 
+		const chatType = ctx.message.chat.type;
+		if (chatType !== 'supergroup') {
+			return await ctx.reply('Данную команду необходимо запускать в <b>group</b>', {
+				parse_mode: 'html',
+			});
+		}
 		const response = await BotSetup.findOneAndUpdate(
 			{ channelOwnerId: userId },
 			{
@@ -15,6 +21,7 @@ export async function updateSetupGroup(ctx) {
 				},
 			}
 		);
+
 		if (response) {
 			await ctx.telegram.sendMessage(groupId, 'Данные группы обновлены.');
 		} else {
@@ -29,7 +36,13 @@ export async function updateSetupChannel(ctx) {
 	try {
 		if (!ctx.message.forward_from_chat) {
 			const chatId = ctx.message.chat.id;
-			return await ctx.telegram.sendMessage(chatId, 'Данная команда предназначена для channel');
+			return await ctx.telegram.sendMessage(
+				chatId,
+				'Данную команду необходимо запускать в <b>channel</b>',
+				{
+					parse_mode: 'html',
+				}
+			);
 		}
 
 		const channelId = ctx.message.forward_from_chat.id;
