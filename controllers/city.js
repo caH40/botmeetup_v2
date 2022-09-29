@@ -1,13 +1,14 @@
 import { adminVerify } from '../app_modules/admin-verify.js';
+import { cityList } from '../weather/city-mylist.js';
+import { newLocation } from '../keyboards/keyboards.js';
 
 //This is a scene for editing an array of cites
 //создать функционал добавления/удаления городов (инлайн клавиатуры)
-export async function editCity(ctx) {
+export function editCity(ctx) {
 	try {
-		// const isAdmin = await adminVerify(ctx);
-		// if (!isAdmin)
-		// 	return await ctx.reply('Команда доступна только админам канала "channelName from DB "');
-		// await ctx.scene.enter('city');
+		// все города/места прописанные в файле city-mylist.js
+		const keyboard = newLocation(cityList);
+		// console.log('keyboard', keyboard);
 	} catch (error) {
 		console.log(error);
 	}

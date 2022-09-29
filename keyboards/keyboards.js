@@ -50,6 +50,23 @@ for (let i = 0; i < timesArr.length; i = i + 6) {
 		{ text: timesArr[i + 5], callback_data: timesArr[i + 5] },
 	]);
 }
+
+function newLocation(cityList) {
+	const keyboardLocations = [];
+	for (let i = 0; i < cityList.length; i = i + 2) {
+		if (!cityList[i + 1]) {
+			cityList[i + 1] = {};
+			cityList[i + 1].name = 'Пустое место';
+		}
+		keyboardLocations.push([
+			{ text: cityList[i].name, callback_data: cityList[i].name },
+			{ text: cityList[i + 1].name, callback_data: cityList[i + 1].name },
+		]);
+	}
+	console.log('keyboardLocations', keyboardLocations);
+	return keyboardLocations;
+}
+
 const keyboardLocations = [];
 for (let i = 0; i < locations.length; i = i + 2) {
 	keyboardLocations.push([
@@ -138,4 +155,5 @@ export {
 	keyboardSummary,
 	keyboardBack,
 	getKeyboardForDelPost,
+	newLocation,
 };
