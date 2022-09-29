@@ -51,12 +51,12 @@ for (let i = 0; i < timesArr.length; i = i + 6) {
 	]);
 }
 
-function keyboardNewLocation(cityList) {
+function keyboardAddNewLocation(cityList) {
 	const keyboardLocations = [];
 	for (let i = 0; i < cityList.length; i = i + 2) {
 		if (!cityList[i + 1]) {
 			cityList[i + 1] = {};
-			cityList[i + 1].name = 'Пустое место';
+			cityList[i + 1].name = 'Пустая кнопка';
 		}
 		keyboardLocations.push([
 			{ text: cityList[i].name, callback_data: 'addNewLocation_' + cityList[i].name },
@@ -66,16 +66,15 @@ function keyboardNewLocation(cityList) {
 	return keyboardLocations;
 }
 
-function dateBaseLocation(cites) {
+function keyboardDeleteNewLocation(cityList) {
 	const keyboardLocations = [];
-	for (let i = 0; i < cites.length; i = i + 2) {
-		if (!cites[i + 1]) {
-			cites[i + 1] = {};
-			cites[i + 1].name = 'Пустое место';
+	for (let i = 0; i < cityList.length; i = i + 2) {
+		if (!cityList[i + 1]) {
+			cityList[i + 1] = 'Пустая кнопка';
 		}
 		keyboardLocations.push([
-			{ text: cityList[i], callback_data: cityList[i] },
-			{ text: cityList[i + 1], callback_data: cityList[i + 1] },
+			{ text: cityList[i], callback_data: 'deleteNewLocation_' + cityList[i] },
+			{ text: cityList[i + 1], callback_data: 'deleteNewLocation_' + cityList[i + 1] },
 		]);
 	}
 	return keyboardLocations;
@@ -181,8 +180,8 @@ export {
 	keyboardSummary,
 	keyboardBack,
 	getKeyboardForDelPost,
-	keyboardNewLocation,
-	dateBaseLocation,
+	keyboardAddNewLocation,
+	keyboardDeleteNewLocation,
 	keyboardAddOrDel,
 	keyboardCityAbsent,
 };
