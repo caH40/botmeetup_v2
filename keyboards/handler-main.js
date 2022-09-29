@@ -35,7 +35,6 @@ export async function handlerMainMenu(ctx, cbqData) {
 
 			let locationsDB = botSetupDB.city;
 			locationsDB ??= [];
-
 			getKeyboard(ctx, 'Место старта', keyboardMainLocations(locationsDB));
 		}
 		// меню дистанций

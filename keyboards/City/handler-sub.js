@@ -17,14 +17,14 @@ export async function handlerSubCityMenu(ctx, cbqData) {
 
 	if (cbqData.includes('addNewLocation_')) {
 		const city = cbqData.slice(15);
-		await BotSetup.findOneAndUpdate({ $addToSet: { city: { locationName: city } } });
+		await BotSetup.findOneAndUpdate({ $addToSet: { city: { name: city } } });
 		const title = `Город <b>${city}</b> был добавлен. Выберите действие:`;
 		await getKeyboard(ctx, title, keyboardAddOrDel);
 	}
 
 	if (cbqData.includes('deleteNewLocation_')) {
 		const city = cbqData.slice(18);
-		await BotSetup.findOneAndUpdate({ $pull: { city: { locationName: city } } });
+		await BotSetup.findOneAndUpdate({ $pull: { city: { name: city } } });
 		const title = `Город <b>${city}</b> был удален. Выберите действие:`;
 		await getKeyboard(ctx, title, keyboardAddOrDel);
 	}

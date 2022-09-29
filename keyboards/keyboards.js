@@ -70,16 +70,16 @@ function keyboardDeleteNewLocation(cityList) {
 	for (let i = 0; i < cityList.length; i = i + 2) {
 		if (!cityList[i + 1]) {
 			cityList[i + 1] = {};
-			cityList[i + 1].locationName = '***';
+			cityList[i + 1].name = '***';
 		}
 		keyboardLocations.push([
 			{
-				text: cityList[i].locationName,
-				callback_data: 'deleteNewLocation_' + cityList[i].locationName,
+				text: cityList[i].name,
+				callback_data: 'deleteNewLocation_' + cityList[i].name,
 			},
 			{
-				text: cityList[i + 1].locationName,
-				callback_data: 'deleteNewLocation_' + cityList[i + 1].locationName,
+				text: cityList[i + 1].name,
+				callback_data: 'deleteNewLocation_' + cityList[i + 1].name,
 			},
 		]);
 	}
@@ -102,11 +102,15 @@ function keyboardMainLocations(cityList) {
 	const keyboardLocations = [];
 	for (let i = 0; i < cityList.length; i = i + 2) {
 		if (!cityList[i + 1]) {
-			cityList[i + 1] = '***';
+			cityList[i + 1] = {};
+			cityList[i + 1].name = '***';
 		}
 		keyboardLocations.push([
-			{ text: cityList[i], callback_data: 'mainLocation_' + cityList[i] },
-			{ text: cityList[i + 1], callback_data: 'mainLocation_' + cityList[i + 1] },
+			{ text: cityList[i].name, callback_data: 'mainLocation_' + cityList[i].name },
+			{
+				text: cityList[i + 1].name,
+				callback_data: 'mainLocation_' + cityList[i + 1].name,
+			},
 		]);
 	}
 	return keyboardLocations;
