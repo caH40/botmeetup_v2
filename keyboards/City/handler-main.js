@@ -16,30 +16,30 @@ export async function handlerMainCityMenu(ctx, cbqData) {
 			'module handler-city.js'
 		);
 
-	let citesDB = botSetupDB.city;
-	citesDB ??= [];
+	let citiesDB = botSetupDB.city;
+	citiesDB ??= [];
 
 	if (cbqData === 'addLocation') {
 		// убираются города из клавиатуры которые есть в ДБ BotSetup
-		const filteredCites = cityList.filter(city => !citesDB.includes(city.name));
+		const filteredCities = cityList.filter(city => !citiesDB.includes(city.name));
 
-		if (filteredCites.length == 0) {
+		if (filteredCities.length == 0) {
 			return await ctx.reply(
 				'Вы добавили все имеющиеся города в настройки бота. Больше нечего добавлять.'
 			);
 		}
 
 		const title = 'Выберите город для добавления в inline-клавиатуру';
-		getKeyboard(ctx, title, keyboardAddNewLocation(filteredCites));
+		getKeyboard(ctx, title, keyboardAddNewLocation(filteredCities));
 	}
 
 	if (cbqData === 'removeLocation') {
-		if (citesDB.length == 0) {
+		if (citiesDB.length == 0) {
 			return await ctx.reply('Вы удалили все города из настройки бота. Больше нечего удалять.');
 		}
 
 		const title = 'Выберите города которые необходимо удалить из inline-клавиатуры';
-		getKeyboard(ctx, title, citesDB ? keyboardDeleteNewLocation(citesDB) : keyboardCityAbsent);
+		getKeyboard(ctx, title, citiesDB ? keyboardDeleteNewLocation(citiesDB) : keyboardCityAbsent);
 	}
 	if (cbqData === 'keyboardCityAbsent') {
 	}

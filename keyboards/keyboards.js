@@ -56,7 +56,7 @@ function keyboardAddNewLocation(cityList) {
 	for (let i = 0; i < cityList.length; i = i + 2) {
 		if (!cityList[i + 1]) {
 			cityList[i + 1] = {};
-			cityList[i + 1].name = 'Пустая кнопка';
+			cityList[i + 1].name = '***';
 		}
 		keyboardLocations.push([
 			{ text: cityList[i].name, callback_data: 'addNewLocation_' + cityList[i].name },
@@ -70,7 +70,7 @@ function keyboardDeleteNewLocation(cityList) {
 	const keyboardLocations = [];
 	for (let i = 0; i < cityList.length; i = i + 2) {
 		if (!cityList[i + 1]) {
-			cityList[i + 1] = 'Пустая кнопка';
+			cityList[i + 1] = '***';
 		}
 		keyboardLocations.push([
 			{ text: cityList[i], callback_data: 'deleteNewLocation_' + cityList[i] },

@@ -5,8 +5,8 @@ import { keyboardAddNewLocation, keyboardCityAbsent, keyboardAddOrDel } from '..
 export async function handlerSubCityMenu(ctx, cbqData) {
 	//не выполнять ниже стоящий код, если нет нужных ключевых слов
 	if (!(cbqData.includes('addNewLocation_') || cbqData.includes('deleteNewLocation_'))) return;
-	// если приходит callback_data 'Пустая кнопка' то return
-	if (cbqData.includes('Пустая кнопка')) {
+	// если приходит callback_data '***' то return
+	if (cbqData.includes('***')) {
 		await getKeyboard(
 			ctx,
 			'Это была пустая кнопка, а не город. Выберите действие:',
