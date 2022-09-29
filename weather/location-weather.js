@@ -1,5 +1,5 @@
 // list of cities with coordinates
-export const locationWeatherList = [
+export const city = [
 	{
 		locationName: 'Кисловодск',
 		LocationWeather: ['Кисловодск', 'Барашек', 'Пятигорск', 'Ессентуки', 'Суворовская'],

@@ -9,7 +9,7 @@ const botSetupSchema = new Schema({
 	channelName: { type: String },
 	groupId: { type: Number, unique: true },
 	groupTitle: { type: String },
-	city: [{ type: String }],
+	city: [{ type: Object }],
 	apiKeyWeather: { type: String },
 });
 

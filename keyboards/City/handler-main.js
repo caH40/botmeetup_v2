@@ -21,7 +21,9 @@ export async function handlerMainCityMenu(ctx, cbqData) {
 
 	if (cbqData === 'addLocation') {
 		// убираются города из клавиатуры которые есть в ДБ BotSetup
-		const filteredCities = cityList.filter(city => !citiesDB.includes(city.name));
+		const locationDbArr = [];
+		citiesDB.forEach(location => locationDbArr.push(location.locationName));
+		const filteredCities = cityList.filter(city => !locationDbArr.includes(city.name));
 
 		if (filteredCities.length == 0) {
 			return await ctx.reply(
