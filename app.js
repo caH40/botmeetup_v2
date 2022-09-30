@@ -15,7 +15,7 @@ import { poll } from './controllers/poll.js';
 import { weatherFromApi } from './weather/weather-api.js';
 import { weatherUpdate } from './weather/weather-update.js';
 import { updatePost } from './app_modules/update-post.js';
-import { editCity } from './controllers/city.js';
+import { editLocations } from './controllers/location.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -34,7 +34,7 @@ bot.command('help', async ctx => await help(ctx));
 bot.command('rideon', async ctx => await rideOn(ctx));
 // bot.command('/rating', async ctx => await rating(ctx));
 // bot.command('/delete', async ctx => await deletePost(ctx));
-bot.command('city', async ctx => await editCity(ctx));
+bot.command('location', async ctx => await editLocations(ctx));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 //первоначальная настройка бота. замена API key погоды.
 bot.command('setup', async ctx => await setup(ctx));

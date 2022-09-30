@@ -1,11 +1,11 @@
 // модель для создания кнопок Городов и мест мониторинга погоды
-// import mongoose from 'mongoose';
 import pkg from 'mongoose';
 
 const { Schema, model } = pkg;
 
-const citySchema = new Schema({
-	city: [{ String }],
+const locationSchema = new Schema({
+	name: { type: String },
+	weather: [{ type: String }],
 });
 
-export const City = model('City', citySchema);
+export const Location = model('Location', locationSchema);

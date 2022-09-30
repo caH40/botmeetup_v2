@@ -1,4 +1,5 @@
 // настройки для определенного канала
+import { mongoose } from 'mongoose';
 import pkg from 'mongoose';
 const { Schema, model } = pkg;
 
@@ -9,7 +10,6 @@ const botSetupSchema = new Schema({
 	channelName: { type: String },
 	groupId: { type: Number, unique: true },
 	groupTitle: { type: String },
-	city: [{ type: Object }],
 	apiKeyWeather: { type: String },
 });
 

@@ -2,7 +2,7 @@ import { BotSetup } from '../../model/BotSetup.js';
 import { getKeyboard } from '../keyboard-get.js';
 import { keyboardAddOrDel } from '../keyboards.js';
 
-export async function handlerSubCityMenu(ctx, cbqData) {
+export async function handlerSubMenuLocation(ctx, cbqData) {
 	//не выполнять ниже стоящий код, если нет нужных ключевых слов
 	if (!(cbqData.includes('addNewLocation_') || cbqData.includes('deleteNewLocation_'))) return;
 	// если приходит callback_data '***' то return

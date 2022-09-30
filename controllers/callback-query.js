@@ -1,7 +1,7 @@
 import { handlerMainMenu } from '../keyboards/handler-main.js';
 import { handlerSubMenu } from '../keyboards/handler-sub.js';
-import { handlerMainCityMenu } from '../keyboards/City/handler-main.js';
-import { handlerSubCityMenu } from '../keyboards/City/handler-sub.js';
+import { handlerMainMenuLocation } from '../keyboards/location_start/handler-main.js';
+import { handlerSubMenuLocation } from '../keyboards/location_start/handler-sub.js';
 
 export async function callbackQuery(ctx) {
 	try {
@@ -13,8 +13,8 @@ export async function callbackQuery(ctx) {
 		await handlerMainMenu(ctx, cbqData);
 		await handlerSubMenu(ctx, cbqData);
 
-		await handlerMainCityMenu(ctx, cbqData);
-		await handlerSubCityMenu(ctx, cbqData);
+		await handlerMainMenuLocation(ctx, cbqData);
+		await handlerSubMenuLocation(ctx, cbqData);
 	} catch (error) {
 		console.log(error);
 	}
