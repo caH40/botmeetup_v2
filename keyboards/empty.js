@@ -7,6 +7,6 @@ export async function emptyButton(ctx, cbqData) {
 	await getKeyboard(
 		ctx,
 		'Это была пустая кнопка, а не город. Выберите действие:',
-		keyboardAddOrDel
+		keyboardAddOrDel()
 	);
 }
