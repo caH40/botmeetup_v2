@@ -1,12 +1,14 @@
 import { getKeyboard } from '../keyboards/keyboard-get.js';
-import { keyboardAddOrDel } from '../keyboards/keyboards.js';
-//This is a scene for editing an array of cities
+import { keyboardLocation } from '../keyboards/keyboards.js';
+import { Location } from '../model/Location.js';
+
 export async function editLocationsWeather(ctx) {
 	try {
+		const locationsDB = await Location.find();
 		await getKeyboard(
 			ctx,
-			'Редактирование массива мест старта. Выберите действие:',
-			keyboardAddOrDel()
+			'Выберите место старта для редактирования его массива мест мониторинга погоды:',
+			keyboardLocation(locationsDB, 'locationStart_')
 		);
 	} catch (error) {
 		console.log(error);

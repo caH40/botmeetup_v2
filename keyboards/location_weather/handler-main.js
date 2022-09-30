@@ -1,4 +1,10 @@
 // 🌞
+import { emptyButtonWeather } from '../empty.js';
+
 export async function handlerMainMenuWeather(ctx, cbqData) {
-	//обработка меню добавление/удаление городов
+	if (cbqData.includes('***')) {
+		await emptyButtonWeather(ctx, cbqData);
+		return;
+	}
+	locationStart_;
 }
