@@ -66,6 +66,20 @@ function keyboardLocation(cityList, extendData) {
 	return keyboardLocations;
 }
 
+function keyboardWeatherRemove(cityList, extendData) {
+	const keyboardLocations = [];
+	for (let i = 0; i < cityList.length; i = i + 2) {
+		if (!cityList[i + 1]) {
+			cityList[i + 1] = '***';
+		}
+		keyboardLocations.push([
+			{ text: cityList[i], callback_data: extendData + cityList[i] },
+			{ text: cityList[i + 1], callback_data: extendData + cityList[i + 1] },
+		]);
+	}
+	return keyboardLocations;
+}
+
 // ❗ универсальная клавиатура
 function keyboardAddOrDel(action, extendData) {
 	if (action === 'add') {
@@ -184,4 +198,5 @@ export {
 	keyboardAddOrDel,
 	keyboardCityAbsent,
 	keyboardLocation,
+	keyboardWeatherRemove,
 };
