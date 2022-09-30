@@ -10,11 +10,12 @@ import {
 
 export async function handlerMainMenuLocation(ctx, cbqData) {
 	//обработка меню добавление/удаление городов
-	const locationsDB = await Location.find();
-	//массив с именами мест старта из БД
-	const locationsName = [];
+
 	//=================================================================================
 	if (cbqData === 'addLocation') {
+		const locationsDB = await Location.find();
+		//массив с именами мест старта из БД
+		const locationsName = [];
 		// убираются города из клавиатуры которые есть в ДБ BotSetup
 		locationsDB.forEach(location => locationsName.push(location.name));
 		const filteredLocationsName = cityList.filter(city => !locationsName.includes(city.name));
@@ -30,6 +31,8 @@ export async function handlerMainMenuLocation(ctx, cbqData) {
 	}
 	//=================================================================================
 	if (cbqData === 'removeLocation') {
+		const locationsDB = await Location.find();
+
 		if (locationsDB.length == 0) {
 			return await ctx.reply(
 				'Вы удалили все места старта из настройки бота. Больше нечего удалять.'
