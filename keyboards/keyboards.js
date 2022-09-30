@@ -67,17 +67,17 @@ function keyboardLocation(cityList, extendData) {
 }
 
 // ❗ универсальная клавиатура
-function keyboardAddOrDel(action) {
+function keyboardAddOrDel(action, extendData) {
 	if (action === 'add') {
-		return [[{ text: 'Добавление места', callback_data: 'addLocation' }]];
+		return [[{ text: 'Добавление места', callback_data: 'addLocation' + extendData }]];
 	}
 	if (action === 'remove') {
-		return [[{ text: 'Удаление места', callback_data: 'removeLocation' }]];
+		return [[{ text: 'Удаление места', callback_data: 'removeLocation' + extendData }]];
 	}
 	return [
 		[
-			{ text: 'Добавление места', callback_data: 'addLocation' },
-			{ text: 'Удаление места', callback_data: 'removeLocation' },
+			{ text: 'Добавление места', callback_data: 'addLocation' + extendData },
+			{ text: 'Удаление места', callback_data: 'removeLocation' + extendData },
 		],
 		// [{ text: 'Выход из редактирования', callback_data: 'quitEditLocation' }],
 	];
