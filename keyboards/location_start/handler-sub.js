@@ -1,4 +1,4 @@
-import { BotSetup } from '../../model/BotSetup.js';
+import { Location } from '../../model/Location.js';
 import { emptyButton } from '../empty.js';
 import { getKeyboard } from '../keyboard-get.js';
 import { keyboardAddOrDel } from '../keyboards.js';
@@ -12,16 +12,22 @@ export async function handlerSubMenuLocation(ctx, cbqData) {
 	}
 
 	if (cbqData.includes('addLocationNew_')) {
-		const city = cbqData.slice(15);
-		await BotSetup.findOneAndUpdate({ $addToSet: { city: { name: city } } });
-		const title = `Город <b>${city}</b> был добавлен. Выберите действие:`;
-		await getKeyboard(ctx, title, keyboardAddOrDel);
+		const locationName = cbqData.slice(15);
+
+		// проверка на дубликат документа
+		const response = await Location.findOne({ name: locationName });
+		if (response) return console.log('Документ с таким name уже есть в коллекции');
+
+		const location = new Location({ name: locationName, weather: [] });
+		await location.save();
+		const title = `Место старта <b>${locationName}</b> было добавлено. Выберите действие:`;
+		await getKeyboard(ctx, title, keyboardAddOrDel());
 	}
 
 	if (cbqData.includes('removeLocationNew_')) {
-		const city = cbqData.slice(18);
-		await BotSetup.findOneAndUpdate({ $pull: { city: { name: city } } });
-		const title = `Город <b>${city}</b> был удален. Выберите действие:`;
-		await getKeyboard(ctx, title, keyboardAddOrDel);
+		const locationName = cbqData.slice(18);
+		await Location.findOneAndDelete({ name: locationName });
+		const title = `Место старта <b>${locationName}</b> было удалено. Выберите действие:`;
+		await getKeyboard(ctx, title, keyboardAddOrDel());
 	}
 }

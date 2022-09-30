@@ -1,8 +1,7 @@
-import { BotSetup } from '../../model/BotSetup.js';
 import { Location } from '../../model/Location.js';
 import { cityList } from '../../weather/city-mylist.js';
 import { getKeyboard } from '../keyboard-get.js';
-import { keyboardLocation, keyboardCityAbsent } from '../keyboards.js';
+import { keyboardLocation, keyboardAddOrDel } from '../keyboards.js';
 
 export async function handlerMainMenuLocation(ctx, cbqData) {
 	//обработка меню добавление/удаление городов
@@ -17,9 +16,11 @@ export async function handlerMainMenuLocation(ctx, cbqData) {
 		const filteredLocationsName = cityList.filter(city => !locationsName.includes(city.name));
 
 		if (filteredLocationsName.length == 0) {
-			return await ctx.reply(
+			await ctx.reply(
 				'Вы добавили все имеющиеся города в настройки бота. Больше нечего добавлять.'
 			);
+			await getKeyboard(ctx, 'Выберите действие:', keyboardAddOrDel('remove'));
+			return;
 		}
 
 		const title = 'Выберите место старта для добавления в inline-клавиатуру';
@@ -30,20 +31,12 @@ export async function handlerMainMenuLocation(ctx, cbqData) {
 		const locationsDB = await Location.find();
 
 		if (locationsDB.length == 0) {
-			return await ctx.reply(
-				'Вы удалили все места старта из настройки бота. Больше нечего удалять.'
-			);
+			await ctx.reply('Вы удалили все места старта из настройки бота. Больше нечего удалять.');
+			await getKeyboard(ctx, 'Выберите действие:', keyboardAddOrDel('add'));
+			return;
 		}
 
 		const title = 'Выберите место старта которое необходимо удалить из inline-клавиатуры';
-		getKeyboard(
-			ctx,
-			title,
-			citiesDB ? keyboardLocation(locationsDB, 'removeLocationNew_') : keyboardLocation
-		);
-	}
-	//=================================================================================
-	if (cbqData === 'keyboardCityAbsent') {
-		console.log('keyboardCityAbsent, module - handler-main cities');
+		getKeyboard(ctx, title, keyboardLocation(locationsDB, 'removeLocationNew_'));
 	}
 }

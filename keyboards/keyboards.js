@@ -66,13 +66,22 @@ function keyboardLocation(cityList, extendData) {
 	return keyboardLocations;
 }
 
-const keyboardAddOrDel = [
-	[
-		{ text: 'Добавление города', callback_data: 'addLocation' },
-		{ text: 'Удаление города', callback_data: 'removeLocation' },
-	],
-	// [{ text: 'Выход из редактирования', callback_data: 'quitEditLocation' }],
-];
+// ❗ универсальная клавиатура
+function keyboardAddOrDel(action) {
+	if (action === 'add') {
+		return [[{ text: 'Добавление места', callback_data: 'addLocation' }]];
+	}
+	if (action === 'remove') {
+		return [[{ text: 'Удаление места', callback_data: 'removeLocation' }]];
+	}
+	return [
+		[
+			{ text: 'Добавление места', callback_data: 'addLocation' },
+			{ text: 'Удаление места', callback_data: 'removeLocation' },
+		],
+		// [{ text: 'Выход из редактирования', callback_data: 'quitEditLocation' }],
+	];
+}
 
 const keyboardCityAbsent = [
 	[{ text: 'В базе нет городов. Выход.', callback_data: 'quitEditLocation' }],

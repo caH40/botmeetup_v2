@@ -6,7 +6,7 @@ export async function editLocations(ctx) {
 		await getKeyboard(
 			ctx,
 			'Редактирование массива мест старта. Выберите действие:',
-			keyboardAddOrDel
+			keyboardAddOrDel()
 		);
 	} catch (error) {
 		console.log(error);
