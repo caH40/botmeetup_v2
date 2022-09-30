@@ -40,7 +40,7 @@ export async function handlerMainMenuWeather(ctx, cbqData) {
 			return;
 		}
 
-		const title = 'Выберите место погоды для мониторинга';
+		const title = `Выберите место погоды для старта из <b>${locationStart}</b>`;
 		getKeyboard(ctx, title, keyboardLocation(filteredWeather, 'weatherForAdd_'));
 	}
 
