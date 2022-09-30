@@ -2,6 +2,8 @@ import { handlerMainMenu } from '../keyboards/handler-main.js';
 import { handlerSubMenu } from '../keyboards/handler-sub.js';
 import { handlerMainMenuLocation } from '../keyboards/location_start/handler-main.js';
 import { handlerSubMenuLocation } from '../keyboards/location_start/handler-sub.js';
+import { handlerMainMenuWeather } from '../keyboards/location_weather/handler-main.js';
+import { handlerSubMenuWeather } from '../keyboards/location_weather/handler-sub.js';
 
 export async function callbackQuery(ctx) {
 	try {
@@ -15,6 +17,9 @@ export async function callbackQuery(ctx) {
 
 		await handlerMainMenuLocation(ctx, cbqData);
 		await handlerSubMenuLocation(ctx, cbqData);
+
+		await handlerMainMenuWeather(ctx, cbqData);
+		await handlerSubMenuWeather(ctx, cbqData);
 	} catch (error) {
 		console.log(error);
 	}
