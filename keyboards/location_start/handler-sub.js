@@ -4,7 +4,7 @@ import { keyboardAddOrDel } from '../keyboards.js';
 
 export async function handlerSubMenuLocation(ctx, cbqData) {
 	//не выполнять ниже стоящий код, если нет нужных ключевых слов
-	if (!(cbqData.includes('addNewLocation_') || cbqData.includes('deleteNewLocation_'))) return;
+	if (!(cbqData.includes('addLocationNew_') || cbqData.includes('removeLocationNew_'))) return;
 	// если приходит callback_data '***' то return
 	if (cbqData.includes('***')) {
 		await getKeyboard(
@@ -15,14 +15,14 @@ export async function handlerSubMenuLocation(ctx, cbqData) {
 		return;
 	}
 
-	if (cbqData.includes('addNewLocation_')) {
+	if (cbqData.includes('addLocationNew_')) {
 		const city = cbqData.slice(15);
 		await BotSetup.findOneAndUpdate({ $addToSet: { city: { name: city } } });
 		const title = `Город <b>${city}</b> был добавлен. Выберите действие:`;
 		await getKeyboard(ctx, title, keyboardAddOrDel);
 	}
 
-	if (cbqData.includes('deleteNewLocation_')) {
+	if (cbqData.includes('removeLocationNew_')) {
 		const city = cbqData.slice(18);
 		await BotSetup.findOneAndUpdate({ $pull: { city: { name: city } } });
 		const title = `Город <b>${city}</b> был удален. Выберите действие:`;

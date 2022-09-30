@@ -2,11 +2,7 @@ import { BotSetup } from '../../model/BotSetup.js';
 import { Location } from '../../model/Location.js';
 import { cityList } from '../../weather/city-mylist.js';
 import { getKeyboard } from '../keyboard-get.js';
-import {
-	keyboardAddNewLocation,
-	keyboardCityAbsent,
-	keyboardDeleteNewLocation,
-} from '../keyboards.js';
+import { keyboardLocation, keyboardCityAbsent } from '../keyboards.js';
 
 export async function handlerMainMenuLocation(ctx, cbqData) {
 	//обработка меню добавление/удаление городов
@@ -27,7 +23,7 @@ export async function handlerMainMenuLocation(ctx, cbqData) {
 		}
 
 		const title = 'Выберите место старта для добавления в inline-клавиатуру';
-		getKeyboard(ctx, title, keyboardAddNewLocation(filteredLocationsName));
+		getKeyboard(ctx, title, keyboardLocation(filteredLocationsName));
 	}
 	//=================================================================================
 	if (cbqData === 'removeLocation') {
@@ -43,7 +39,7 @@ export async function handlerMainMenuLocation(ctx, cbqData) {
 		getKeyboard(
 			ctx,
 			title,
-			citiesDB ? keyboardDeleteNewLocation(locationsDB, 'deleteNewLocation_') : keyboardLocation
+			citiesDB ? keyboardLocation(locationsDB, 'deleteNewLocation_') : keyboardLocation
 		);
 	}
 	//=================================================================================

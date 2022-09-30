@@ -65,41 +65,6 @@ function keyboardLocation(cityList, extendData) {
 	}
 	return keyboardLocations;
 }
-function keyboardAddNewLocation(cityList) {
-	const keyboardLocations = [];
-	for (let i = 0; i < cityList.length; i = i + 2) {
-		if (!cityList[i + 1]) {
-			cityList[i + 1] = {};
-			cityList[i + 1].name = '***';
-		}
-		keyboardLocations.push([
-			{ text: cityList[i].name, callback_data: 'addNewLocation_' + cityList[i].name },
-			{ text: cityList[i + 1].name, callback_data: 'addNewLocation_' + cityList[i + 1].name },
-		]);
-	}
-	return keyboardLocations;
-}
-
-function keyboardDeleteNewLocation(cityList) {
-	const keyboardLocations = [];
-	for (let i = 0; i < cityList.length; i = i + 2) {
-		if (!cityList[i + 1]) {
-			cityList[i + 1] = {};
-			cityList[i + 1].name = '***';
-		}
-		keyboardLocations.push([
-			{
-				text: cityList[i].name,
-				callback_data: 'deleteNewLocation_' + cityList[i].name,
-			},
-			{
-				text: cityList[i + 1].name,
-				callback_data: 'deleteNewLocation_' + cityList[i + 1].name,
-			},
-		]);
-	}
-	return keyboardLocations;
-}
 
 const keyboardAddOrDel = [
 	[
@@ -207,8 +172,7 @@ export {
 	keyboardSummary,
 	keyboardBack,
 	getKeyboardForDelPost,
-	keyboardAddNewLocation,
-	keyboardDeleteNewLocation,
 	keyboardAddOrDel,
 	keyboardCityAbsent,
+	keyboardLocation,
 };
