@@ -18,7 +18,7 @@ export async function handlerSubMenuLocation(ctx, cbqData) {
 		const response = await Location.findOne({ name: locationName });
 		if (response) return console.log('Документ с таким name уже есть в коллекции');
 
-		const location = new Location({ name: locationName, weather: [] });
+		const location = new Location({ name: locationName, weather: [locationName] });
 		await location.save();
 		const title = `Место старта <b>${locationName}</b> было добавлено. Выберите действие:`;
 		await getKeyboard(ctx, title, keyboardAddOrDel());
