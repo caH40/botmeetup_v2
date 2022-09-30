@@ -1,19 +1,13 @@
 import { BotSetup } from '../../model/BotSetup.js';
+import { emptyButton } from '../empty.js';
 import { getKeyboard } from '../keyboard-get.js';
 import { keyboardAddOrDel } from '../keyboards.js';
 
 export async function handlerSubMenuLocation(ctx, cbqData) {
 	//не выполнять ниже стоящий код, если нет нужных ключевых слов
+	await emptyButton(ctx, cbqData);
 	if (!(cbqData.includes('addLocationNew_') || cbqData.includes('removeLocationNew_'))) return;
-	// если приходит callback_data '***' то return
-	if (cbqData.includes('***')) {
-		await getKeyboard(
-			ctx,
-			'Это была пустая кнопка, а не город. Выберите действие:',
-			keyboardAddOrDel
-		);
-		return;
-	}
+	await emptyButton(ctx, cbqData);
 
 	if (cbqData.includes('addLocationNew_')) {
 		const city = cbqData.slice(15);
