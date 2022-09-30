@@ -23,7 +23,7 @@ export async function handlerMainMenuLocation(ctx, cbqData) {
 		}
 
 		const title = 'Выберите место старта для добавления в inline-клавиатуру';
-		getKeyboard(ctx, title, keyboardLocation(filteredLocationsName));
+		getKeyboard(ctx, title, keyboardLocation(filteredLocationsName, 'addLocationNew_'));
 	}
 	//=================================================================================
 	if (cbqData === 'removeLocation') {
@@ -39,7 +39,7 @@ export async function handlerMainMenuLocation(ctx, cbqData) {
 		getKeyboard(
 			ctx,
 			title,
-			citiesDB ? keyboardLocation(locationsDB, 'deleteNewLocation_') : keyboardLocation
+			citiesDB ? keyboardLocation(locationsDB, 'removeLocationNew_') : keyboardLocation
 		);
 	}
 	//=================================================================================

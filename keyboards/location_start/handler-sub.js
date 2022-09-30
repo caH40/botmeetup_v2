@@ -5,9 +5,11 @@ import { keyboardAddOrDel } from '../keyboards.js';
 
 export async function handlerSubMenuLocation(ctx, cbqData) {
 	//не выполнять ниже стоящий код, если нет нужных ключевых слов
-	await emptyButton(ctx, cbqData);
 	if (!(cbqData.includes('addLocationNew_') || cbqData.includes('removeLocationNew_'))) return;
-	await emptyButton(ctx, cbqData);
+	if (cbqData.includes('***')) {
+		await emptyButton(ctx, cbqData);
+		return;
+	}
 
 	if (cbqData.includes('addLocationNew_')) {
 		const city = cbqData.slice(15);
