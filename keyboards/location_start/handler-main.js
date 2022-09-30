@@ -5,7 +5,7 @@ import { keyboardLocation, keyboardAddOrDel } from '../keyboards.js';
 
 export async function handlerMainMenuLocation(ctx, cbqData) {
 	//обработка меню добавление/удаление городов
-
+	console.log(cbqData);
 	//=================================================================================
 	if (cbqData === 'addLocation') {
 		const locationsDB = await Location.find();

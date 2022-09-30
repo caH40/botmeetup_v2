@@ -81,7 +81,7 @@ function keyboardWeatherRemove(cityList, extendData) {
 }
 
 // ❗ универсальная клавиатура
-function keyboardAddOrDel(action, extendData) {
+function keyboardAddOrDel(action, extendData = '') {
 	if (action === 'add') {
 		return [[{ text: 'Добавление места', callback_data: 'addLocation' + extendData }]];
 	}
