@@ -9,6 +9,7 @@ import {
 	keyboardDifficulty,
 	keyboardSummary,
 	keyboardLocationsWeather,
+	keyboardBack,
 } from './keyboards.js';
 import { sendFinalPost } from '../app_modules/sender.js';
 import { BotSetup } from '../model/BotSetup.js';
@@ -41,14 +42,23 @@ export async function handlerMainMenu(ctx, cbqData) {
 		if (cbqData === 'meetWeather') {
 			const locationStart = ctx.session.locationStart;
 			if (!locationStart) {
-				await ctx.reply('Сначала необходимо выбрать место старта.');
+				await getKeyboard(
+					ctx,
+					'Сначала необходимо выбрать место старта.',
+					keyboardBack('Вернутся в главное меню', 'meetEdit_')
+				);
+
 				return;
 			}
 			const { weather } = await Location.findOne({ name: ctx.session.locationStart });
 			if (weather.length == 0) {
 				await ctx.reply(`Нет мест мониторинга для места старта ${locationStart}`);
 			}
-			getKeyboard(ctx, 'Укажите место для прогноза погоды', keyboardLocationsWeather(weather));
+			getKeyboard(
+				ctx,
+				`Укажите место погоды для старта из <b>${locationStart}</b>`,
+				keyboardLocationsWeather(weather, 'weather_')
+			);
 		}
 		// // меню сложности
 		// if (cbqData === 'meetLevel') {

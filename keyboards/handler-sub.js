@@ -43,8 +43,9 @@ export async function handlerSubMenu(ctx, cbqData) {
 			ctx.session.start[2][0].text = 'Средняя скорость ✔️';
 			mainMenu(ctx);
 		}
-		if (locationsWeather.includes(cbqData)) {
-			ctx.session.locationWeather = cbqData.split(' ')[0];
+		if (cbqData.includes('weather_')) {
+			const locationWeather = cbqData.slice(8);
+			ctx.session.locationWeather = locationWeather;
 			ctx.session.start[2][1].text = 'Погода ✔️';
 			mainMenu(ctx);
 		}
