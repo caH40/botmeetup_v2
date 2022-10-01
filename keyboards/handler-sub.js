@@ -12,7 +12,7 @@ import {
 export async function handlerSubMenu(ctx, cbqData) {
 	try {
 		// редактирование создаваемого объявления
-		if (cbqData === 'meetEdit') {
+		if (cbqData === 'meetEdit_back') {
 			mainMenu(ctx);
 		}
 		// обработка данных всех подменю

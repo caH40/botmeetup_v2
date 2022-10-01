@@ -119,7 +119,19 @@ function keyboardMainLocations(cityList) {
 	return keyboardLocations;
 }
 
-const keyboardLocationsWeather = [];
+function keyboardLocationsWeather(cityList, extendData) {
+	const keyboardLocations = [];
+	for (let i = 0; i < cityList.length; i = i + 2) {
+		if (!cityList[i + 1]) {
+			cityList[i + 1] = '***';
+		}
+		keyboardLocations.push([
+			{ text: cityList[i], callback_data: extendData + cityList[i] },
+			{ text: cityList[i + 1], callback_data: extendData + cityList[i + 1] },
+		]);
+	}
+	return keyboardLocations;
+}
 
 const keyboardDistances = [];
 for (let i = 0; i < 12; i = i + 4) {
@@ -158,11 +170,13 @@ const keyboardDifficulty = [
 const keyboardSummary = [
 	[
 		{ text: 'Опубликовать', callback_data: 'meetSend' },
-		{ text: 'Редактировать', callback_data: 'meetEdit' },
+		{ text: 'Редактировать', callback_data: 'meetEdit_back' },
 	],
 ];
-// для проверки заполнения ячеек
-const keyboardBack = [[{ text: 'Продолжить ввод данных', callback_data: 'meetEdit' }]];
+// кнопка назад
+function keyboardBack(text, extendData) {
+	return [[{ text, callback_data: extendData + 'back' }]];
+}
 // формируем инлайн клавиатуру из отфильтрованных элементов, вырезая необходимую информацию и значения message.text
 function getKeyboardForDelPost(messageFromDb) {
 	let keyboardForDelPost = [];

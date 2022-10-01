@@ -10,7 +10,7 @@ export async function sendFinalPost(ctx) {
 		const finalPost = formFinalPost(ctx);
 		if (finalPost.includes('---') || !ctx.session.photoId) {
 			await ctx.reply('Не все поля заполнены!!!', {
-				reply_markup: { inline_keyboard: keyboardBack },
+				reply_markup: { inline_keyboard: keyboardBack('Продолжить ввод данных', 'meetEdit_') },
 			});
 		} else {
 			const { channelId, channelName } = await BotSetup.findOne();

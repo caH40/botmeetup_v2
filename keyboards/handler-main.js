@@ -12,6 +12,7 @@ import {
 } from './keyboards.js';
 import { sendFinalPost } from '../app_modules/sender.js';
 import { BotSetup } from '../model/BotSetup.js';
+import { Location } from '../model/Location.js';
 
 export async function handlerMainMenu(ctx, cbqData) {
 	try {
@@ -25,16 +26,7 @@ export async function handlerMainMenu(ctx, cbqData) {
 		}
 		// меню места
 		if (cbqData === 'meetLocation') {
-			const botSetupDB = await BotSetup.findOne();
-			if (!botSetupDB)
-				return console.log(
-					new Date().toLocaleString(),
-					'в БД нет документов в коллекции BotSetup -',
-					'module handler-city.js'
-				);
-
-			let locationsDB = botSetupDB.city;
-			locationsDB ??= [];
+			const locationsDB = await Location.find();
 			getKeyboard(ctx, 'Место старта', keyboardMainLocations(locationsDB));
 		}
 		// меню дистанций
@@ -47,7 +39,16 @@ export async function handlerMainMenu(ctx, cbqData) {
 		}
 		// меню погода
 		if (cbqData === 'meetWeather') {
-			getKeyboard(ctx, 'Укажите место для прогноза погоды', keyboardLocationsWeather);
+			const locationStart = ctx.session.locationStart;
+			if (!locationStart) {
+				await ctx.reply('Сначала необходимо выбрать место старта.');
+				return;
+			}
+			const { weather } = await Location.findOne({ name: ctx.session.locationStart });
+			if (weather.length == 0) {
+				await ctx.reply(`Нет мест мониторинга для места старта ${locationStart}`);
+			}
+			getKeyboard(ctx, 'Укажите место для прогноза погоды', keyboardLocationsWeather(weather));
 		}
 		// // меню сложности
 		// if (cbqData === 'meetLevel') {
