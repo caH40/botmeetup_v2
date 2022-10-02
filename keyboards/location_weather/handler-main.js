@@ -67,6 +67,8 @@ export async function handlerMainMenuWeather(ctx, cbqData) {
 			{ $addToSet: { weather: locationWeather } },
 			{ returnDocument: 'after' }
 		);
+		// после каждого добавления "места погоды" запрашивается прогноз погоды с сервера погоды и обновляются данные в ДБ weatherWeek
+		await weatherFromApi();
 
 		await getKeyboard(
 			ctx,

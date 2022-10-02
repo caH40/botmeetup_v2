@@ -8,7 +8,6 @@ export async function weatherUpdate(bot) {
 	try {
 		const { groupId } = await BotSetup.findOne();
 		const postsDB = await Post.find();
-		console.log(postsDB);
 
 		postsDB.forEach(async elm => {
 			const location = elm.locationStart;
