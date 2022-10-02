@@ -42,19 +42,6 @@ export async function updateSetupGroup(ctx) {
 
 export async function updateSetupChannel(ctx) {
 	try {
-		const channelId = ctx.message.forward_from_chat.id;
-		const channelTitle = ctx.message.forward_from_chat.title;
-		const channelName = ctx.message.forward_from_chat.username;
-		const groupId = ctx.message.chat.id;
-
-		const isOwner = await ownerVerify(ctx);
-		// Если не админ то выход из команды /location
-		if (!isOwner)
-			return await await ctx.telegram.sendMessage(
-				channelId,
-				'Команда доступна только владельцу канала.'
-			);
-
 		if (!ctx.message.forward_from_chat) {
 			const chatId = ctx.message.chat.id;
 			return await ctx.telegram.sendMessage(
@@ -65,6 +52,11 @@ export async function updateSetupChannel(ctx) {
 				}
 			);
 		}
+
+		const channelId = ctx.message.forward_from_chat.id;
+		const channelTitle = ctx.message.forward_from_chat.title;
+		const channelName = ctx.message.forward_from_chat.username;
+		const groupId = ctx.message.chat.id;
 
 		const response = await BotSetup.findOneAndUpdate(
 			{ groupId },
