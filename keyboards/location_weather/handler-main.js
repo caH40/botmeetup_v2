@@ -3,11 +3,11 @@ import { cityList } from '../../weather/city-mylist.js';
 import { Location } from '../../model/Location.js';
 import { getKeyboard } from '../keyboard-get.js';
 import { keyboardLocation, keyboardAddOrDel, keyboardWeatherRemove } from '../keyboards.js';
-import emptyButton from '../empty.js';
+import buttonEmpty from '../button-empty.js';
 
 export async function handlerMainMenuWeather(ctx, cbqData) {
 	if (cbqData.includes('weatherForAdd_***')) {
-		await emptyButton.locationWeather(ctx, cbqData);
+		await buttonEmpty.locationWeather(ctx, cbqData);
 		return;
 	}
 

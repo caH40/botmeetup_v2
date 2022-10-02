@@ -8,6 +8,7 @@ import {
 	levelArr,
 	locationsWeather,
 } from './buttons.js';
+import buttonEmpty from './button-empty.js';
 
 export async function handlerSubMenu(ctx, cbqData) {
 	try {
@@ -26,7 +27,7 @@ export async function handlerSubMenu(ctx, cbqData) {
 			ctx.session.start[0][1].text = 'Время старта ✔️';
 			mainMenu(ctx);
 		}
-		if (cbqData.includes('mainLocation_')) {
+		if (cbqData.includes('mainLocation_') && cbqData !== 'mainLocation_***') {
 			const location = cbqData.slice(13);
 			ctx.session.locationStart = location;
 			ctx.session.start[1][0].text = 'Место старта ✔️';
@@ -43,12 +44,15 @@ export async function handlerSubMenu(ctx, cbqData) {
 			ctx.session.start[2][0].text = 'Средняя скорость ✔️';
 			mainMenu(ctx);
 		}
-		if (cbqData.includes('weather_')) {
+		if (cbqData.includes('weather_') && cbqData !== 'weather_***') {
 			const locationWeather = cbqData.slice(8);
 			ctx.session.locationWeather = locationWeather;
 			ctx.session.start[2][1].text = 'Погода ✔️';
 			mainMenu(ctx);
 		}
+
+		if (cbqData === 'mainLocation_***') await buttonEmpty.meetLocation(ctx, cbqData);
+		if (cbqData === 'weather_***') await buttonEmpty.meetWeather(ctx, cbqData);
 		// if (levelArr.includes(cbqData)) {
 		// 	ctx.session.level = cbqData;
 		// 	ctx.session.start[2][1].text = 'Сложность заезда ✔️';

@@ -17,6 +17,8 @@ import { meetWeather } from './small_handlers/meet-weather.js';
 export async function handlerMainMenu(ctx, cbqData) {
 	try {
 		console.log(cbqData);
+		// console.log('ctx.session', ctx.session); //!!!! for dev
+
 		// меню время
 		if (cbqData === 'meetTime') await getKeyboard(ctx, 'Время старта', keyboardMeetingTimes);
 
@@ -26,6 +28,10 @@ export async function handlerMainMenu(ctx, cbqData) {
 
 		// меню места
 		if (cbqData === 'meetLocation') {
+			// обнуление значение погоды в сессии
+			ctx.session.locationWeather = '';
+			ctx.session.start[2][1].text = 'Погода';
+
 			const locationsDB = await Location.find();
 			getKeyboard(ctx, 'Место старта', keyboardMainLocations(locationsDB));
 		}

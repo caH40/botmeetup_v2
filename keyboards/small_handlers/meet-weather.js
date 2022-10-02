@@ -19,7 +19,7 @@ export async function meetWeather(ctx, cbqData) {
 	}
 	getKeyboard(
 		ctx,
-		`Укажите место погоды для старта из <b>${locationStart}</b>`,
+		`Выберите место погоды для старта из <b>${locationStart}</b>`,
 		keyboardLocationsWeather(weather, 'weather_')
 	);
 }
