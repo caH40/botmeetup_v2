@@ -17,6 +17,15 @@ export default {
 		);
 	},
 
+	async locationStartWeather(ctx, cbqData) {
+		const locationsDB = await Location.find();
+		await getKeyboard(
+			ctx,
+			'Это была пустая кнопка, а не место старта. Выберите место старта для редактирования его массива мест мониторинга погоды:',
+			keyboardLocation(locationsDB, 'locationStart_')
+		);
+	},
+
 	async locationWeather(ctx, cbqData) {
 		const locationsDB = await Location.find();
 		await getKeyboard(

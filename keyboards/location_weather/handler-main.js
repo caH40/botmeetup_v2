@@ -7,6 +7,10 @@ import buttonEmpty from '../button-empty.js';
 import { weatherFromApi } from '../../weather/weather-api.js';
 
 export async function handlerMainMenuWeather(ctx, cbqData) {
+	if (cbqData.includes('locationStart_***')) {
+		await buttonEmpty.locationStartWeather(ctx, cbqData);
+		return;
+	}
 	if (cbqData.includes('weatherForAdd_***')) {
 		await buttonEmpty.locationWeather(ctx, cbqData);
 		return;
@@ -17,6 +21,7 @@ export async function handlerMainMenuWeather(ctx, cbqData) {
 		ctx.session.locationStart = locationStart;
 
 		const locationsWeather = await Location.findOne({ name: locationStart });
+		if (!locationsWeather) return console.log(`Не найдено место name: "${locationStart}" в БД`);
 
 		await getKeyboard(
 			ctx,
@@ -69,7 +74,7 @@ export async function handlerMainMenuWeather(ctx, cbqData) {
 			{ returnDocument: 'after' }
 		);
 		// после каждого добавления "места погоды" запрашивается прогноз погоды с сервера погоды и обновляются данные в ДБ weatherWeek
-		await weatherFromApi();
+		// await weatherFromApi(); ❗❗❗❗
 
 		await getKeyboard(
 			ctx,
