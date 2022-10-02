@@ -1,6 +1,6 @@
-import { BotSetup } from '../model/BotSetup';
+import { BotSetup } from '../model/BotSetup.js';
 
-export async function ownerVerify() {
+export async function ownerVerify(ctx) {
 	try {
 		const userId = ctx.message.from.id;
 
