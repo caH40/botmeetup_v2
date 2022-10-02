@@ -8,8 +8,6 @@ import {
 	keyboardSpeed,
 	keyboardDifficulty,
 	keyboardSummary,
-	keyboardLocationsWeather,
-	keyboardBack,
 } from './keyboards.js';
 import { sendFinalPost } from '../app_modules/sender.js';
 import { BotSetup } from '../model/BotSetup.js';

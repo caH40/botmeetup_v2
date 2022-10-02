@@ -1,13 +1,13 @@
 import { Location } from '../../model/Location.js';
-import { emptyButton } from '../empty.js';
+import emptyButton from '../empty.js';
 import { getKeyboard } from '../keyboard-get.js';
 import { keyboardAddOrDel } from '../keyboards.js';
 
 export async function handlerSubMenuLocation(ctx, cbqData) {
 	//не выполнять ниже стоящий код, если нет нужных ключевых слов
 	if (!(cbqData.includes('addLocationNew_') || cbqData.includes('removeLocationNew_'))) return;
-	if (cbqData.includes('***')) {
-		await emptyButton(ctx, cbqData);
+	if (cbqData.includes('addLocationNew_***')) {
+		await emptyButton.locationStart(ctx, cbqData);
 		return;
 	}
 
