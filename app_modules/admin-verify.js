@@ -7,7 +7,7 @@ export async function adminVerify(ctx) {
 		const chatId = ctx.message.chat.id;
 		const chatType = ctx.message.chat.type;
 
-		if (chatType === 'private') return isAdmin;
+		if (chatType === 'private') return false;
 
 		const admins = await ctx.telegram.getChatAdministrators(chatId);
 
