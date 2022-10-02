@@ -11,7 +11,9 @@ export function formFinalPost(ctx) {
 			ctx.session.time ?? '---'
 		};\n<b>Дистанция:</b> ${ctx.session.distance ?? '---'};\n<b>Tемп:</b> ${
 			ctx.session.speed ?? '---'
-		};\n<b>Организатор заезда:</b> ${ctx.session.leader}`;
+		};\n<b>Погода(${ctx.session.locationWeather ?? '---'}):</b>\n<b>Организатор заезда:</b> ${
+			ctx.session.leader
+		}`;
 	} catch (error) {
 		console.log(error);
 	}
@@ -21,6 +23,7 @@ export async function formFinalPostUpdate(post) {
 		const {
 			description,
 			locationStart,
+			locationWeather,
 			date,
 			time,
 			distance,
@@ -49,9 +52,9 @@ export async function formFinalPostUpdate(post) {
 		if (tempDay === '') {
 			weatherStr = `<b>Погода:</b> Нет данных;`;
 		} else {
-			weatherStr = `<b>Погода:</b> ${Math.round(tempDay) ?? '-'}°C, ${humidity ?? '-'}%, ${
-				descriptionWeather ?? '-'
-			};`;
+			weatherStr = `<b>Погода (${locationWeather}):</b> ${Math.round(tempDay) ?? '-'}°C, ${
+				humidity ?? '-'
+			}%, ${descriptionWeather ?? '-'};`;
 		}
 
 		return `${description ?? 'Детали заезда:'}\n<b>Место старта:</b> ${
@@ -77,11 +80,15 @@ export function formConfig(configFromDB) {
 }
 
 export function formWeather(weatherCurrent) {
-	return `Температура утром: ${weatherCurrent.tempMorn ?? '---'}°C\nТемпература днём: ${
-		weatherCurrent.tempDay ?? '---'
-	}°C\nТемпература вечером: ${weatherCurrent.tempEve ?? '---'}°C\nВлажность: ${
-		weatherCurrent.humidity ?? '---'
-	}%\nСкорость ветра: ${weatherCurrent.windSpeed ?? '---'}м/с\n${
-		weatherCurrent.desc ?? 'Нет данных о погоде.'
-	}`;
+	try {
+		return `Место мониторинга: ${weatherCurrent.city ?? '---'}\nТемпература утром: ${
+			weatherCurrent.tempMorn ?? '---'
+		}°C\nТемпература днём: ${weatherCurrent.tempDay ?? '---'}°C\nТемпература вечером: ${
+			weatherCurrent.tempEve ?? '---'
+		}°C\nВлажность: ${weatherCurrent.humidity ?? '---'}%\nСкорость ветра: ${
+			weatherCurrent.windSpeed ?? '---'
+		}м/с\n${weatherCurrent.desc ?? 'Нет данных о погоде.'}`;
+	} catch (error) {
+		console.log(error);
+	}
 }
