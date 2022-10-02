@@ -10,7 +10,6 @@ import { Location } from '../model/Location.js';
 
 export default {
 	async locationStart(ctx, cbqData) {
-		// если приходит callback_data '***' то return
 		await getKeyboard(
 			ctx,
 			'Это была пустая кнопка, а не место старта. Выберите действие:',

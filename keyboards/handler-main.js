@@ -10,15 +10,11 @@ import {
 	keyboardSummary,
 } from './keyboards.js';
 import { sendFinalPost } from '../app_modules/sender.js';
-import { BotSetup } from '../model/BotSetup.js';
-import { Location } from '../model/Location.js';
 import { meetWeather } from './small_handlers/meet-weather.js';
+import { meetLocations } from './small_handlers/meet-location.js';
 
 export async function handlerMainMenu(ctx, cbqData) {
 	try {
-		console.log(cbqData);
-		// console.log('ctx.session', ctx.session); //!!!! for dev
-
 		// меню время
 		if (cbqData === 'meetTime') await getKeyboard(ctx, 'Время старта', keyboardMeetingTimes);
 
@@ -27,14 +23,7 @@ export async function handlerMainMenu(ctx, cbqData) {
 			await getKeyboard(ctx, 'Дата запланированного заезда', getKeyboardDays());
 
 		// меню места
-		if (cbqData === 'meetLocation') {
-			// обнуление значение погоды в сессии
-			ctx.session.locationWeather = '';
-			ctx.session.start[2][1].text = 'Погода';
-
-			const locationsDB = await Location.find();
-			getKeyboard(ctx, 'Место старта', keyboardMainLocations(locationsDB));
-		}
+		if (cbqData === 'meetLocation') await meetLocations(ctx, cbqData);
 		// меню дистанций
 		if (cbqData === 'meetDistance') await getKeyboard(ctx, 'Дистанция заезда', keyboardDistances);
 
