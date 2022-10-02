@@ -3,22 +3,24 @@ import fetch from 'node-fetch';
 import { WeatherWeek } from '../model/WeatherWeek.js';
 import { BotSetup } from '../model/BotSetup.js';
 import { cityList } from './city-mylist.js';
+import { Location } from '../model/Location.js';
+import { createLocationsWeather } from '../app_modules/weather-array.js';
 
 export async function weatherFromApi() {
 	try {
 		const { apiKeyWeather } = await BotSetup.findOne();
-		const cityMy = ['Пятигорск', 'Кисловодск'];
-
+		const locationsDB = await Location.find();
+		const locationsWeather = createLocationsWeather(locationsDB);
 		//массив для сохранения в БД
 		const arrayWeather = [];
 
-		for (let indexCity = 0; indexCity < cityMy.length; indexCity++) {
-			let { lon, lat } = cityList.filter(city => city.name === cityMy[indexCity])[0].coord;
+		for (let indexCity = 0; indexCity < locationsWeather.length; indexCity++) {
+			let { lon, lat } = cityList.filter(city => city.name === locationsWeather[indexCity])[0]
+				.coord;
 
 			const requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKeyWeather}&exclude=hourly&units=metric&lang=ru`;
 			const response = await fetch(requestUrl);
 			const data = await response.json();
-			console.log(data);
 
 			const quantityDays = 8;
 			for (let indexDay = 0; indexDay < quantityDays; indexDay++) {
@@ -46,7 +48,7 @@ export async function weatherFromApi() {
 					dateUpdate: dateUpdate,
 					date: weatherDate,
 					dateString: conversionDays[dayWeather],
-					city: cityMy[indexCity],
+					city: locationsWeather[indexCity],
 					tempMorn: weatherTempMorn,
 					tempDay: weatherTempDay,
 					tempEve: weatherTempEve,

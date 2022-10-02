@@ -8,6 +8,7 @@ export async function weatherUpdate(bot) {
 	try {
 		const { groupId } = await BotSetup.findOne();
 		const postsDB = await Post.find();
+		console.log(postsDB);
 
 		postsDB.forEach(async elm => {
 			const location = elm.locationStart;
@@ -34,18 +35,20 @@ export async function weatherUpdate(bot) {
 						descriptionWeather: weatherCurrent.desc,
 					},
 				}
-			);
+			).catch(error => console.log('ошибка в weather-update.js'));
 
-			await bot.telegram.editMessageText(
-				groupId,
-				elm.messageIdWeather,
-				'привет!',
-				formWeatherStr + `\nUpdate: ${new Date().toLocaleString()}`,
-				{
-					reply_to_message_id: elm.messageIdGroup,
-					parse_mode: 'html',
-				}
-			);
+			await bot.telegram
+				.editMessageText(
+					groupId,
+					elm.messageIdWeather,
+					'привет!',
+					formWeatherStr + `\nUpdate: ${new Date().toLocaleString()}`,
+					{
+						reply_to_message_id: elm.messageIdGroup,
+						parse_mode: 'html',
+					}
+				)
+				.catch(error => console.log('ошибка в weather-update.js, нет messageIdWeather'));
 		});
 	} catch (error) {
 		console.log(error);
