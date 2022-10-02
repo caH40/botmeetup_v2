@@ -14,9 +14,11 @@ import {
 import { sendFinalPost } from '../app_modules/sender.js';
 import { BotSetup } from '../model/BotSetup.js';
 import { Location } from '../model/Location.js';
+import { meetWeather } from './small_handlers/meet-weather.js';
 
 export async function handlerMainMenu(ctx, cbqData) {
 	try {
+		console.log(cbqData);
 		// меню время
 		if (cbqData === 'meetTime') {
 			getKeyboard(ctx, 'Время старта', keyboardMeetingTimes);
@@ -40,25 +42,7 @@ export async function handlerMainMenu(ctx, cbqData) {
 		}
 		// меню погода
 		if (cbqData === 'meetWeather') {
-			const locationStart = ctx.session.locationStart;
-			if (!locationStart) {
-				await getKeyboard(
-					ctx,
-					'Сначала необходимо выбрать место старта.',
-					keyboardBack('Вернутся в главное меню', 'meetEdit_')
-				);
-
-				return;
-			}
-			const { weather } = await Location.findOne({ name: ctx.session.locationStart });
-			if (weather.length == 0) {
-				await ctx.reply(`Нет мест мониторинга для места старта ${locationStart}`);
-			}
-			getKeyboard(
-				ctx,
-				`Укажите место погоды для старта из <b>${locationStart}</b>`,
-				keyboardLocationsWeather(weather, 'weather_')
-			);
+			await meetWeather(ctx, cbqData);
 		}
 		// // меню сложности
 		// if (cbqData === 'meetLevel') {
