@@ -25,19 +25,19 @@ const keyboardMain = [
 
 export const keyboardPattern = [
 	[
-		{ text: 'Использовать объявление', callback_data: 'meetPatternGet' },
+		{ text: 'Выбрать объявление', callback_data: 'meetPatternGet' },
 		{ text: 'Удалить объявление', callback_data: 'meetPatternDel' },
 	],
 	[{ text: 'Вернутся в главное меню', callback_data: 'meetEdit_back' }],
 ];
 
-export function keyboardPatternSub(posts, index) {
+export function keyboardPatternSub(posts, index, action) {
 	try {
 		return [
 			[
 				{
 					text: 'Номер объявление: ' + (index + 1),
-					callback_data: 'postId_' + posts._id,
+					callback_data: 'postId_' + action + posts._id,
 				},
 			],
 		];

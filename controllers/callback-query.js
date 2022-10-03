@@ -7,7 +7,7 @@ import { handlerMainMenuWeather } from '../keyboards/location_weather/handler-ma
 export async function callbackQuery(ctx) {
 	try {
 		const cbqData = ctx.update.callback_query.data;
-		// console.log(cbqData); //❗❗❗ for dev
+		console.log(cbqData); //❗❗❗ for dev
 		// удаление меню инлайн клавиатуры после нажатия любой кнопки
 		await ctx.deleteMessage(ctx.update.callback_query.message.message_id);
 		//обработчики меню создания объявления о заезде(поста)

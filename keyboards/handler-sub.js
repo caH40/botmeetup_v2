@@ -2,8 +2,9 @@ import { getFullDay } from '../utility/utilites.js';
 import { mainMenu } from './mainmenu.js';
 import { createDayArr, timesArr, distanceArr, speedArr, levelArr } from './buttons.js';
 import buttonEmpty from './button-empty.js';
-import { patternSub } from './small_handlers/pattern-sub.js';
 import { Post } from '../model/Post.js';
+import { patternGet, patternsForGet } from './small_handlers/pattern-get.js';
+import { patternDel, patternsForDel } from './small_handlers/pattern-del.js';
 
 export async function handlerSubMenu(ctx, cbqData) {
 	try {
@@ -57,9 +58,11 @@ export async function handlerSubMenu(ctx, cbqData) {
 		if (cbqData === 'mainLocation_***') await buttonEmpty.meetLocation(ctx, cbqData);
 		if (cbqData === 'weather_***') await buttonEmpty.meetWeather(ctx, cbqData);
 
-		if (cbqData === 'meetPatternGet') await patternSub(ctx, cbqData);
-		if (cbqData === 'meetPatternDel') {
-		}
+		if (cbqData === 'meetPatternGet') await patternsForGet(ctx, cbqData);
+		if (cbqData === 'meetPatternDel') await patternsForDel(ctx, cbqData);
+
+		if (cbqData.includes('postId_get_')) await patternGet(ctx, cbqData);
+		if (cbqData.includes('postId_del_')) await patternDel(ctx, cbqData);
 
 		// if (levelArr.includes(cbqData)) {
 		// 	ctx.session.level = cbqData;
