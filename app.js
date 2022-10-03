@@ -8,7 +8,7 @@ import { start } from './controllers/start.js';
 import { help } from './controllers/help.js';
 import { rideOn } from './controllers/rideon.js';
 import { callbackQuery } from './controllers/callback-query.js';
-import { cityScene, setupScene } from './app_modules/scene.js';
+import { setupScene } from './app_modules/scene.js';
 import { photoWizard, descriptionWizard } from './app_modules/wizard-scene.js';
 import { controlMessage } from './controllers/controlMessage.js';
 import { poll } from './controllers/poll.js';
@@ -25,7 +25,7 @@ await mongoose
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const stage = new Scenes.Stage([cityScene, setupScene, photoWizard, descriptionWizard]);
+const stage = new Scenes.Stage([setupScene, photoWizard, descriptionWizard]);
 
 bot.use(session());
 bot.use(stage.middleware());
