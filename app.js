@@ -46,7 +46,7 @@ bot.on('poll_answer', async ctx => await poll(ctx));
 bot.on('message', async ctx => await controlMessage(ctx));
 
 bot.launch().then(() => {
-	// await bot.telegram.sendMessage(process.env.MY_TELEGRAM_ID, 'restart...');
+	await bot.telegram.sendMessage(process.env.MY_TELEGRAM_ID, 'restart...');
 	setInterval(async () => {
 		//запуск таймера обновления данных о погоде в день старта заезда
 		await weatherFromApi();
