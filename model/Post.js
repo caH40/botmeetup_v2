@@ -10,6 +10,7 @@ const postSchema = new Schema({
 	date: { type: String },
 	time: { type: String },
 	leader: { type: String },
+	userId: { type: String },
 	locationStart: { type: String },
 	locationWeather: { type: String },
 	distance: { type: String },

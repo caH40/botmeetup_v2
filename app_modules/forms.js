@@ -4,7 +4,9 @@ import { isActualDate, timeLeft } from '../utility/utilites.js';
 export function formFinalPost(ctx) {
 	try {
 		const userName = ctx.update.callback_query.from.username;
+		const userId = ctx.update.callback_query.from.id;
 		ctx.session.leader = '@' + userName;
+		ctx.session.userId = userId;
 		return `${ctx.session.description ?? 'Детали заезда:'}\n<b>Место старта:</b> ${
 			ctx.session.locationStart ?? '---'
 		};\n<b>Дата заезда:</b> ${ctx.session.date ?? '---'};\n<b>Время старта:</b> ${

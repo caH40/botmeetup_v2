@@ -31,6 +31,7 @@ export async function sendFinalPost(ctx) {
 				date: ctx.session.date,
 				time: ctx.session.time,
 				leader: ctx.session.leader,
+				userId: ctx.session.userId,
 				locationStart: ctx.session.locationStart,
 				locationWeather: ctx.session.locationWeather,
 				distance: ctx.session.distance,
