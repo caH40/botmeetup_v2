@@ -33,21 +33,20 @@ export async function handlerSubMenu(ctx, cbqData) {
 			ctx.session.start[1][0].text = 'Место старта ✔️';
 			mainMenu(ctx);
 		}
-
+		if (cbqData.includes('weather_') && cbqData !== 'weather_***') {
+			const locationWeather = cbqData.slice(8);
+			ctx.session.locationWeather = locationWeather;
+			ctx.session.start[1][1].text = 'Погода ✔️';
+			mainMenu(ctx);
+		}
 		if (distanceArr.includes(cbqData)) {
 			ctx.session.distance = cbqData;
-			ctx.session.start[1][1].text = 'Дистанция, км ✔️';
+			ctx.session.start[2][0].text = 'Дистанция, км ✔️';
 			mainMenu(ctx);
 		}
 		if (speedArr.includes(cbqData)) {
 			ctx.session.speed = cbqData;
-			ctx.session.start[2][0].text = 'Средняя скорость ✔️';
-			mainMenu(ctx);
-		}
-		if (cbqData.includes('weather_') && cbqData !== 'weather_***') {
-			const locationWeather = cbqData.slice(8);
-			ctx.session.locationWeather = locationWeather;
-			ctx.session.start[2][1].text = 'Погода ✔️';
+			ctx.session.start[2][1].text = 'Средняя скорость ✔️';
 			mainMenu(ctx);
 		}
 

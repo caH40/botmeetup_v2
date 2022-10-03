@@ -16,11 +16,11 @@ export async function rideOn(ctx) {
 			],
 			[
 				{ text: 'Место старта', callback_data: 'meetLocation' },
-				{ text: 'Дистанция, км', callback_data: 'meetDistance' },
+				{ text: 'Погода', callback_data: 'meetWeather' },
 			],
 			[
+				{ text: 'Дистанция, км', callback_data: 'meetDistance' },
 				{ text: 'Средняя скорость', callback_data: 'meetSpeed' },
-				{ text: 'Погода', callback_data: 'meetWeather' },
 				// { text: 'Сложность заезда', callback_data: 'meetLevel' },
 			],
 			[
