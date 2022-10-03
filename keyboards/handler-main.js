@@ -10,7 +10,7 @@ import {
 import { sendFinalPost } from '../app_modules/sender.js';
 import { meetWeather } from './small_handlers/meet-weather.js';
 import { meetLocations } from './small_handlers/meet-location.js';
-import { patternPost } from './small_handlers/meet-pattern.js';
+import { patternPost } from './small_handlers/pattern.js';
 
 export async function handlerMainMenu(ctx, cbqData) {
 	try {
