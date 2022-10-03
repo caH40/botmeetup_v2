@@ -19,10 +19,11 @@ const keyboardMain = [
 		{ text: 'Картинка', callback_data: 'meetCover' },
 		{ text: 'Описание', callback_data: 'meetDescription' },
 	],
+	[{ text: 'Использовать ранее созданное объявление', callback_data: 'meetPattern' }],
 	[{ text: 'Сводные данные по заезду', callback_data: 'meetSummary' }],
 ];
 
-export const keyboardPatternSub = [
+export const keyboardPattern = [
 	[
 		{ text: 'Использовать объявление', callback_data: 'meetPatternGet' },
 		{ text: 'Удалить объявление', callback_data: 'meetPatternDel' },
@@ -30,24 +31,20 @@ export const keyboardPatternSub = [
 	[{ text: 'Вернутся в главное меню', callback_data: 'meetEdit_back' }],
 ];
 
-// export function keyboardPatternSub(posts){
-// 	try {
-// 		const keyboard = [];
-// 		for (let i = 0; i < posts.length; i = i + 2) {
-// 			if (!posts[i + 1]) {
-// 				posts[i + 1] = {};
-// 				posts[i + 1].name = '***';
-// 			}
-// 			keyboard.push([
-// 				{ text: posts[i].name, callback_data: extendData + posts[i].name },
-// 				{ text: posts[i + 1].name, callback_data: extendData + posts[i + 1].name },
-// 			]);
-// 		}
-// 		return keyboard;
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// }
+export function keyboardPatternSub(posts, index) {
+	try {
+		return [
+			[
+				{
+					text: 'Номер объявление: ' + (index + 1),
+					callback_data: 'postId_' + posts._id,
+				},
+			],
+		];
+	} catch (error) {
+		console.log(error);
+	}
+}
 
 function getKeyboardDays() {
 	try {

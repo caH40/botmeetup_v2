@@ -2,11 +2,22 @@ import { getFullDay } from '../utility/utilites.js';
 import { mainMenu } from './mainmenu.js';
 import { createDayArr, timesArr, distanceArr, speedArr, levelArr } from './buttons.js';
 import buttonEmpty from './button-empty.js';
+import { patternSub } from './small_handlers/pattern-sub.js';
+import { Post } from '../model/Post.js';
 
 export async function handlerSubMenu(ctx, cbqData) {
 	try {
 		// редактирование создаваемого объявления
 		if (cbqData === 'meetEdit_back') {
+			mainMenu(ctx);
+		}
+		if (cbqData === 'meetEdit_pattern_back') {
+			const userId = ctx.update.callback_query.from.id;
+			const postsDB = await Post.find({ userId });
+			//удаляется на одно сообщение меньше, так как последне из сообщений удаляется в модуле callback-query.js
+			for (let index = 1; index < postsDB.length; index++) {
+				await ctx.deleteMessage(ctx.update.callback_query.message.message_id - index);
+			}
 			mainMenu(ctx);
 		}
 		// обработка данных всех подменю
@@ -45,6 +56,11 @@ export async function handlerSubMenu(ctx, cbqData) {
 
 		if (cbqData === 'mainLocation_***') await buttonEmpty.meetLocation(ctx, cbqData);
 		if (cbqData === 'weather_***') await buttonEmpty.meetWeather(ctx, cbqData);
+
+		if (cbqData === 'meetPatternGet') await patternSub(ctx, cbqData);
+		if (cbqData === 'meetPatternDel') {
+		}
+
 		// if (levelArr.includes(cbqData)) {
 		// 	ctx.session.level = cbqData;
 		// 	ctx.session.start[2][1].text = 'Сложность заезда ✔️';

@@ -1,6 +1,6 @@
 import { Post } from '../../model/Post.js';
 import { getKeyboard } from '../keyboard-get.js';
-import { keyboardBack, keyboardPatternSub } from '../keyboards.js';
+import { keyboardBack, keyboardPattern } from '../keyboards.js';
 
 export async function patternPost(ctx, cbqData) {
 	try {
@@ -16,8 +16,7 @@ export async function patternPost(ctx, cbqData) {
 
 			return;
 		}
-
-		await getKeyboard(ctx, 'Выберите действие с сохраненными объявлениями', keyboardPatternSub);
+		await getKeyboard(ctx, 'Выберите действие с сохраненными объявлениями', keyboardPattern);
 	} catch (error) {
 		console.log(error);
 	}

@@ -94,3 +94,17 @@ export function formWeather(weatherCurrent) {
 		console.log(error);
 	}
 }
+
+export function formPattern(post) {
+	try {
+		const { description, locationStart, locationWeather, time, distance, speed } = post;
+
+		return `${description ?? 'Детали заезда:'}\n<b>Место старта:</b> ${
+			locationStart ?? '-'
+		};\n<b>Время старта:</b> ${time ?? '-'};\n<b>Дистанция:</b> ${distance ?? '-'};\n<b>Tемп:</b> ${
+			speed ?? '-'
+		};\n<b>Погода:</b>${locationWeather}`;
+	} catch (error) {
+		console.log(error);
+	}
+}
