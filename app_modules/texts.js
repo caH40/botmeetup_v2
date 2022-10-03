@@ -12,10 +12,3 @@ export const setupMessage = `-При первоначальном запуске
 export function posted(channelName) {
 	return `Ваше объявление о заезде опубликовано на канале https://t.me/${channelName}`;
 }
-
-// const button = `Кнопка`;
-
-// module.exports.commands = commands;
-// module.exports.button = button;
-
-// module.exports.textPost = textPost;

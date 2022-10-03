@@ -25,7 +25,7 @@ await mongoose
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const stage = new Scenes.Stage([setupScene(), photoWizard, descriptionWizard]);
+const stage = new Scenes.Stage([setupScene(), photoWizard(), descriptionWizard()]);
 
 bot.use(session());
 bot.use(stage.middleware());

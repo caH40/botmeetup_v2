@@ -11,7 +11,7 @@ export function formFinalPost(ctx) {
 			ctx.session.time ?? '---'
 		};\n<b>Дистанция:</b> ${ctx.session.distance ?? '---'};\n<b>Tемп:</b> ${
 			ctx.session.speed ?? '---'
-		};\n<b>Погода(${ctx.session.locationWeather ?? '---'}):</b>\n<b>Организатор заезда:</b> ${
+		};\n<b>Погода (${ctx.session.locationWeather ?? '---'}):</b>\n<b>Организатор заезда:</b> ${
 			ctx.session.leader
 		}`;
 	} catch (error) {

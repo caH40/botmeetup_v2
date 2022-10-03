@@ -1,3 +1,7 @@
 export async function weather(ctx) {
-	await ctx.reply('Укажите место для прогноза погоды');
+	try {
+		await ctx.reply('Укажите место для прогноза погоды');
+	} catch (error) {
+		console.log(error);
+	}
 }
