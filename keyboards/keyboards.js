@@ -1,11 +1,4 @@
-import {
-	createDayArr,
-	timesArr,
-	distanceArr,
-	speedArr,
-	levelArr,
-	locationsWeather,
-} from './buttons.js';
+import { createDayArr, timesArr, distanceArr, speedArr, levelArr } from './buttons.js';
 
 const keyboardMain = [
 	[
@@ -27,17 +20,23 @@ const keyboardMain = [
 	],
 	[{ text: 'Сводные данные по заезду', callback_data: 'meetSummary' }],
 ];
+
 function getKeyboardDays() {
-	let date = [];
-	const days = createDayArr();
-	for (let i = 0; i < 12; i = i + 2) {
-		date.push([
-			{ text: days[i], callback_data: days[i] },
-			{ text: days[i + 1], callback_data: days[i + 1] },
-		]);
+	try {
+		let date = [];
+		const days = createDayArr();
+		for (let i = 0; i < 12; i = i + 2) {
+			date.push([
+				{ text: days[i], callback_data: days[i] },
+				{ text: days[i + 1], callback_data: days[i + 1] },
+			]);
+		}
+		return date;
+	} catch (error) {
+		console.log(error);
 	}
-	return date;
 }
+
 const keyboardMeetingTimes = [];
 for (let i = 0; i < timesArr.length; i = i + 6) {
 	keyboardMeetingTimes.push([
@@ -52,49 +51,61 @@ for (let i = 0; i < timesArr.length; i = i + 6) {
 
 // ❗ универсальная клавиатура
 function keyboardLocation(cityList, extendData) {
-	const keyboardLocations = [];
-	for (let i = 0; i < cityList.length; i = i + 2) {
-		if (!cityList[i + 1]) {
-			cityList[i + 1] = {};
-			cityList[i + 1].name = '***';
+	try {
+		const keyboardLocations = [];
+		for (let i = 0; i < cityList.length; i = i + 2) {
+			if (!cityList[i + 1]) {
+				cityList[i + 1] = {};
+				cityList[i + 1].name = '***';
+			}
+			keyboardLocations.push([
+				{ text: cityList[i].name, callback_data: extendData + cityList[i].name },
+				{ text: cityList[i + 1].name, callback_data: extendData + cityList[i + 1].name },
+			]);
 		}
-		keyboardLocations.push([
-			{ text: cityList[i].name, callback_data: extendData + cityList[i].name },
-			{ text: cityList[i + 1].name, callback_data: extendData + cityList[i + 1].name },
-		]);
+		return keyboardLocations;
+	} catch (error) {
+		console.log(error);
 	}
-	return keyboardLocations;
 }
 
 function keyboardWeatherRemove(cityList, extendData) {
-	const keyboardLocations = [];
-	for (let i = 0; i < cityList.length; i = i + 2) {
-		if (!cityList[i + 1]) {
-			cityList[i + 1] = '***';
+	try {
+		const keyboardLocations = [];
+		for (let i = 0; i < cityList.length; i = i + 2) {
+			if (!cityList[i + 1]) {
+				cityList[i + 1] = '***';
+			}
+			keyboardLocations.push([
+				{ text: cityList[i], callback_data: extendData + cityList[i] },
+				{ text: cityList[i + 1], callback_data: extendData + cityList[i + 1] },
+			]);
 		}
-		keyboardLocations.push([
-			{ text: cityList[i], callback_data: extendData + cityList[i] },
-			{ text: cityList[i + 1], callback_data: extendData + cityList[i + 1] },
-		]);
+		return keyboardLocations;
+	} catch (error) {
+		console.log(error);
 	}
-	return keyboardLocations;
 }
 
 // ❗ универсальная клавиатура
 function keyboardAddOrDel(action, extendData = '') {
-	if (action === 'add') {
-		return [[{ text: 'Добавление места', callback_data: 'addLocation' + extendData }]];
+	try {
+		if (action === 'add') {
+			return [[{ text: 'Добавление места', callback_data: 'addLocation' + extendData }]];
+		}
+		if (action === 'remove') {
+			return [[{ text: 'Удаление места', callback_data: 'removeLocation' + extendData }]];
+		}
+		return [
+			[
+				{ text: 'Добавление места', callback_data: 'addLocation' + extendData },
+				{ text: 'Удаление места', callback_data: 'removeLocation' + extendData },
+			],
+			// [{ text: 'Выход из редактирования', callback_data: 'quitEditLocation' }],
+		];
+	} catch (error) {
+		console.log(error);
 	}
-	if (action === 'remove') {
-		return [[{ text: 'Удаление места', callback_data: 'removeLocation' + extendData }]];
-	}
-	return [
-		[
-			{ text: 'Добавление места', callback_data: 'addLocation' + extendData },
-			{ text: 'Удаление места', callback_data: 'removeLocation' + extendData },
-		],
-		// [{ text: 'Выход из редактирования', callback_data: 'quitEditLocation' }],
-	];
 }
 
 const keyboardCityAbsent = [
@@ -102,35 +113,43 @@ const keyboardCityAbsent = [
 ];
 
 function keyboardMainLocations(cityList) {
-	const keyboardLocations = [];
-	for (let i = 0; i < cityList.length; i = i + 2) {
-		if (!cityList[i + 1]) {
-			cityList[i + 1] = {};
-			cityList[i + 1].name = '***';
+	try {
+		const keyboardLocations = [];
+		for (let i = 0; i < cityList.length; i = i + 2) {
+			if (!cityList[i + 1]) {
+				cityList[i + 1] = {};
+				cityList[i + 1].name = '***';
+			}
+			keyboardLocations.push([
+				{ text: cityList[i].name, callback_data: 'mainLocation_' + cityList[i].name },
+				{
+					text: cityList[i + 1].name,
+					callback_data: 'mainLocation_' + cityList[i + 1].name,
+				},
+			]);
 		}
-		keyboardLocations.push([
-			{ text: cityList[i].name, callback_data: 'mainLocation_' + cityList[i].name },
-			{
-				text: cityList[i + 1].name,
-				callback_data: 'mainLocation_' + cityList[i + 1].name,
-			},
-		]);
+		return keyboardLocations;
+	} catch (error) {
+		console.log(error);
 	}
-	return keyboardLocations;
 }
 
 function keyboardLocationsWeather(cityList, extendData) {
-	const keyboardLocations = [];
-	for (let i = 0; i < cityList.length; i = i + 2) {
-		if (!cityList[i + 1]) {
-			cityList[i + 1] = '***';
+	try {
+		const keyboardLocations = [];
+		for (let i = 0; i < cityList.length; i = i + 2) {
+			if (!cityList[i + 1]) {
+				cityList[i + 1] = '***';
+			}
+			keyboardLocations.push([
+				{ text: cityList[i], callback_data: extendData + cityList[i] },
+				{ text: cityList[i + 1], callback_data: extendData + cityList[i + 1] },
+			]);
 		}
-		keyboardLocations.push([
-			{ text: cityList[i], callback_data: extendData + cityList[i] },
-			{ text: cityList[i + 1], callback_data: extendData + cityList[i + 1] },
-		]);
+		return keyboardLocations;
+	} catch (error) {
+		console.log(error);
 	}
-	return keyboardLocations;
 }
 
 const keyboardDistances = [];
@@ -179,22 +198,26 @@ function keyboardBack(text, extendData) {
 }
 // формируем инлайн клавиатуру из отфильтрованных элементов, вырезая необходимую информацию и значения message.text
 function getKeyboardForDelPost(messageFromDb) {
-	let keyboardForDelPost = [];
-	for (let i = 0; i < messageFromDb.length; i++) {
-		let clearMessage = messageFromDb[i].messageChannel.caption;
-		clearMessage =
-			clearMessage.match(/\d{1,2}.\d\d.\d\d\d\d/) +
-			', ' +
-			clearMessage.match(/\d{1,2}:\d\d/) +
-			', ' +
-			clearMessage.match(/Место старта: ([^\n]*)/)[1] +
-			', ' +
-			clearMessage.match(/Дистанция: ([^\n]*)/)[1];
-		keyboardForDelPost.push([
-			{ text: clearMessage, callback_data: `ffmi${messageFromDb[i].messageChannel.message_id}` },
-		]);
+	try {
+		let keyboardForDelPost = [];
+		for (let i = 0; i < messageFromDb.length; i++) {
+			let clearMessage = messageFromDb[i].messageChannel.caption;
+			clearMessage =
+				clearMessage.match(/\d{1,2}.\d\d.\d\d\d\d/) +
+				', ' +
+				clearMessage.match(/\d{1,2}:\d\d/) +
+				', ' +
+				clearMessage.match(/Место старта: ([^\n]*)/)[1] +
+				', ' +
+				clearMessage.match(/Дистанция: ([^\n]*)/)[1];
+			keyboardForDelPost.push([
+				{ text: clearMessage, callback_data: `ffmi${messageFromDb[i].messageChannel.message_id}` },
+			]);
+		}
+		return keyboardForDelPost;
+	} catch (error) {
+		console.log(error);
 	}
-	return keyboardForDelPost;
 }
 
 export {

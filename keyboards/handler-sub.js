@@ -1,13 +1,6 @@
 import { getFullDay } from '../utility/utilites.js';
 import { mainMenu } from './mainmenu.js';
-import {
-	createDayArr,
-	timesArr,
-	distanceArr,
-	speedArr,
-	levelArr,
-	locationsWeather,
-} from './buttons.js';
+import { createDayArr, timesArr, distanceArr, speedArr, levelArr } from './buttons.js';
 import buttonEmpty from './button-empty.js';
 
 export async function handlerSubMenu(ctx, cbqData) {

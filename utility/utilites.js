@@ -22,31 +22,43 @@ export function getFullDay(date) {
 }
 
 function getTime(date, time) {
-	const timeArr = time.split(':');
-	const timeMilliseconds = timeArr[0] * millisecondsInHour + timeArr[1] * millisecondsInMinute;
+	try {
+		const timeArr = time.split(':');
+		const timeMilliseconds = timeArr[0] * millisecondsInHour + timeArr[1] * millisecondsInMinute;
 
-	const dateClear = date.slice(-10);
-	const dateArr = dateClear.split('.');
-	const dateNewFormat = [dateArr[1], dateArr[0], dateArr[2]].join('.');
+		const dateClear = date.slice(-10);
+		const dateArr = dateClear.split('.');
+		const dateNewFormat = [dateArr[1], dateArr[0], dateArr[2]].join('.');
 
-	const dateMilliseconds = new Date(dateNewFormat).getTime() + timeMilliseconds;
-	const todayMilliseconds = new Date().getTime();
-	return { dateMilliseconds, todayMilliseconds };
+		const dateMilliseconds = new Date(dateNewFormat).getTime() + timeMilliseconds;
+		const todayMilliseconds = new Date().getTime();
+		return { dateMilliseconds, todayMilliseconds };
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 //в прошедшем заезде не обновлять погоду
 export function isActualDate(date, time) {
-	const ml = getTime(date, time);
-	return ml.dateMilliseconds > ml.todayMilliseconds;
+	try {
+		const ml = getTime(date, time);
+		return ml.dateMilliseconds > ml.todayMilliseconds;
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 // расчет оставшегося времени до заезда
 export function timeLeft(date, time) {
-	const ml = getTime(date, time);
+	try {
+		const ml = getTime(date, time);
 
-	const hoursDecimal = (ml.dateMilliseconds - ml.todayMilliseconds) / millisecondsInHour;
+		const hoursDecimal = (ml.dateMilliseconds - ml.todayMilliseconds) / millisecondsInHour;
 
-	const hours = Math.trunc(hoursDecimal);
-	const minutes = Math.trunc((hoursDecimal - hours) * 60);
-	return `${hours}ч, ${minutes}мин`;
+		const hours = Math.trunc(hoursDecimal);
+		const minutes = Math.trunc((hoursDecimal - hours) * 60);
+		return `${hours}ч, ${minutes}мин`;
+	} catch (error) {
+		console.log(error);
+	}
 }

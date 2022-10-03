@@ -58,12 +58,12 @@ export async function handlerMainMenu(ctx, cbqData) {
 				});
 			}
 		}
+		// отправка итогового объявления на канал объявлений
+		if (cbqData === 'meetSend') {
+			// проверка заполнения всех полей
+			await sendFinalPost(ctx);
+		}
 	} catch (error) {
 		console.log(error);
-	}
-	// отправка итогового объявления на канал объявлений
-	if (cbqData === 'meetSend') {
-		// проверка заполнения всех полей
-		await sendFinalPost(ctx);
 	}
 }
