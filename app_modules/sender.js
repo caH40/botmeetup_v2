@@ -44,9 +44,6 @@ export async function sendFinalPost(ctx) {
 			});
 
 			await post.save();
-
-			// // подсчет количества созданных объявлений
-			// await creatRating(userName);
 		}
 	} catch (error) {
 		console.log(error);

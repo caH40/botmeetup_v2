@@ -17,7 +17,6 @@ export async function callbackQuery(ctx) {
 		//обнуление массива сообщений для удаления
 		ctx.session.messageDel = [];
 		const cbqData = ctx.update.callback_query.data;
-		// console.log(cbqData); //❗❗❗ for dev
 		// удаление меню инлайн клавиатуры после нажатия любой кнопки, исключение при выборе шаблонов поста
 		if (!(cbqData.includes('postId_') || cbqData.includes('_pattern_back'))) {
 			await ctx.deleteMessage(ctx.update.callback_query.message.message_id);

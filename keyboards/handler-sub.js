@@ -1,8 +1,7 @@
 import { getFullDay } from '../utility/utilites.js';
 import { mainMenu } from './mainmenu.js';
-import { createDayArr, timesArr, distanceArr, speedArr, levelArr } from './buttons.js';
+import { createDayArr, timesArr, distanceArr, speedArr } from './buttons.js';
 import buttonEmpty from './button-empty.js';
-import { Post } from '../model/Post.js';
 import { patternGet, patternsForGet } from './small_handlers/pattern-get.js';
 import { patternDel, patternsForDel } from './small_handlers/pattern-del.js';
 
@@ -55,11 +54,6 @@ export async function handlerSubMenu(ctx, cbqData) {
 		if (cbqData.includes('postId_get_')) await patternGet(ctx, cbqData);
 		if (cbqData.includes('postId_del_')) await patternDel(ctx, cbqData);
 
-		// if (levelArr.includes(cbqData)) {
-		// 	ctx.session.level = cbqData;
-		// 	ctx.session.start[2][1].text = 'Сложность заезда ✔️';
-		// 	mainMenu(ctx);
-		// }
 		// // блок удаления автором ненужных объявлений с канала объявлений
 		// if (cbqData.includes('ffmi')) {
 		// 	await deletePost(cbqData, ctx).catch(error => console.log(error));

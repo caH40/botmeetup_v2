@@ -1,6 +1,6 @@
-import { createDayArr, timesArr, distanceArr, speedArr, levelArr } from './buttons.js';
+import { createDayArr, timesArr, distanceArr, speedArr } from './buttons.js';
 
-const keyboardMain = [
+export const keyboardMain = [
 	[{ text: 'Использовать ранее созданное объявление', callback_data: 'meetPattern' }],
 	[
 		{ text: 'Дата заезда', callback_data: 'meetDate' },
@@ -46,7 +46,7 @@ export function keyboardPatternSub(posts, index, action, text) {
 	}
 }
 
-function getKeyboardDays() {
+export function getKeyboardDays() {
 	try {
 		let date = [];
 		const days = createDayArr();
@@ -62,20 +62,27 @@ function getKeyboardDays() {
 	}
 }
 
-const keyboardMeetingTimes = [];
-for (let i = 0; i < timesArr.length; i = i + 6) {
-	keyboardMeetingTimes.push([
-		{ text: timesArr[i], callback_data: timesArr[i] },
-		{ text: timesArr[i + 1], callback_data: timesArr[i + 1] },
-		{ text: timesArr[i + 2], callback_data: timesArr[i + 2] },
-		{ text: timesArr[i + 3], callback_data: timesArr[i + 3] },
-		{ text: timesArr[i + 4], callback_data: timesArr[i + 4] },
-		{ text: timesArr[i + 5], callback_data: timesArr[i + 5] },
-	]);
+export function keyboardMeetingTimes() {
+	try {
+		const keyboard = [];
+		for (let i = 0; i < timesArr.length; i = i + 6) {
+			keyboard.push([
+				{ text: timesArr[i], callback_data: timesArr[i] },
+				{ text: timesArr[i + 1], callback_data: timesArr[i + 1] },
+				{ text: timesArr[i + 2], callback_data: timesArr[i + 2] },
+				{ text: timesArr[i + 3], callback_data: timesArr[i + 3] },
+				{ text: timesArr[i + 4], callback_data: timesArr[i + 4] },
+				{ text: timesArr[i + 5], callback_data: timesArr[i + 5] },
+			]);
+		}
+		return keyboard;
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 // ❗ универсальная клавиатура
-function keyboardLocation(cityList, extendData) {
+export function keyboardLocation(cityList, extendData) {
 	try {
 		const keyboardLocations = [];
 		for (let i = 0; i < cityList.length; i = i + 2) {
@@ -94,7 +101,7 @@ function keyboardLocation(cityList, extendData) {
 	}
 }
 
-function keyboardWeatherRemove(cityList, extendData) {
+export function keyboardWeatherRemove(cityList, extendData) {
 	try {
 		const keyboardLocations = [];
 		for (let i = 0; i < cityList.length; i = i + 2) {
@@ -113,7 +120,7 @@ function keyboardWeatherRemove(cityList, extendData) {
 }
 
 // ❗ универсальная клавиатура
-function keyboardAddOrDel(action, extendData = '') {
+export function keyboardAddOrDel(action, extendData = '') {
 	try {
 		if (action === 'add') {
 			return [[{ text: 'Добавление места', callback_data: 'addLocation' + extendData }]];
@@ -133,11 +140,11 @@ function keyboardAddOrDel(action, extendData = '') {
 	}
 }
 
-const keyboardCityAbsent = [
+export const keyboardCityAbsent = [
 	[{ text: 'В базе нет городов. Выход.', callback_data: 'quitEditLocation' }],
 ];
 
-function keyboardMainLocations(cityList) {
+export function keyboardMainLocations(cityList) {
 	try {
 		const keyboardLocations = [];
 		for (let i = 0; i < cityList.length; i = i + 2) {
@@ -159,7 +166,7 @@ function keyboardMainLocations(cityList) {
 	}
 }
 
-function keyboardLocationsWeather(cityList, extendData) {
+export function keyboardLocationsWeather(cityList, extendData) {
 	try {
 		const keyboardLocations = [];
 		for (let i = 0; i < cityList.length; i = i + 2) {
@@ -177,16 +184,24 @@ function keyboardLocationsWeather(cityList, extendData) {
 	}
 }
 
-const keyboardDistances = [];
-for (let i = 0; i < 12; i = i + 4) {
-	keyboardDistances.push([
-		{ text: distanceArr[i], callback_data: distanceArr[i] },
-		{ text: distanceArr[i + 1], callback_data: distanceArr[i + 1] },
-		{ text: distanceArr[i + 2], callback_data: distanceArr[i + 2] },
-		{ text: distanceArr[i + 3], callback_data: distanceArr[i + 3] },
-	]);
+export function keyboardDistances() {
+	try {
+		const keyboard = [];
+		for (let i = 0; i < 12; i = i + 4) {
+			keyboard.push([
+				{ text: distanceArr[i], callback_data: distanceArr[i] },
+				{ text: distanceArr[i + 1], callback_data: distanceArr[i + 1] },
+				{ text: distanceArr[i + 2], callback_data: distanceArr[i + 2] },
+				{ text: distanceArr[i + 3], callback_data: distanceArr[i + 3] },
+			]);
+		}
+		return keyboard;
+	} catch (error) {
+		console.log(error);
+	}
 }
-const keyboardSpeed = [
+
+export const keyboardSpeed = [
 	[
 		{ text: speedArr[0], callback_data: speedArr[0] },
 		{ text: speedArr[1], callback_data: speedArr[1] },
@@ -198,31 +213,19 @@ const keyboardSpeed = [
 		{ text: speedArr[5], callback_data: speedArr[5] },
 	],
 ];
-const keyboardDifficulty = [
-	[
-		{ text: levelArr[0], callback_data: levelArr[0] },
-		{ text: levelArr[1], callback_data: levelArr[1] },
-		{ text: levelArr[2], callback_data: levelArr[2] },
-	],
-	[
-		{ text: levelArr[3], callback_data: levelArr[3] },
-		{ text: levelArr[4], callback_data: levelArr[4] },
-		{ text: levelArr[5], callback_data: levelArr[5] },
-	],
-];
 // сводные данных по заезду
-const keyboardSummary = [
+export const keyboardSummary = [
 	[
 		{ text: 'Опубликовать', callback_data: 'meetSend' },
 		{ text: 'Редактировать', callback_data: 'meetEdit_back' },
 	],
 ];
 // кнопка назад
-function keyboardBack(text, extendData) {
+export function keyboardBack(text, extendData) {
 	return [[{ text, callback_data: extendData + 'back' }]];
 }
 // формируем инлайн клавиатуру из отфильтрованных элементов, вырезая необходимую информацию и значения message.text
-function getKeyboardForDelPost(messageFromDb) {
+export function getKeyboardForDelPost(messageFromDb) {
 	try {
 		let keyboardForDelPost = [];
 		for (let i = 0; i < messageFromDb.length; i++) {
@@ -244,21 +247,3 @@ function getKeyboardForDelPost(messageFromDb) {
 		console.log(error);
 	}
 }
-
-export {
-	keyboardMain,
-	getKeyboardDays,
-	keyboardMainLocations,
-	keyboardLocationsWeather,
-	keyboardMeetingTimes,
-	keyboardDistances,
-	keyboardSpeed,
-	keyboardDifficulty,
-	keyboardSummary,
-	keyboardBack,
-	getKeyboardForDelPost,
-	keyboardAddOrDel,
-	keyboardCityAbsent,
-	keyboardLocation,
-	keyboardWeatherRemove,
-};

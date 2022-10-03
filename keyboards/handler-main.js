@@ -2,13 +2,10 @@ import { formFinalPost } from '../app_modules/forms.js';
 import { getKeyboard } from './keyboard-get.js';
 import {
 	getKeyboardDays,
-	keyboardMainLocations,
 	keyboardMeetingTimes,
 	keyboardDistances,
 	keyboardSpeed,
-	keyboardDifficulty,
 	keyboardSummary,
-	keyboardBack,
 } from './keyboards.js';
 import { sendFinalPost } from '../app_modules/sender.js';
 import { meetWeather } from './small_handlers/meet-weather.js';
@@ -18,7 +15,7 @@ import { patternPost } from './small_handlers/meet-pattern.js';
 export async function handlerMainMenu(ctx, cbqData) {
 	try {
 		// меню время
-		if (cbqData === 'meetTime') await getKeyboard(ctx, 'Время старта', keyboardMeetingTimes);
+		if (cbqData === 'meetTime') await getKeyboard(ctx, 'Время старта', keyboardMeetingTimes());
 
 		// меню с датами выбираем
 		if (cbqData === 'meetDate')
@@ -27,7 +24,7 @@ export async function handlerMainMenu(ctx, cbqData) {
 		// меню места
 		if (cbqData === 'meetLocation') await meetLocations(ctx, cbqData);
 		// меню дистанций
-		if (cbqData === 'meetDistance') await getKeyboard(ctx, 'Дистанция заезда', keyboardDistances);
+		if (cbqData === 'meetDistance') await getKeyboard(ctx, 'Дистанция заезда', keyboardDistances());
 
 		// меню скорости
 		if (cbqData === 'meetSpeed')
@@ -36,10 +33,6 @@ export async function handlerMainMenu(ctx, cbqData) {
 		// меню погода
 		if (cbqData === 'meetWeather') await meetWeather(ctx, cbqData);
 
-		// // меню сложности
-		// if (cbqData === 'meetLevel') {
-		// 	getKeyboard(ctx, 'Уровень сложности заезда', keyboardDifficulty);
-		// }
 		// меню загрузки картинки
 		if (cbqData === 'meetCover') await ctx.scene.enter('getPhoto');
 
