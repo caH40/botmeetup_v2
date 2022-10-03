@@ -11,7 +11,7 @@ export async function patternsForGet(ctx, cbqData) {
 
 		for (let index = 0; index < postsDB.length; index++) {
 			if (index === postsDB.length - 1) {
-				const response = await getKeyboard(ctx, formPattern(postsDB[index]), [
+				const response = await getKeyboard(ctx, formPattern(postsDB[index], index), [
 					...keyboardPatternSub(postsDB[index], index, 'get_', 'Выбрать сообщение №'),
 					...keyboardBack('Вернутся в главное меню', 'meetEdit_pattern_'),
 				]);
@@ -20,7 +20,7 @@ export async function patternsForGet(ctx, cbqData) {
 			}
 			const response = await getKeyboard(
 				ctx,
-				formPattern(postsDB[index]),
+				formPattern(postsDB[index], index),
 				keyboardPatternSub(postsDB[index], index, 'get_', 'Выбрать сообщение №')
 			);
 			ctx.session.messageDel.push(response);

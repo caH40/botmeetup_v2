@@ -95,11 +95,11 @@ export function formWeather(weatherCurrent) {
 	}
 }
 
-export function formPattern(post) {
+export function formPattern(post, index) {
 	try {
 		const { description, locationStart, locationWeather, time, distance, speed } = post;
 
-		return `${description ?? 'Детали заезда:'}\n<b>Место старта:</b> ${
+		return `№${index + 1}\n${description ?? 'Детали заезда:'}\n<b>Место старта:</b> ${
 			locationStart ?? '-'
 		};\n<b>Время старта:</b> ${time ?? '-'};\n<b>Дистанция:</b> ${distance ?? '-'};\n<b>Tемп:</b> ${
 			speed ?? '-'

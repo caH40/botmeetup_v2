@@ -12,7 +12,11 @@ export async function meetLocations(ctx, cbqData) {
 			return ctx.reply(
 				'Нет данных! Первоначально необходимо выполнить настройку бота, добавив "места старта" командой /location. Затем, если необходимо, добавить "места погоды" каждому "месту старта" для мониторинга погоды /weather'
 			);
-		getKeyboard(ctx, 'Место старта', keyboardMainLocations(locationsDB));
+		getKeyboard(
+			ctx,
+			'Выберите место старта заезда (старт на велосипедах):',
+			keyboardMainLocations(locationsDB)
+		);
 	} catch (error) {
 		console.log(error);
 	}
