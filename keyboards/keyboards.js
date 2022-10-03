@@ -1,6 +1,7 @@
 import { createDayArr, timesArr, distanceArr, speedArr, levelArr } from './buttons.js';
 
 const keyboardMain = [
+	[{ text: 'Использовать ранее созданное объявление', callback_data: 'meetPattern' }],
 	[
 		{ text: 'Дата заезда', callback_data: 'meetDate' },
 		{ text: 'Время старта', callback_data: 'meetTime' },

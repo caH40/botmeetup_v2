@@ -10,6 +10,7 @@ export async function rideOn(ctx) {
 		ctx.session = {};
 		//при замене значения из модуля на keyboardMain, смешиваются ответы из разных сессий!!
 		ctx.session.start = [
+			[{ text: 'Использовать ранее созданное объявление', callback_data: 'meetPattern' }],
 			[
 				{ text: 'Дата заезда', callback_data: 'meetDate' },
 				{ text: 'Время старта', callback_data: 'meetTime' },
