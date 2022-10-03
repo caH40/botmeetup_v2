@@ -9,16 +9,7 @@ import { patternDel, patternsForDel } from './small_handlers/pattern-del.js';
 export async function handlerSubMenu(ctx, cbqData) {
 	try {
 		// редактирование создаваемого объявления
-		if (cbqData === 'meetEdit_back') {
-			mainMenu(ctx);
-		}
-		if (cbqData === 'meetEdit_pattern_back') {
-			const userId = ctx.update.callback_query.from.id;
-			const postsDB = await Post.find({ userId });
-			//удаляется на одно сообщение меньше, так как последне из сообщений удаляется в модуле callback-query.js
-			for (let index = 1; index < postsDB.length; index++) {
-				await ctx.deleteMessage(ctx.update.callback_query.message.message_id - index);
-			}
+		if (cbqData === 'meetEdit_back' || cbqData === 'meetEdit_pattern_back') {
 			mainMenu(ctx);
 		}
 		// обработка данных всех подменю

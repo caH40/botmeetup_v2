@@ -30,6 +30,7 @@ const postSchema = new Schema({
 	humidity: { type: String },
 	descriptionWeather: { type: String },
 	isLastUpdated: { type: Boolean },
+	isPattern: { type: Boolean, default: true },
 });
 
 export const Post = model('Post', postSchema);

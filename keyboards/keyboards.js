@@ -31,13 +31,13 @@ export const keyboardPattern = [
 	[{ text: 'Вернутся в главное меню', callback_data: 'meetEdit_back' }],
 ];
 
-export function keyboardPatternSub(posts, index, action) {
+export function keyboardPatternSub(posts, index, action, text) {
 	try {
 		return [
 			[
 				{
-					text: 'Номер объявление: ' + (index + 1),
-					callback_data: 'postId_' + action + posts._id,
+					text: `${text}${index + 1}`,
+					callback_data: `postId_${action}${posts._id}`,
 				},
 			],
 		];

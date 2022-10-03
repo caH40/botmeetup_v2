@@ -9,6 +9,7 @@ export async function rideOn(ctx) {
 		// обнуление сессии
 		ctx.session = {};
 		//при замене значения из модуля на keyboardMain, смешиваются ответы из разных сессий!!
+		ctx.session.messageDel = [];
 		ctx.session.start = [
 			[
 				{ text: 'Дата заезда', callback_data: 'meetDate' },
