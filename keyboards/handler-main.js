@@ -8,12 +8,12 @@ import {
 	keyboardSpeed,
 	keyboardDifficulty,
 	keyboardSummary,
+	keyboardBack,
 } from './keyboards.js';
 import { sendFinalPost } from '../app_modules/sender.js';
 import { meetWeather } from './small_handlers/meet-weather.js';
 import { meetLocations } from './small_handlers/meet-location.js';
-import { Post } from '../model/Post.js';
-import { mainMenu } from './mainmenu.js';
+import { patternPost } from './small_handlers/meet-pattern.js';
 
 export async function handlerMainMenu(ctx, cbqData) {
 	try {
@@ -60,16 +60,7 @@ export async function handlerMainMenu(ctx, cbqData) {
 				});
 			}
 		}
-		if (cbqData === 'meetPattern') {
-			const userId = ctx.update.callback_query.from.id;
-			const postsDB = await Post.find({ userId });
-
-			if (postsDB.length == 0) {
-				await ctx.reply('У вас нет ни одного сохраненного объявления о велозаезде.');
-				return mainMenu(ctx);
-			}
-			console.log(postsDB);
-		}
+		if (cbqData === 'meetPattern') await patternPost(ctx, cbqData);
 		// отправка итогового объявления на канал объявлений
 		if (cbqData === 'meetSend') {
 			// проверка заполнения всех полей

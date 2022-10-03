@@ -22,6 +22,33 @@ const keyboardMain = [
 	[{ text: 'Сводные данные по заезду', callback_data: 'meetSummary' }],
 ];
 
+export const keyboardPatternSub = [
+	[
+		{ text: 'Использовать объявление', callback_data: 'meetPatternGet' },
+		{ text: 'Удалить объявление', callback_data: 'meetPatternDel' },
+	],
+	[{ text: 'Вернутся в главное меню', callback_data: 'meetEdit_back' }],
+];
+
+// export function keyboardPatternSub(posts){
+// 	try {
+// 		const keyboard = [];
+// 		for (let i = 0; i < posts.length; i = i + 2) {
+// 			if (!posts[i + 1]) {
+// 				posts[i + 1] = {};
+// 				posts[i + 1].name = '***';
+// 			}
+// 			keyboard.push([
+// 				{ text: posts[i].name, callback_data: extendData + posts[i].name },
+// 				{ text: posts[i + 1].name, callback_data: extendData + posts[i + 1].name },
+// 			]);
+// 		}
+// 		return keyboard;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// }
+
 function getKeyboardDays() {
 	try {
 		let date = [];
