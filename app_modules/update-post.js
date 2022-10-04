@@ -11,6 +11,7 @@ export async function updatePost(bot, postId) {
 			return;
 		}
 		// обновление всех постов по таймауту
+
 		const postsDB = await Post.find({ isLastUpdated: false });
 
 		for (let index = 0; index < postsDB.length; index++) {
@@ -21,20 +22,39 @@ export async function updatePost(bot, postId) {
 	}
 }
 
+export async function updatePhoto(bot, post) {
+	try {
+		const formPostString = formFinalPostUpdate(post);
+		const chatId = post.channelId;
+		const messageId = post.messageId;
+		const photoId = post.photoId;
+		await bot.telegram.editMessageMedia(
+			chatId,
+			messageId,
+			{},
+			{ type: 'photo', media: photoId, caption: formPostString, parse_mode: 'html' }
+		);
+	} catch (error) {
+		console.log(error);
+	}
+}
+
 async function editMessageTelegram(bot, post) {
 	try {
-		const formPostString = await formFinalPostUpdate(post);
-		await bot.telegram
+		const formPostString = formFinalPostUpdate(post);
+		const response = await bot.telegram
 			.editMessageCaption(post.channelId, post.messageId, 'привет!', formPostString, {
 				parse_mode: 'html',
 			})
 			.catch(error =>
 				console.log(
+					error,
 					new Date().toLocaleString(),
 					'ошибка при обновлении постов, старый пост такой же как и обновлённый',
 					'module - update-posts.js'
 				)
 			);
+
 		let date = post.date;
 		let time = post.time;
 		//это последнее обновление поста

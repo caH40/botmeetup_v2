@@ -4,6 +4,7 @@ import { createDayArr, timesArr, distanceArr, speedArr } from './buttons.js';
 import buttonEmpty from './button-empty.js';
 import { patternGet, patternsForGet } from './small_handlers/pattern-get.js';
 import { patternDel, patternsForDel } from './small_handlers/pattern-del.js';
+import { postDelete, postEdit } from './small_handlers/post-edit.js';
 
 export async function handlerSubMenu(ctx, cbqData) {
 	try {
@@ -53,6 +54,9 @@ export async function handlerSubMenu(ctx, cbqData) {
 
 		if (cbqData.includes('postId_get_')) await patternGet(ctx, cbqData);
 		if (cbqData.includes('postId_del_')) await patternDel(ctx, cbqData);
+
+		if (cbqData.includes('postId_editPost_')) await postEdit(ctx, cbqData);
+		if (cbqData.includes('postId_delPost_')) await postDelete(ctx, cbqData);
 
 		// // блок удаления автором ненужных объявлений с канала объявлений
 		// if (cbqData.includes('ffmi')) {

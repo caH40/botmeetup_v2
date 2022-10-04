@@ -1,7 +1,7 @@
 import { createDayArr, timesArr, distanceArr, speedArr } from './buttons.js';
 
+//клавиатура для команды edit
 export const keyboardMain = [
-	[{ text: 'Использовать ранее созданное объявление', callback_data: 'meetPattern' }],
 	[
 		{ text: 'Дата заезда', callback_data: 'meetDate' },
 		{ text: 'Время старта', callback_data: 'meetTime' },
@@ -19,7 +19,7 @@ export const keyboardMain = [
 		{ text: 'Картинка', callback_data: 'meetCover' },
 		{ text: 'Описание', callback_data: 'meetDescription' },
 	],
-	[{ text: 'Использовать ранее созданное объявление', callback_data: 'meetPattern' }],
+	// [{ text: 'Использовать ранее созданное объявление', callback_data: 'meetPattern' }],
 	[{ text: 'Сводные данные по заезду', callback_data: 'meetSummary' }],
 ];
 
@@ -34,8 +34,8 @@ export const keyboardPattern = [
 export function keyboardEdit(posts, index) {
 	return [
 		[
-			{ text: `Редактировать №${index + 1}`, callback_data: `postId_editPost${posts._id}` },
-			{ text: `Удалить №${index + 1}`, callback_data: `postId_delPost${posts._id}` },
+			{ text: `Редактировать №${index + 1}`, callback_data: `postId_editPost_${posts._id}` },
+			{ text: `Удалить №${index + 1}`, callback_data: `postId_delPost_${posts._id}` },
 		],
 	];
 }

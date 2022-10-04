@@ -20,8 +20,10 @@ export function formFinalPost(ctx) {
 		console.log(error);
 	}
 }
-export async function formFinalPostUpdate(post) {
+export function formFinalPostUpdate(post) {
 	try {
+		// console.log(post);
+		// console.log(post);
 		const {
 			description,
 			locationStart,
