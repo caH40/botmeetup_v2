@@ -53,12 +53,12 @@ export function formFinalPostUpdate(post) {
 
 		//строка о погоде
 		let weatherStr = '';
-		if (tempDay === '') {
-			weatherStr = `<b>Погода:</b> Нет данных;`;
-		} else {
+		if (tempDay) {
 			weatherStr = `<b>Погода (${locationWeather}):</b> ${Math.round(tempDay) ?? '-'}°C, ${
 				humidity ?? '-'
 			}%, ${descriptionWeather ?? '-'};`;
+		} else {
+			weatherStr = `<b>Погода (${locationWeather}):</b> Нет данных;`;
 		}
 
 		return `${description ?? 'Детали заезда:'}\n<b>Место старта:</b> ${
@@ -99,11 +99,13 @@ export function formWeather(weatherCurrent) {
 
 export function formPattern(post, index) {
 	try {
-		const { description, locationStart, locationWeather, time, distance, speed } = post;
+		const { description, date, locationStart, locationWeather, time, distance, speed } = post;
 
 		return `<u>№${index + 1}</u>\n${description ?? 'Детали заезда:'}\n<b>Место старта:</b> ${
 			locationStart ?? '-'
-		};\n<b>Время старта:</b> ${time ?? '-'};\n<b>Дистанция:</b> ${distance ?? '-'};\n<b>Tемп:</b> ${
+		};\n<b>Дата заезда:</b> ${date ?? '-'};\n<b>Время старта:</b> ${
+			time ?? '-'
+		};\n<b>Дистанция:</b> ${distance ?? '-'};\n<b>Tемп:</b> ${
 			speed ?? '-'
 		};\n<b>Погода:</b>${locationWeather}`;
 	} catch (error) {

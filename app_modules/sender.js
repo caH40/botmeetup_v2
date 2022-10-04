@@ -4,6 +4,7 @@ import { formFinalPost } from './forms.js';
 import { keyboardBack } from '../keyboards/keyboards.js';
 import { posted } from './texts.js';
 import { updatePhoto } from './update-post.js';
+import { weatherUpdate } from '../weather/weather-update.js';
 
 export async function sendFinalPost(ctx) {
 	try {
@@ -35,6 +36,7 @@ export async function sendFinalPost(ctx) {
 					{ returnDocument: 'after' }
 				);
 				await updatePhoto(ctx, postDB).catch(error => console.log(error));
+				await weatherUpdate(ctx);
 				return console.log('Пост обновился');
 			}
 

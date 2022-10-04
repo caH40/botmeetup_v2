@@ -14,6 +14,8 @@ export async function editPost(ctx) {
 		//сделать проверку
 		const postsDB = await Post.find({ userId, isLastUpdated: false });
 
+		if (postsDB.length == 0) await ctx.reply('У вас нет объявлений для редактирования/удаления!');
+
 		for (let index = 0; index < postsDB.length; index++) {
 			if (index === postsDB.length - 1) {
 				let keyboard = [

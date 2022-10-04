@@ -48,7 +48,6 @@ async function editMessageTelegram(bot, post) {
 			})
 			.catch(error =>
 				console.log(
-					error,
 					new Date().toLocaleString(),
 					'ошибка при обновлении постов, старый пост такой же как и обновлённый',
 					'module - update-posts.js'

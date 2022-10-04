@@ -6,7 +6,7 @@ export async function postEdit(ctx, cbqData) {
 	const _id = cbqData.slice(16);
 	ctx.session.start = keyboardMain;
 
-	const postDB = await Post.findOne({ _id });
+	const postDB = await Post.findOne({ _id, isLastUpdated: false });
 	if (!postDB) return console.log(`Не найден пост с id-${_id}`);
 	ctx.session._id = _id;
 	ctx.session.date = postDB.date;
@@ -31,4 +31,12 @@ export async function postEdit(ctx, cbqData) {
 	await mainMenu(ctx);
 }
 
-export async function postDelete(ctx, cbqData) {}
+export async function postDelete(ctx, cbqData) {
+	const _id = cbqData.slice(15);
+	const postDB = await Post.findOneAndDelete({ _id, isLastUpdated: false });
+	if (!postDB) return await ctx.reply('Объявление не найдено');
+	await ctx.reply('Объявление удалено с БД!');
+	const { channelId, messageId } = postDB;
+	await ctx.telegram.deleteMessage(channelId, messageId);
+	await ctx.reply('Объявление удалено с канала телеграм!');
+}
