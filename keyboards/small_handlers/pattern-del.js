@@ -12,7 +12,7 @@ export async function patternsForDel(ctx, cbqData) {
 		for (let index = 0; index < postsDB.length; index++) {
 			if (index === postsDB.length - 1) {
 				const response = await getKeyboard(ctx, formPattern(postsDB[index], index), [
-					...keyboardPatternSub(postsDB[index], index, 'del_', 'Удалить сообщение №'),
+					...keyboardPatternSub(postsDB[index], index, 'del_', 'Удалить объявление №'),
 					...keyboardBack('Вернутся в главное меню', 'meetEdit_pattern_'),
 				]);
 				ctx.session.messageDel.push(response);
@@ -21,7 +21,7 @@ export async function patternsForDel(ctx, cbqData) {
 			const response = await getKeyboard(
 				ctx,
 				formPattern(postsDB[index], index),
-				keyboardPatternSub(postsDB[index], index, 'del_', 'Удалить сообщение №')
+				keyboardPatternSub(postsDB[index], index, 'del_', 'Удалить объявление №')
 			);
 			ctx.session.messageDel.push(response);
 		}
