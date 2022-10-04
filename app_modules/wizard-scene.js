@@ -44,6 +44,11 @@ export const descriptionWizard = () => {
 		ctx => {
 			ctx.reply('Опишите детали и необходимые уточнения по заезду. Для отмены введите /quit');
 			ctx.wizard.state.data = {};
+			if (ctx.session.description)
+				ctx.reply(`<b>Предыдущий текст описания заезда:</b> ${ctx.session.description}`, {
+					parse_mode: 'html',
+				});
+
 			return ctx.wizard.next();
 		},
 		ctx => {

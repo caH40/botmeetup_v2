@@ -37,7 +37,7 @@ export async function sendFinalPost(ctx) {
 				);
 				await updatePhoto(ctx, postDB).catch(error => console.log(error));
 				await weatherUpdate(ctx);
-				return console.log('Пост обновился');
+				return;
 			}
 
 			const { channelId, channelName } = await BotSetup.findOne();
