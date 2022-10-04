@@ -17,6 +17,7 @@ import { weatherUpdate } from './weather/weather-update.js';
 import { updatePost } from './app_modules/update-post.js';
 import { editLocations } from './controllers/location.js';
 import { editLocationsWeather } from './controllers/weather.js';
+import { editPost } from './controllers/edit.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -34,7 +35,7 @@ bot.command('start', async ctx => await start(ctx));
 bot.command('help', async ctx => await help(ctx));
 bot.command('rideon', async ctx => await rideOn(ctx));
 // bot.command('/rating', async ctx => await rating(ctx));
-// bot.command('/delete', async ctx => await deletePost(ctx));
+bot.command('/edit', async ctx => await editPost(ctx));
 bot.command('location', async ctx => await editLocations(ctx));
 bot.command('weather', async ctx => await editLocationsWeather(ctx));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));

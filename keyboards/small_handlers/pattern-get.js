@@ -15,6 +15,7 @@ export async function patternsForGet(ctx, cbqData) {
 					...keyboardPatternSub(postsDB[index], index, 'get_', 'Выбрать объявление №'),
 					...keyboardBack('Вернутся в главное меню', 'meetEdit_pattern_'),
 				]);
+				console.log(response);
 				ctx.session.messageDel.push(response);
 				return;
 			}

@@ -31,6 +31,15 @@ export const keyboardPattern = [
 	[{ text: 'Вернутся в главное меню', callback_data: 'meetEdit_back' }],
 ];
 
+export function keyboardEdit(posts, index) {
+	return [
+		[
+			{ text: `Редактировать №${index + 1}`, callback_data: `postId_editPost${posts._id}` },
+			{ text: `Удалить №${index + 1}`, callback_data: `postId_delPost${posts._id}` },
+		],
+	];
+}
+
 export function keyboardPatternSub(posts, index, action, text) {
 	try {
 		return [
