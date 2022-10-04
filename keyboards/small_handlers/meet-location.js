@@ -1,6 +1,6 @@
 import { Location } from '../../model/Location.js';
 import { getKeyboard } from '../keyboard-get.js';
-import { keyboardMainLocations } from '../keyboards.js';
+import { keyboardLocation } from '../keyboards.js';
 
 export async function meetLocations(ctx, cbqData) {
 	try {
@@ -15,7 +15,7 @@ export async function meetLocations(ctx, cbqData) {
 		getKeyboard(
 			ctx,
 			'Выберите место старта заезда (старт на велосипедах):',
-			keyboardMainLocations(locationsDB)
+			keyboardLocation(locationsDB, 'mainLocation_')
 		);
 	} catch (error) {
 		console.log(error);

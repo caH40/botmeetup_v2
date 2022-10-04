@@ -101,47 +101,7 @@ export function keyboardLocation(cityList, extendData) {
 	}
 }
 
-export function keyboardMainLocations(cityList) {
-	try {
-		const keyboardLocations = [];
-		for (let i = 0; i < cityList.length; i = i + 2) {
-			if (!cityList[i + 1]) {
-				cityList[i + 1] = {};
-				cityList[i + 1].name = '***';
-			}
-			keyboardLocations.push([
-				{ text: cityList[i].name, callback_data: 'mainLocation_' + cityList[i].name },
-				{
-					text: cityList[i + 1].name,
-					callback_data: 'mainLocation_' + cityList[i + 1].name,
-				},
-			]);
-		}
-		return keyboardLocations;
-	} catch (error) {
-		console.log(error);
-	}
-}
-
-export function keyboardLocationsWeather(cityList, extendData) {
-	try {
-		const keyboardLocations = [];
-		for (let i = 0; i < cityList.length; i = i + 2) {
-			if (!cityList[i + 1]) {
-				cityList[i + 1] = '***';
-			}
-			keyboardLocations.push([
-				{ text: cityList[i], callback_data: extendData + cityList[i] },
-				{ text: cityList[i + 1], callback_data: extendData + cityList[i + 1] },
-			]);
-		}
-		return keyboardLocations;
-	} catch (error) {
-		console.log(error);
-	}
-}
-
-export function keyboardWeatherRemove(cityList, extendData) {
+export function keyboardWeathers(cityList, extendData) {
 	try {
 		const keyboardLocations = [];
 		for (let i = 0; i < cityList.length; i = i + 2) {

@@ -2,7 +2,7 @@
 import { cityList } from '../../weather/city-mylist.js';
 import { Location } from '../../model/Location.js';
 import { getKeyboard } from '../keyboard-get.js';
-import { keyboardLocation, keyboardAddOrDel, keyboardWeatherRemove } from '../keyboards.js';
+import { keyboardLocation, keyboardAddOrDel, keyboardWeathers } from '../keyboards.js';
 import buttonEmpty from '../button-empty.js';
 import { weatherFromApi } from '../../weather/weather-api.js';
 
@@ -62,7 +62,7 @@ export async function handlerMainMenuWeather(ctx, cbqData) {
 					parse_mode: 'html',
 				});
 			}
-			getKeyboard(ctx, title, keyboardWeatherRemove(weather, 'weatherForRemove_'));
+			getKeyboard(ctx, title, keyboardWeathers(weather, 'weatherForRemove_'));
 		}
 
 		if (cbqData.includes('weatherForAdd_')) {

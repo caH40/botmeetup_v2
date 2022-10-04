@@ -1,11 +1,6 @@
 //обработка пустой (дополнительной) клавиши "***"
 import { getKeyboard } from './keyboard-get.js';
-import {
-	keyboardAddOrDel,
-	keyboardMainLocations,
-	keyboardLocation,
-	keyboardLocationsWeather,
-} from './keyboards.js';
+import { keyboardAddOrDel, keyboardLocation, keyboardWeathers } from './keyboards.js';
 import { Location } from '../model/Location.js';
 
 export default {
@@ -53,7 +48,7 @@ export default {
 			await getKeyboard(
 				ctx,
 				'Это была пустая кнопка, а не место старта.\nВыберите место старта:',
-				keyboardMainLocations(locationsDB)
+				keyboardLocation(locationsDB, 'mainLocation_')
 			);
 		} catch (error) {
 			console.log(error);
@@ -68,7 +63,7 @@ export default {
 			await getKeyboard(
 				ctx,
 				'Это была пустая кнопка, а не место погоды.\nВыберите место погоды:',
-				keyboardLocationsWeather(weather, 'weather_')
+				keyboardWeathers(weather, 'weather_')
 			);
 		} catch (error) {
 			console.log(error);

@@ -1,6 +1,6 @@
 import { Location } from '../../model/Location.js';
 import { getKeyboard } from '../keyboard-get.js';
-import { keyboardBack, keyboardLocationsWeather } from '../keyboards.js';
+import { keyboardBack, keyboardWeathers } from '../keyboards.js';
 
 export async function meetWeather(ctx, cbqData) {
 	try {
@@ -21,7 +21,7 @@ export async function meetWeather(ctx, cbqData) {
 		getKeyboard(
 			ctx,
 			`Выберите место погоды для старта из <b>${locationStart}</b>`,
-			keyboardLocationsWeather(weather, 'weather_')
+			keyboardWeathers(weather, 'weather_')
 		);
 	} catch (error) {
 		console.log(error);
