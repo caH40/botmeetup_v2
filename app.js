@@ -18,6 +18,7 @@ import { updatePost } from './app_modules/update-post.js';
 import { editLocations } from './controllers/location.js';
 import { editLocationsWeather } from './controllers/weather.js';
 import { editPost } from './controllers/edit.js';
+import { getMyId } from './controllers/my-id.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -36,6 +37,7 @@ bot.command('help', async ctx => await help(ctx));
 bot.command('rideon', async ctx => await rideOn(ctx));
 // bot.command('/rating', async ctx => await rating(ctx));
 bot.command('/edit', async ctx => await editPost(ctx));
+bot.command('/myid', async ctx => await getMyId(ctx));
 bot.command('location', async ctx => await editLocations(ctx));
 bot.command('weather', async ctx => await editLocationsWeather(ctx));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
@@ -47,7 +49,7 @@ bot.on('poll_answer', async ctx => await poll(ctx));
 bot.on('message', async ctx => await controlMessage(ctx));
 
 bot.launch().then(() => {
-	bot.telegram.sendMessage(process.env.MY_TELEGRAM_ID, 'restart...');
+	// bot.telegram.sendMessage(process.env.MY_TELEGRAM_ID, 'restart...');
 	setInterval(async () => {
 		//запуск таймера обновления данных о погоде в день старта заезда
 		await weatherFromApi();
