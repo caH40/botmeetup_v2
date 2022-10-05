@@ -5,6 +5,9 @@ import { BotSetup } from '../model/BotSetup.js';
 export async function update(ctx) {
 	try {
 		const channelOwnerId = process.env.MY_TELEGRAM_ID;
+		const userId = ctx.message.from.id;
+		const isOwner = userId == channelOwnerId;
+		if (!isOwner) return await ctx.reply('Команда доступна только владельцу канала.');
 		if (!channelOwnerId) {
 			const channelId = ctx.message.forward_from_chat.id;
 			await ctx.telegram.sendMessage(channelId, `Нет Id юзера в файле .env`);

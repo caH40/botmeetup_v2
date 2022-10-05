@@ -2,7 +2,7 @@ import { BotSetup } from '../model/BotSetup.js';
 
 export async function ownerVerify(ctx) {
 	try {
-		const isOwner = false;
+		let isOwner = false;
 		const userId = ctx.message.from.id;
 
 		const botSetupDB = await BotSetup.findOne();
