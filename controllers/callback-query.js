@@ -11,8 +11,16 @@ export async function callbackQuery(ctx) {
 		if (!messageForDel)
 			return await ctx.reply('Что то пошло не так, попробуйте заново запустить /rideon');
 
-		messageForDel.forEach(messageId => {
-			ctx.deleteMessage(messageId);
+		messageForDel.forEach(async messageId => {
+			await ctx
+				.deleteMessage(messageId)
+				.catch(error =>
+					console.log(
+						new Date().toLocaleString(),
+						'ошибка пру удалении сообщения',
+						'module - callback-query.js'
+					)
+				);
 		});
 		//обнуление массива сообщений для удаления
 		ctx.session.messageDel = [];

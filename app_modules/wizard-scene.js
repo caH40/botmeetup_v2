@@ -39,39 +39,43 @@ export const photoWizard = () => {
 };
 
 export const descriptionWizard = () => {
-	return new Scenes.WizardScene(
-		'getDescription',
-		ctx => {
-			ctx.reply('Опишите детали и необходимые уточнения по заезду. Для отмены введите /quit');
-			ctx.wizard.state.data = {};
-			if (ctx.session.description)
-				ctx.reply(`<b>Предыдущий текст описания заезда:</b> ${ctx.session.description}`, {
-					parse_mode: 'html',
-				});
+	try {
+		return new Scenes.WizardScene(
+			'getDescription',
+			ctx => {
+				ctx.reply('Опишите детали и необходимые уточнения по заезду. Для отмены введите /quit');
+				ctx.wizard.state.data = {};
+				if (ctx.session.description)
+					ctx.reply(`<b>Предыдущий текст описания заезда:</b> ${ctx.session.description}`, {
+						parse_mode: 'html',
+					});
 
-			return ctx.wizard.next();
-		},
-		ctx => {
-			if (ctx.message.text && ctx.message.text !== '/quit') {
-				ctx.deleteMessage(ctx.message.message_id - 1);
-				ctx.deleteMessage(ctx.message.message_id);
+				return ctx.wizard.next();
+			},
+			ctx => {
+				if (ctx.message.text && ctx.message.text !== '/quit') {
+					ctx.deleteMessage(ctx.message.message_id - 1);
+					ctx.deleteMessage(ctx.message.message_id);
 
-				ctx.session.start[3][1].text = 'Описание ✔️';
-				ctx.session.description = ctx.message.text;
-				ctx.scene.leave();
-				return ctx.reply('Выберите блок заполнения', {
-					reply_markup: { inline_keyboard: ctx.session.start },
-				});
+					ctx.session.start[3][1].text = 'Описание ✔️';
+					ctx.session.description = ctx.message.text;
+					ctx.scene.leave();
+					return ctx.reply('Выберите блок заполнения', {
+						reply_markup: { inline_keyboard: ctx.session.start },
+					});
+				}
+				if (ctx.message.text === '/quit') {
+					ctx.deleteMessage(ctx.message.message_id - 1);
+					ctx.deleteMessage(ctx.message.message_id);
+
+					ctx.scene.leave();
+					return ctx.reply('Выберите блок заполнения', {
+						reply_markup: { inline_keyboard: ctx.session.start },
+					});
+				}
 			}
-			if (ctx.message.text === '/quit') {
-				ctx.deleteMessage(ctx.message.message_id - 1);
-				ctx.deleteMessage(ctx.message.message_id);
-
-				ctx.scene.leave();
-				return ctx.reply('Выберите блок заполнения', {
-					reply_markup: { inline_keyboard: ctx.session.start },
-				});
-			}
-		}
-	);
+		);
+	} catch (error) {
+		console.log(error);
+	}
 };
