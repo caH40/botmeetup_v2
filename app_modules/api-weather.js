@@ -5,7 +5,7 @@ export async function apiWeather(ctx) {
 		const userId = ctx.message.from.id;
 
 		const message = ctx.message.text;
-		if (message.includes('API ') && message.length == 36) {
+		if (message.length == 32) {
 			const apiKey = message.slice(-32);
 			const response = await BotSetup.findOne({ channelOwnerId: userId });
 			if (!response)

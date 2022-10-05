@@ -19,6 +19,7 @@ import { editLocations } from './controllers/location.js';
 import { editLocationsWeather } from './controllers/weather.js';
 import { editPost } from './controllers/edit.js';
 import { getMyId } from './controllers/my-id.js';
+import { getConfiguration } from './controllers/configuration.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -43,6 +44,7 @@ bot.command('weather', async ctx => await editLocationsWeather(ctx));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 bot.command('setup', async ctx => await setup(ctx));
 bot.command('update', async ctx => await update(ctx));
+bot.command('config', async ctx => await getConfiguration(ctx));
 bot.on('poll_answer', async ctx => await poll(ctx));
 bot.on('message', async ctx => await controlMessage(ctx));
 

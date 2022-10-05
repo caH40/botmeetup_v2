@@ -11,7 +11,6 @@ export async function update(ctx) {
 			return;
 		}
 		if (ctx.message.chat.type !== 'channel' && !ctx.message.sender_chat) {
-			// console.log(2);
 			const chatId = ctx.message.chat.id;
 			return await ctx.telegram.sendMessage(
 				chatId,
