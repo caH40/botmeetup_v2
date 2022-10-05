@@ -7,7 +7,6 @@ export async function editLocationsWeather(ctx) {
 	try {
 		ctx.session.messageDel = [];
 		const isOwner = await ownerVerify(ctx);
-		// Если не админ то выход из команды /weather
 		if (!isOwner) return await ctx.reply('Команда доступна только владельцу канала.');
 
 		const locationsDB = await Location.find();
