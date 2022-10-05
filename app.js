@@ -3,7 +3,7 @@ import { Scenes, session, Telegraf } from 'telegraf';
 import mongoose from 'mongoose';
 
 import { setup } from './controllers/setup.js';
-import { updateSetupChannel, updateSetupGroup } from './controllers/update-setup.js';
+import { update } from './controllers/update-setup.js';
 import { start } from './controllers/start.js';
 import { help } from './controllers/help.js';
 import { rideOn } from './controllers/rideon.js';
@@ -41,10 +41,8 @@ bot.command('/myid', async ctx => await getMyId(ctx));
 bot.command('location', async ctx => await editLocations(ctx));
 bot.command('weather', async ctx => await editLocationsWeather(ctx));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
-//первоначальная настройка бота. замена API key погоды.
 bot.command('setup', async ctx => await setup(ctx));
-bot.command('updateDataChannel', async ctx => await updateSetupChannel(ctx));
-bot.command('updateDataGroup', async ctx => await updateSetupGroup(ctx));
+bot.command('update', async ctx => await update(ctx));
 bot.on('poll_answer', async ctx => await poll(ctx));
 bot.on('message', async ctx => await controlMessage(ctx));
 

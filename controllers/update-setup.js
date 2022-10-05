@@ -1,48 +1,17 @@
-import { ownerVerify } from '../app_modules/owner-verify.js';
+import 'dotenv/config';
+
 import { BotSetup } from '../model/BotSetup.js';
 
-export async function updateSetupGroup(ctx) {
+export async function update(ctx) {
 	try {
-		const isOwner = await ownerVerify(ctx);
-		// Если не админ то выход из команды /location
-		if (!isOwner) return await ctx.reply('Команда доступна только владельцу канала.');
-
-		const userId = ctx.message.from.id;
-		const groupId = ctx.message.chat.id;
-		const groupTitle = ctx.message.chat.title;
-
-		const chatType = ctx.message.chat.type;
-
-		if (chatType !== 'supergroup') {
-			return await ctx.reply('Данную команду необходимо запускать в <b>group</b>', {
-				parse_mode: 'html',
-			});
+		const channelOwnerId = process.env.MY_TELEGRAM_ID;
+		if (!channelOwnerId) {
+			const channelId = ctx.message.forward_from_chat.id;
+			await ctx.telegram.sendMessage(channelId, `Нет Id юзера в файле .env`);
+			return;
 		}
-		const response = await BotSetup.findOneAndUpdate(
-			{ channelOwnerId: userId },
-			{
-				$set: {
-					groupId,
-					groupTitle,
-				},
-			}
-		);
-		if (response) {
-			await ctx.telegram.sendMessage(groupId, 'Данные группы обновлены.');
-		} else {
-			await ctx.telegram.sendMessage(
-				groupId,
-				'Произошла ошибка при обновлении данных. Необходимо быть владельцем группы, привязанной к каналу объявлений.'
-			);
-		}
-	} catch (error) {
-		console.log(error);
-	}
-}
-
-export async function updateSetupChannel(ctx) {
-	try {
-		if (!ctx.message.forward_from_chat) {
+		if (ctx.message.chat.type !== 'channel' && !ctx.message.sender_chat) {
+			// console.log(2);
 			const chatId = ctx.message.chat.id;
 			return await ctx.telegram.sendMessage(
 				chatId,
@@ -52,24 +21,37 @@ export async function updateSetupChannel(ctx) {
 				}
 			);
 		}
+		if (ctx.update.message.reply_to_message) {
+			const senderChatId = ctx.update.message.chat.id;
+			const messageIdGroup = ctx.update.message.message_id;
+			await ctx.telegram.sendMessage(
+				senderChatId,
+				'Данную команду необходимо запускать в <b>channel</b>',
+				{
+					reply_to_message_id: messageIdGroup,
+					parse_mode: 'html',
+				}
+			);
+			return;
+		}
 
 		const channelId = ctx.message.forward_from_chat.id;
 		const channelTitle = ctx.message.forward_from_chat.title;
 		const channelName = ctx.message.forward_from_chat.username;
 		const groupId = ctx.message.chat.id;
-
-		const response = await BotSetup.findOneAndUpdate(
-			{ groupId },
-			{
-				$set: {
-					channelId,
-					channelTitle,
-					channelName,
-				},
-			}
-		);
+		const groupTitle = ctx.message.chat.title;
+		//609f2cbbdf65c33092313a1205e75fde
+		const botSetup = new BotSetup({
+			channelOwnerId,
+			channelId,
+			channelTitle,
+			channelName,
+			groupId,
+			groupTitle,
+		});
+		const response = await botSetup.save();
 		if (response) {
-			await ctx.telegram.sendMessage(channelId, 'Данные канала обновились.');
+			await ctx.telegram.sendMessage(channelId, 'Данные обновились.');
 		} else {
 			await ctx.telegram.sendMessage(channelId, 'Произошла ошибка при обновлении данных.');
 		}
