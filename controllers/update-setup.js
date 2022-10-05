@@ -1,19 +1,21 @@
 import 'dotenv/config';
+import { ownerVerify } from '../app_modules/owner-verify.js';
 
 import { BotSetup } from '../model/BotSetup.js';
 
 export async function update(ctx) {
 	try {
 		const channelOwnerId = process.env.MY_TELEGRAM_ID;
-		const userId = ctx.message.from.id;
-		const isOwner = userId == channelOwnerId;
-		if (!isOwner) return await ctx.reply('Команда доступна только владельцу канала.');
+
 		if (!channelOwnerId) {
 			const channelId = ctx.message.forward_from_chat.id;
 			await ctx.telegram.sendMessage(channelId, `Нет Id юзера в файле .env`);
 			return;
 		}
-		if (ctx.message.chat.type !== 'channel' && !ctx.message.sender_chat) {
+
+		if (ctx.message.chat.type !== 'channel' && !ctx.update.message.reply_to_message) {
+			const isOwner = await ownerVerify(ctx);
+			if (!isOwner) return await ctx.reply('Команда доступна только владельцу канала.');
 			const chatId = ctx.message.chat.id;
 			return await ctx.telegram.sendMessage(
 				chatId,
@@ -23,6 +25,7 @@ export async function update(ctx) {
 				}
 			);
 		}
+
 		if (ctx.update.message.reply_to_message) {
 			const senderChatId = ctx.update.message.chat.id;
 			const messageIdGroup = ctx.update.message.message_id;
