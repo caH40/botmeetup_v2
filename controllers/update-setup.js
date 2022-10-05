@@ -39,7 +39,7 @@ export async function update(ctx) {
 		const channelName = ctx.message.forward_from_chat.username;
 		const groupId = ctx.message.chat.id;
 		const groupTitle = ctx.message.chat.title;
-		//609f2cbbdf65c33092313a1205e75fde
+
 		const botSetup = new BotSetup({
 			channelOwnerId,
 			channelId,

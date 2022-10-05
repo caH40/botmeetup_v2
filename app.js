@@ -20,6 +20,7 @@ import { editLocationsWeather } from './controllers/weather.js';
 import { editPost } from './controllers/edit.js';
 import { getMyId } from './controllers/my-id.js';
 import { getConfiguration } from './controllers/configuration.js';
+import { helpAdmin } from './controllers/help-admin.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -35,6 +36,7 @@ bot.use(stage.middleware());
 
 bot.command('start', async ctx => await start(ctx));
 bot.command('help', async ctx => await help(ctx));
+bot.command('helpA', async ctx => await helpAdmin(ctx));
 bot.command('rideon', async ctx => await rideOn(ctx));
 // bot.command('/rating', async ctx => await rating(ctx));
 bot.command('/edit', async ctx => await editPost(ctx));
