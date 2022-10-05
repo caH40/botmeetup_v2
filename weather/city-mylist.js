@@ -150,4 +150,64 @@ export const cityList = [
 			lat: 44.194168,
 		},
 	},
+	{
+		id: 572567,
+		name: 'Боргустанская',
+		state: '',
+		country: 'RU',
+		coord: {
+			lon: 42.528801,
+			lat: 44.054699,
+		},
+	},
+	{
+		id: 572567,
+		name: 'Гумбаши',
+		state: '',
+		country: 'RU',
+		coord: {
+			lon: 42.2317,
+			lat: 43.7675,
+		},
+	},
+	{
+		id: 572567,
+		name: 'г.Харбас',
+		state: '',
+		country: 'RU',
+		coord: {
+			lon: 42.595,
+			lat: 43.6178,
+		},
+	},
+	{
+		id: 802078,
+		name: 'Алагир',
+		state: '',
+		country: 'RU',
+		coord: {
+			lon: 44.222221,
+			lat: 43.042221,
+		},
+	},
+	{
+		id: 525990,
+		name: 'Мизур',
+		state: '',
+		country: 'RU',
+		coord: {
+			lon: 44.053059,
+			lat: 42.853062,
+		},
+	},
+	{
+		id: 525990,
+		name: 'Цейлоам',
+		state: '',
+		country: 'RU',
+		coord: {
+			lon: 44.83309,
+			lat: 42.8205,
+		},
+	},
 ];
