@@ -1,5 +1,4 @@
 // настройки для определенного канала
-import { mongoose } from 'mongoose';
 import pkg from 'mongoose';
 const { Schema, model } = pkg;
 

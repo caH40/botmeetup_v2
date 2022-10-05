@@ -6,7 +6,10 @@ export async function ownerVerify(ctx) {
 		const userId = ctx.message.from.id;
 
 		const botSetupDB = await BotSetup.findOne();
-		if (!botSetupDB) return console.log('Нет данных по owner в коллекции BotSetup в БД');
+		if (!botSetupDB)
+			return await ctx.reply(
+				'Необходимо запустить команду /update в канале, к которому привязана дискуссионная группа.'
+			);
 
 		if (botSetupDB.channelOwnerId == userId) isOwner = true;
 		return isOwner;
