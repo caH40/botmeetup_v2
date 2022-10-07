@@ -47,8 +47,14 @@ export async function updatePhoto(bot, post) {
 async function editMessageTelegram(bot, post) {
 	try {
 		const formPostString = formFinalPostUpdate(post);
+
+		const botSetupDB = await BotSetup.findOne({ _id: post.botId });
+		if (!botSetupDB)
+			return await ctx.reply('Не нашел настроек бота, обратитесь к админу @Aleksandr_BV');
+		const { channelId } = botSetupDB;
+
 		const response = await bot.telegram
-			.editMessageCaption(post.channelId, post.messageId, 'привет!', formPostString, {
+			.editMessageCaption(channelId, post.messageId, 'привет!', formPostString, {
 				parse_mode: 'html',
 			})
 			.catch(error =>

@@ -22,8 +22,6 @@ export function formFinalPost(ctx) {
 }
 export function formFinalPostUpdate(post) {
 	try {
-		// console.log(post);
-		// console.log(post);
 		const {
 			description,
 			locationStart,
