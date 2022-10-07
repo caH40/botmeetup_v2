@@ -4,8 +4,8 @@ import { BotSetup } from '../model/BotSetup.js';
 
 export async function update(ctx) {
 	try {
-		const channelOwnerId = process.env.MY_TELEGRAM_ID;
-		if (!channelOwnerId) {
+		const ownerId = process.env.MY_TELEGRAM_ID;
+		if (!ownerId) {
 			const channelId = ctx.message.forward_from_chat.id;
 			await ctx.telegram.sendMessage(channelId, `Нет Id юзера в файле .env`);
 			return;
@@ -29,7 +29,7 @@ export async function update(ctx) {
 		const groupTitle = ctx.message.chat.title;
 
 		const botSetup = new BotSetup({
-			channelOwnerId,
+			ownerId,
 			channelId,
 			channelTitle,
 			channelName,

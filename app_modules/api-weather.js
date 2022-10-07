@@ -7,13 +7,10 @@ export async function apiWeather(ctx) {
 		const message = ctx.message.text;
 		if (message.length == 32) {
 			const apiKey = message.slice(-32);
-			const response = await BotSetup.findOne({ channelOwnerId: userId });
+			const response = await BotSetup.findOne({ ownerId: userId });
 			if (!response)
 				return await ctx.reply('Вы не являетесь владельцем канала. Для выхода введите /quit');
-			await BotSetup.findOneAndUpdate(
-				{ channelOwnerId: userId },
-				{ $set: { apiKeyWeather: apiKey } }
-			);
+			await BotSetup.findOneAndUpdate({ ownerId: userId }, { $set: { apiKeyWeather: apiKey } });
 			await ctx.reply('Отлично, ключ сохранен в базе данных. Для выхода введите /quit');
 		} else {
 			await ctx.reply('Неверный формат ввода ключа, попробуйте еще. Для выхода введите /quit');

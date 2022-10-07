@@ -3,8 +3,7 @@ import pkg from 'mongoose';
 const { Schema, model } = pkg;
 
 const botSetupSchema = new Schema({
-	idForOne: { type: Number, default: 0, unique: true },
-	channelOwnerId: { type: Number },
+	ownerId: { type: Number },
 	channelId: { type: Number, unique: true },
 	channelTitle: { type: String },
 	channelName: { type: String },

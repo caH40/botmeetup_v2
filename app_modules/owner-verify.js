@@ -11,7 +11,7 @@ export async function ownerVerify(ctx) {
 				'Необходимо запустить команду /update в канале, к которому привязана дискуссионная группа.'
 			);
 
-		if (botSetupDB.channelOwnerId == userId) isOwner = true;
+		if (botSetupDB.ownerId == userId) isOwner = true;
 		return isOwner;
 	} catch (error) {
 		console.log(error);
