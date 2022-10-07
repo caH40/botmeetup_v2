@@ -7,7 +7,8 @@ export async function controlMessage(ctx) {
 		// проводить проверку по номеру сообщения, сохраненного в БД
 		const idMainTelegram = 777000;
 		if (ctx.update.message.from.id === idMainTelegram) {
-			const { groupId, channelId, channelName } = await BotSetup.findOne();
+			// тут необходимо проверять актуальность тикета оплаты
+			const groupId = ctx.update.message.chat.id;
 			const messageId = ctx.update.message.forward_from_message_id;
 			const messageIdGroup = ctx.update.message.message_id;
 			const { date, locationWeather, _id } = await Post.findOneAndUpdate(

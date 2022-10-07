@@ -1,3 +1,4 @@
+import { BotSetup } from '../../model/BotSetup.js';
 import { Post } from '../../model/Post.js';
 import { keyboardMain } from '../keyboards.js';
 import { mainMenu } from '../mainmenu.js';
@@ -41,7 +42,14 @@ export async function postDelete(ctx, cbqData) {
 		const postDB = await Post.findOneAndDelete({ _id, isLastUpdated: false });
 		if (!postDB) return await ctx.reply('Объявление не найдено');
 		await ctx.reply('Объявление удалено с БД!');
-		const { channelId, messageId } = postDB;
+
+		const { botId, messageId } = postDB;
+
+		const botSetupDB = await BotSetup.findOne({ _id: botId });
+		if (!botSetupDB)
+			return await ctx.reply('Не нашел настроек бота, обратитесь к админу @Aleksandr_BV');
+		const { channelId } = botSetupDB;
+
 		await ctx.telegram.deleteMessage(channelId, messageId);
 		await ctx.reply('Объявление удалено с канала телеграм!');
 	} catch (error) {

@@ -1,6 +1,7 @@
 import { Post } from '../model/Post.js';
 import { formFinalPostUpdate } from './forms.js';
 import { isActualDate } from '../utility/utilites.js';
+import { BotSetup } from '../model/BotSetup.js';
 
 export async function updatePost(bot, postId) {
 	try {
@@ -24,12 +25,16 @@ export async function updatePost(bot, postId) {
 
 export async function updatePhoto(bot, post) {
 	try {
+		const botSetupDB = await BotSetup.findOne({ ownerId: post.userId });
+		if (!botSetupDB)
+			return await ctx.reply('Не нашел настроек бота, обратитесь к админу @Aleksandr_BV');
+		const { channelId } = botSetupDB;
+
 		const formPostString = formFinalPostUpdate(post);
-		const chatId = post.channelId;
 		const messageId = post.messageId;
 		const photoId = post.photoId;
 		await bot.telegram.editMessageMedia(
-			chatId,
+			channelId,
 			messageId,
 			{},
 			{ type: 'photo', media: photoId, caption: formPostString, parse_mode: 'html' }
