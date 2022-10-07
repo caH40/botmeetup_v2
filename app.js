@@ -21,6 +21,7 @@ import { editPost } from './controllers/edit.js';
 import { getMyId } from './controllers/my-id.js';
 import { getConfiguration } from './controllers/configuration.js';
 import { helpAdmin } from './controllers/help-admin.js';
+import { ticket } from './controllers/ticket.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -42,6 +43,7 @@ bot.command('rideon', async ctx => await rideOn(ctx));
 bot.command('/edit', async ctx => await editPost(ctx));
 bot.command('/myid', async ctx => await getMyId(ctx));
 bot.command('location', async ctx => await editLocations(ctx));
+bot.command('buyTicket', async ctx => await ticket(ctx));
 bot.command('weather', async ctx => await editLocationsWeather(ctx));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 bot.command('setup', async ctx => await setup(ctx));
