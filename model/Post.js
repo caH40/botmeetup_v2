@@ -6,7 +6,6 @@ const { Schema, model } = pkg;
 
 const postSchema = new Schema({
 	botId: { type: mongoose.Schema.Types.ObjectId, ref: 'BotSetup' },
-	channelId: { type: Number },
 	date: { type: String },
 	time: { type: String },
 	leader: { type: String },
@@ -14,7 +13,6 @@ const postSchema = new Schema({
 	locationStart: { type: String },
 	locationWeather: { type: String },
 	distance: { type: String },
-	level: { type: String },
 	speed: { type: String },
 	photoId: { type: String },
 	description: { type: String },

@@ -9,6 +9,7 @@ import { weatherUpdate } from '../weather/weather-update.js';
 export async function sendFinalPost(ctx) {
 	try {
 		//проверка на заполненность всех полей объявления, краткое описание заезда может не заполняться
+		const userId = ctx.update.callback_query.from.id;
 		const finalPost = formFinalPost(ctx);
 		if (finalPost.includes('---') || !ctx.session.photoId) {
 			await ctx.reply('Не все поля заполнены!!!', {
@@ -16,10 +17,10 @@ export async function sendFinalPost(ctx) {
 			});
 		} else {
 			// обновление отредактированного поста
-			const _id = ctx.session._id;
-			if (_id) {
+			const _idPost = ctx.session._id;
+			if (_idPost) {
 				const postDB = await Post.findOneAndUpdate(
-					{ _id },
+					{ _id: _idPost },
 					{
 						$set: {
 							date: ctx.session.date,
@@ -27,7 +28,6 @@ export async function sendFinalPost(ctx) {
 							locationStart: ctx.session.locationStart,
 							locationWeather: ctx.session.locationWeather,
 							distance: ctx.session.distance,
-							level: ctx.session.level,
 							speed: ctx.session.speed,
 							photoId: ctx.session.photoId,
 							description: ctx.session.description,
@@ -40,8 +40,10 @@ export async function sendFinalPost(ctx) {
 				return;
 			}
 
-			const { channelId, channelName } = await BotSetup.findOne();
-			if (!channelId) return await ctx.reply('Не нашел id канала для размещения объявления');
+			const botSetupDB = await BotSetup.findOne({ ownerId: userId });
+			if (!botSetupDB)
+				return await ctx.reply('Не нашел настроек бота, обратитесь к админу @Aleksandr_BV');
+			const { _id, channelId, channelName } = botSetupDB;
 
 			const messageChannel = await ctx.telegram.sendPhoto(channelId, ctx.session.photoId, {
 				caption: finalPost,
@@ -55,7 +57,7 @@ export async function sendFinalPost(ctx) {
 			const messageId = messageChannel.message_id;
 
 			const post = new Post({
-				channelId,
+				botId: _id,
 				date: ctx.session.date,
 				time: ctx.session.time,
 				leader: ctx.session.leader,
@@ -63,7 +65,6 @@ export async function sendFinalPost(ctx) {
 				locationStart: ctx.session.locationStart,
 				locationWeather: ctx.session.locationWeather,
 				distance: ctx.session.distance,
-				level: ctx.session.level,
 				speed: ctx.session.speed,
 				photoId: ctx.session.photoId,
 				description: ctx.session.description,
