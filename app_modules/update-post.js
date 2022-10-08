@@ -50,10 +50,12 @@ async function editMessageTelegram(bot, post) {
 
 		const botSetupDB = await BotSetup.findOne({ _id: post.botId });
 		if (!botSetupDB)
-			return await ctx.reply('Не нашел настроек бота, обратитесь к админу @Aleksandr_BV');
+			return console.log(
+				`Не нашел настроек бота, ${post.botId}, похоже бот удалялся, а у нового другой _id`
+			);
 		const { channelId } = botSetupDB;
 
-		const response = await bot.telegram
+		await bot.telegram
 			.editMessageCaption(channelId, post.messageId, 'привет!', formPostString, {
 				parse_mode: 'html',
 			})
