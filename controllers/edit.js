@@ -1,3 +1,4 @@
+import { chatsMember } from '../app_modules/chat-member.js';
 import { formPattern } from '../app_modules/forms.js';
 import { editPostText } from '../app_modules/texts.js';
 import { getKeyboard } from '../keyboards/keyboard-get.js';
@@ -6,6 +7,9 @@ import { Post } from '../model/Post.js';
 
 export async function editPost(ctx) {
 	try {
+		const channelId = await chatsMember(ctx);
+		if (!channelId) return;
+
 		const response = await ctx.reply(editPostText);
 		ctx.session.messageDel = [];
 		ctx.session.messageDel.push(response.message_id);
