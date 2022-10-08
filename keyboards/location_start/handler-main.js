@@ -1,3 +1,4 @@
+import { BotSetup } from '../../model/BotSetup.js';
 import { Location } from '../../model/Location.js';
 import { cityList } from '../../weather/city-mylist.js';
 import { getKeyboard } from '../keyboard-get.js';
@@ -7,7 +8,10 @@ export async function handlerMainMenuLocation(ctx, cbqData) {
 	try {
 		//обработка меню добавление/удаление городов
 		if (cbqData === 'addLocation') {
-			const locationsDB = await Location.find();
+			//можно не делать проверку, так как только что получили данные с прошлого шага
+			const { _id } = await BotSetup.findOne({ channelId: ctx.session.channelId });
+
+			const locationsDB = await Location.find({ botId: _id });
 			//массив с именами мест старта из БД
 			const locationsName = [];
 			// убираются города из клавиатуры которые есть в ДБ BotSetup

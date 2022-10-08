@@ -19,7 +19,9 @@ export async function chatsMember(ctx) {
 	}
 
 	if (channels.length == 0) {
-		await ctx.reply('Для публикации объявления необходимо состоять в соответствующем канале.');
+		await ctx.reply(
+			'Для выполнения команд необходимо состоять в соответствующем канале объявлений.'
+		);
 		return false;
 	}
 

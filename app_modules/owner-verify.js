@@ -5,13 +5,14 @@ export async function ownerVerify(ctx) {
 		let isOwner = false;
 		const userId = ctx.message.from.id;
 
-		const botSetupDB = await BotSetup.findOne();
-		if (!botSetupDB)
-			return await ctx.reply(
-				'Необходимо запустить команду /update в канале, к которому привязана дискуссионная группа.'
-			);
+		const botSetupDB = await BotSetup.findOne({ ownerId: userId });
+		if (!botSetupDB) {
+			await ctx.reply('У вас нет Бота для настройки мест старта');
+			return isOwner;
+		}
 
-		if (botSetupDB.ownerId == userId) isOwner = true;
+		isOwner = true;
+
 		return isOwner;
 	} catch (error) {
 		console.log(error);
