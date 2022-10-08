@@ -9,7 +9,12 @@ export async function chatsMember(ctx) {
 
 	for (let index = 0; index < botsSetupDB.length; index++) {
 		chatMember = await ctx.telegram.getChatMember(botsSetupDB[index].channelId, userId);
-		if (chatMember.status === 'member' || chatMember.status === 'creator')
+
+		if (
+			chatMember.status === 'member' ||
+			chatMember.status === 'creator' ||
+			chatMember.status === 'administrator'
+		)
 			channels.push(botsSetupDB[index].channelId);
 	}
 
