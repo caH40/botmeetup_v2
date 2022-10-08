@@ -62,3 +62,7 @@ export function timeLeft(date, time) {
 		console.log(error);
 	}
 }
+
+export function dateExpired(ticketDB) {
+	return new Date(ticketDB.datePurchase + ticketDB.duration).toLocaleString();
+}

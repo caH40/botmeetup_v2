@@ -3,7 +3,7 @@ import { Scenes, session, Telegraf } from 'telegraf';
 import mongoose from 'mongoose';
 
 import { setup } from './controllers/setup.js';
-import { update } from './controllers/update-setup.js';
+import { updateGroup, updateChannel } from './controllers/update-setup.js';
 import { start } from './controllers/start.js';
 import { help } from './controllers/help.js';
 import { rideOn } from './controllers/rideon.js';
@@ -47,7 +47,8 @@ bot.command('buyTicket', async ctx => await ticket(ctx));
 bot.command('weather', async ctx => await editLocationsWeather(ctx));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 bot.command('setup', async ctx => await setup(ctx));
-bot.command('update', async ctx => await update(ctx));
+bot.command('updategroup', async ctx => await updateGroup(ctx));
+bot.command('updatechannel', async ctx => await updateChannel(ctx));
 bot.command('config', async ctx => await getConfiguration(ctx));
 bot.on('poll_answer', async ctx => await poll(ctx));
 bot.on('message', async ctx => await controlMessage(ctx));

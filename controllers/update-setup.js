@@ -1,49 +1,101 @@
 import 'dotenv/config';
 
 import { BotSetup } from '../model/BotSetup.js';
+import { Ticket } from '../model/Ticket.js';
+import { dateExpired } from '../utility/utilites.js';
 
-export async function update(ctx) {
+export async function updateGroup(ctx) {
 	try {
-		const ownerId = process.env.MY_TELEGRAM_ID;
-		if (!ownerId) {
-			const channelId = ctx.message.forward_from_chat.id;
-			await ctx.telegram.sendMessage(channelId, `Нет Id юзера в файле .env`);
-			return;
-		}
-
-		if (ctx.message.chat.type !== 'channel' && !ctx.message.sender_chat) {
+		if (ctx.message.chat.type !== 'supergroup') {
 			const chatId = ctx.message.chat.id;
 			return await ctx.telegram.sendMessage(
 				chatId,
-				'Данную команду необходимо запускать в <b>channel</b>',
+				'Данную команду необходимо запускать в <b>Channel</b>',
 				{
 					parse_mode: 'html',
 				}
 			);
 		}
 
-		const channelId = ctx.message.forward_from_chat.id;
-		const channelTitle = ctx.message.forward_from_chat.title;
-		const channelName = ctx.message.forward_from_chat.username;
+		const userId = ctx.message.from.id;
 		const groupId = ctx.message.chat.id;
 		const groupTitle = ctx.message.chat.title;
 
+		const ticketDB = await Ticket.findOne({ ownerId: userId });
+		if (!ticketDB) await ctx.reply('У вас нет тикетов для использования бота!');
+		if (!ticketDB.isActive)
+			await ctx.reply(`Оплаченный период тикета закончился ${dateExpired(ticketDB)}`);
+
+		//проверка наличия конфигурации Бота с данным groupId, для исключения дублирования настроек ботов
+		//если есть, вторым шагом сверить userId === ownerId, если да ==> обновить, если нет, то уже есть бот для этого канала, обратиться к администратору
+
+		const botSetupDB = await BotSetup.findOne({ groupId });
+
+		if (botSetupDB && botSetupDB.ownerId !== userId)
+			return await ctx.reply(
+				'Уже есть бот для этой группы, если это ваша группа, тогда обратитесь к админу @Aleksandr_BV'
+			);
+
+		if (botSetupDB && botSetupDB.ownerId == userId)
+			return await ctx.reply(
+				'Бот для этой группы уже настроен, если необходимо, выполните команду /updatechannel в канале объявлений.'
+			);
+
 		const botSetup = new BotSetup({
-			ownerId,
-			channelId,
-			channelTitle,
-			channelName,
+			ownerId: userId,
 			groupId,
 			groupTitle,
 		});
 		const response = await botSetup.save();
+
 		if (response) {
-			await ctx.telegram.sendMessage(
-				channelId,
-				'Данные в БД обновились. Можно переходить к добавлению API-key погоды, добавления мест от куда будет происходить старт, мест мониторинга погоды. В приватном сообщении боту запустите команду /helpA'
+			await ctx.reply(
+				'Данные по группе сохранились в БД. Теперь необходимо выполните команду /updatechannel в канале объявлений.'
 			);
 		} else {
-			await ctx.telegram.sendMessage(channelId, 'Произошла ошибка при обновлении данных.');
+			await ctx.reply('Произошла ошибка при сохранении данных.');
+		}
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export async function updateChannel(ctx) {
+	try {
+		if (!ctx.message.sender_chat) {
+			const groupId = ctx.message.chat.id;
+			return await ctx.telegram.sendMessage(
+				groupId,
+				'Данную команду необходимо запускать в <b>Group</b>',
+				{
+					parse_mode: 'html',
+				}
+			);
+		}
+
+		const groupId = ctx.message.chat.id;
+		const channelId = ctx.message.sender_chat.id;
+		const channelTitle = ctx.message.sender_chat.title;
+		const channelName = ctx.message.sender_chat.username;
+
+		const botSetupDB = await BotSetup.findOne({ groupId });
+		console.log(botSetupDB);
+
+		if (!botSetupDB)
+			return await ctx.telegram.sendMessage(
+				channelId,
+				'Нет Бота с настроенной группой для этого канала. Сначала выполните команду /updategroup в привязанной к каналу группе.'
+			);
+
+		const response = await BotSetup.findOneAndUpdate(
+			{ groupId },
+			{ $set: { channelId, channelTitle, channelName } }
+		);
+
+		if (response) {
+			await ctx.telegram.sendMessage(channelId, 'Данные по каналу сохранились в БД.');
+		} else {
+			await ctx.telegram.sendMessage(channelId, 'Произошла ошибка при сохранении данных.');
 		}
 	} catch (error) {
 		console.log(error);

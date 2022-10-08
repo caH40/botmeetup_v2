@@ -11,11 +11,9 @@ export async function controlMessage(ctx) {
 			const groupId = ctx.update.message.chat.id;
 			const messageId = ctx.update.message.forward_from_message_id;
 			const messageIdGroup = ctx.update.message.message_id;
-			const { date, locationWeather, _id } = await Post.findOneAndUpdate(
-				{ messageId },
-				{ $set: { messageIdGroup } }
-			);
-
+			const postDb = await Post.findOneAndUpdate({ messageId }, { $set: { messageIdGroup } });
+			if (!postDb) return;
+			const { date, locationWeather, _id } = postDB;
 			// отправляем голосование в группу дискуссий "прикрепляя" его к переадресованному сообщению reply_to_message_id
 			const pollAnswers = ['Участвую!', 'Не участвую!', 'Ищу возможность!'];
 			const optionalOptions = {
