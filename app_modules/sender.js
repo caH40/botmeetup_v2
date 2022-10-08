@@ -5,6 +5,7 @@ import { keyboardBack } from '../keyboards/keyboards.js';
 import { posted } from './texts.js';
 import { updatePhoto } from './update-post.js';
 import { weatherUpdate } from '../weather/weather-update.js';
+import { chatsMember } from './chat-member.js';
 
 export async function sendFinalPost(ctx) {
 	try {
@@ -41,31 +42,11 @@ export async function sendFinalPost(ctx) {
 				return;
 			}
 
-			const botsSetupDB = await BotSetup.find();
-			let chatMember;
-			const channels = [];
-
-			for (let index = 0; index < botsSetupDB.length; index++) {
-				chatMember = await ctx.telegram.getChatMember(botsSetupDB[index].channelId, userId);
-				if (chatMember.status === 'member' || chatMember.status === 'creator')
-					channels.push(botsSetupDB[index].channelId);
-			}
-
-			if (channels.length == 0)
-				return await ctx.reply(
-					'Для публикации объявления необходимо состоять в соответствующем канале.'
-				);
-
-			if (channels.length > 1)
-				return await ctx.reply(
-					'Вы состоите в нескольких каналах объявлений о велозаездах, где используется данный бот. К сожалению, бот может создавать объявление, когда пользователь состоит только в одном канале объявлений велозаездов.'
-				);
-
-			const botSetupDB = await BotSetup.findOne({ channelId: channels[0] });
-
+			const channelId = ctx.session.channelId;
+			const botSetupDB = await BotSetup.findOne({ channelId });
 			if (!botSetupDB)
 				return await ctx.reply('Не нашел настроек бота, обратитесь к админу @Aleksandr_BV');
-			const { _id, channelId, channelName } = botSetupDB;
+			const { _id, channelName } = botSetupDB;
 
 			const messageChannel = await ctx.telegram.sendPhoto(channelId, ctx.session.photoId, {
 				caption: finalPost,
