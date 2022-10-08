@@ -21,7 +21,8 @@ export async function handlerMainMenuWeather(ctx, cbqData) {
 			const locationStart = cbqData.slice(14);
 			ctx.session.locationStart = locationStart;
 
-			const locationsWeather = await Location.findOne({ name: locationStart });
+			const botId = ctx.session.botId;
+			const locationsWeather = await Location.findOne({ botId, name: locationStart });
 			if (!locationsWeather) return console.log(`Не найдено место name: "${locationStart}" в БД`);
 
 			await getKeyboard(
@@ -33,8 +34,9 @@ export async function handlerMainMenuWeather(ctx, cbqData) {
 
 		if (cbqData.includes('addLocationWeather')) {
 			const locationStart = ctx.session.locationStart;
+			const botId = ctx.session.botId;
 			// сделать отработку ошибки если не находит документ
-			const { weather } = await Location.findOne({ name: locationStart });
+			const { weather } = await Location.findOne({ botId, name: locationStart });
 
 			// убираются города из клавиатуры которые есть текущем документе location
 			const filteredWeather = cityList.filter(city => !weather.includes(city.name));
@@ -53,8 +55,9 @@ export async function handlerMainMenuWeather(ctx, cbqData) {
 
 		if (cbqData.includes('removeLocationWeather')) {
 			const locationStart = ctx.session.locationStart;
+			const botId = ctx.session.botId;
 			// сделать отработку ошибки если не находит документ
-			const { weather } = await Location.findOne({ name: locationStart });
+			const { weather } = await Location.findOne({ botId, name: locationStart });
 
 			const title = 'Выберите место погоды для удаления из массива:';
 			if (weather.length == 0) {
@@ -67,10 +70,11 @@ export async function handlerMainMenuWeather(ctx, cbqData) {
 
 		if (cbqData.includes('weatherForAdd_')) {
 			const locationWeather = cbqData.slice(14);
-
 			const locationStart = ctx.session.locationStart;
+			const botId = ctx.session.botId;
+
 			const response = await Location.findOneAndUpdate(
-				{ name: locationStart },
+				{ botId, name: locationStart },
 				{ $addToSet: { weather: locationWeather } },
 				{ returnDocument: 'after' }
 			);
@@ -87,9 +91,10 @@ export async function handlerMainMenuWeather(ctx, cbqData) {
 		if (cbqData.includes('weatherForRemove_')) {
 			const locationWeather = cbqData.slice(17);
 			const locationStart = ctx.session.locationStart;
+			const botId = ctx.session.botId;
 
 			const response = await Location.findOneAndUpdate(
-				{ name: locationStart },
+				{ botId, name: locationStart },
 				{ $pull: { weather: locationWeather } },
 				{ returnDocument: 'after' }
 			);
