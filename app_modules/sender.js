@@ -10,6 +10,7 @@ export async function sendFinalPost(ctx) {
 	try {
 		//проверка на заполненность всех полей объявления, краткое описание заезда может не заполняться
 		const userId = ctx.update.callback_query.from.id;
+
 		const finalPost = formFinalPost(ctx);
 		if (finalPost.includes('---') || !ctx.session.photoId) {
 			await ctx.reply('Не все поля заполнены!!!', {
@@ -40,7 +41,28 @@ export async function sendFinalPost(ctx) {
 				return;
 			}
 
-			const botSetupDB = await BotSetup.findOne({ ownerId: userId });
+			const botsSetupDB = await BotSetup.find();
+			let chatMember;
+			const channels = [];
+
+			for (let index = 0; index < botsSetupDB.length; index++) {
+				chatMember = await ctx.telegram.getChatMember(botsSetupDB[index].channelId, userId);
+				if (chatMember.status === 'member' || chatMember.status === 'creator')
+					channels.push(botsSetupDB[index].channelId);
+			}
+
+			if (channels.length == 0)
+				return await ctx.reply(
+					'Для публикации объявления необходимо состоять в соответствующем канале.'
+				);
+
+			if (channels.length > 1)
+				return await ctx.reply(
+					'Вы состоите в нескольких каналах объявлений о велозаездах, где используется данный бот. К сожалению, бот может создавать объявление, когда пользователь состоит только в одном канале объявлений велозаездов.'
+				);
+
+			const botSetupDB = await BotSetup.findOne({ channelId: channels[0] });
+
 			if (!botSetupDB)
 				return await ctx.reply('Не нашел настроек бота, обратитесь к админу @Aleksandr_BV');
 			const { _id, channelId, channelName } = botSetupDB;
