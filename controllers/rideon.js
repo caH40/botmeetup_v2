@@ -1,3 +1,5 @@
+import { chatsMember } from '../app_modules/chat-member.js';
+
 export async function rideOn(ctx) {
 	try {
 		// проверка наличия username
@@ -8,6 +10,10 @@ export async function rideOn(ctx) {
 			return await ctx.reply('Пользователи с приватным аккаунтом не могут создавать объявления');
 		// обнуление сессии
 		ctx.session = {};
+
+		const channelId = await chatsMember(ctx);
+		if (!channelId) return;
+		ctx.session.channelId = channelId;
 		//при замене значения из модуля на keyboardMain, смешиваются ответы из разных сессий!!
 		ctx.session.messageDel = [];
 		ctx.session.start = [

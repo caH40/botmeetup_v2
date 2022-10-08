@@ -10,7 +10,6 @@ import { chatsMember } from './chat-member.js';
 export async function sendFinalPost(ctx) {
 	try {
 		//проверка на заполненность всех полей объявления, краткое описание заезда может не заполняться
-		const userId = ctx.update.callback_query.from.id;
 
 		const finalPost = formFinalPost(ctx);
 		if (finalPost.includes('---') || !ctx.session.photoId) {

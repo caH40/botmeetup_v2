@@ -2,6 +2,7 @@
 import { BotSetup } from '../model/BotSetup.js';
 
 export async function chatsMember(ctx) {
+	const userId = ctx.message.from.id;
 	const botsSetupDB = await BotSetup.find();
 	let chatMember;
 	const channels = [];

@@ -14,7 +14,6 @@ export const photoWizard = () => {
 					ctx.deleteMessage(ctx.message.message_id - 1);
 					ctx.deleteMessage(ctx.message.message_id);
 
-					ctx.reply('Фотография загружена');
 					ctx.session.start[3][0].text = 'Картинка ✔️';
 					ctx.session.photoId = ctx.message.photo[2].file_id;
 					ctx.scene.leave();
