@@ -1,9 +1,13 @@
+import { chatsMember } from '../app_modules/chat-member.js';
 import { startMessage } from '../app_modules/texts.js';
 import { BotSetup } from '../model/BotSetup.js';
 
 export async function start(ctx) {
 	try {
-		const { channelName } = await BotSetup.findOne();
+		const channelId = await chatsMember(ctx);
+		if (!channelId) return;
+
+		const { channelName } = await BotSetup.findOne({ channelId });
 		const userName = ctx.message.from.username;
 
 		ctx.reply(`Привет ${userName ? userName : 'незнакомец'} ! ${startMessage(channelName)}`, {
