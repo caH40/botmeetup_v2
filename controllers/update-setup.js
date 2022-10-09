@@ -7,12 +7,8 @@ import { dateExpired } from '../utility/utilites.js';
 
 export async function updateGroup(ctx) {
 	try {
-		await chatsMember(ctx);
-
-		if (!ctx.session.isAdmin)
-			return await ctx.reply(
-				`Команда доступна только администраторам канала @${ctx.session.channelName} `
-			);
+		const isAdmin = await chatsMember(ctx, 'isAdmin');
+		if (!isAdmin) return;
 
 		if (ctx.message.chat.type !== 'supergroup') {
 			const chatId = ctx.message.chat.id;
