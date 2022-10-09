@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { chatsMember } from '../app_modules/chat-member.js';
 
 import { BotSetup } from '../model/BotSetup.js';
 import { Ticket } from '../model/Ticket.js';
@@ -6,6 +7,13 @@ import { dateExpired } from '../utility/utilites.js';
 
 export async function updateGroup(ctx) {
 	try {
+		await chatsMember(ctx);
+
+		if (!ctx.session.isAdmin)
+			return await ctx.reply(
+				`Команда доступна только администраторам канала @${ctx.session.channelName} `
+			);
+
 		if (ctx.message.chat.type !== 'supergroup') {
 			const chatId = ctx.message.chat.id;
 			return await ctx.telegram.sendMessage(
@@ -62,6 +70,8 @@ export async function updateGroup(ctx) {
 
 export async function updateChannel(ctx) {
 	try {
+		// нет технической возможности проверять userId при отправке сообщений в канале.
+		// проверка на админа перманентная, писать сообщения в канале могут только админы.
 		if (!ctx.message.sender_chat) {
 			const groupId = ctx.message.chat.id;
 			return await ctx.telegram.sendMessage(
@@ -79,7 +89,6 @@ export async function updateChannel(ctx) {
 		const channelName = ctx.message.sender_chat.username;
 
 		const botSetupDB = await BotSetup.findOne({ groupId });
-		console.log(botSetupDB);
 
 		if (!botSetupDB)
 			return await ctx.telegram.sendMessage(
