@@ -7,7 +7,7 @@ export async function ownerVerify(ctx) {
 
 		const botSetupDB = await BotSetup.findOne({ ownerId: userId });
 		if (!botSetupDB) {
-			await ctx.reply('У вас нет Бота для настройки мест старта');
+			await ctx.reply('Команда доступна только владельцу канала.');
 			return isOwner;
 		}
 

@@ -5,7 +5,7 @@ import { BotSetup } from '../model/BotSetup.js';
 export async function getConfiguration(ctx) {
 	try {
 		const isOwner = await ownerVerify(ctx);
-		if (!isOwner) return await ctx.reply('Команда доступна только владельцу канала.');
+		if (!isOwner) return;
 		const configFromDB = await BotSetup.findOne();
 		if (!configFromDB) return await ctx.reply('Конфигурация бота не найдена');
 
