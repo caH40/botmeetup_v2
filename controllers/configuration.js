@@ -4,12 +4,8 @@ import { BotSetup } from '../model/BotSetup.js';
 
 export async function getConfiguration(ctx) {
 	try {
-		await chatsMember(ctx);
-
-		if (!ctx.session.isAdmin)
-			return await ctx.reply(
-				`Команда доступна только администраторам канала @${ctx.session.channelName} `
-			);
+		const isAdmin = await chatsMember(ctx, 'isAdmin');
+		if (!isAdmin) return;
 
 		const configFromDB = await BotSetup.findOne({ _id: ctx.session.botId });
 		if (!configFromDB) return await ctx.reply('Конфигурация бота не найдена');

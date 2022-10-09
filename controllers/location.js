@@ -5,14 +5,10 @@ import { keyboardAddOrDel } from '../keyboards/keyboards.js';
 
 export async function editLocations(ctx) {
 	try {
-		await chatsMember(ctx);
+		const isAdmin = await chatsMember(ctx, 'isAdmin');
+		if (!isAdmin) return;
 
 		ctx.session.messageDel = [];
-
-		if (!ctx.session.isAdmin)
-			return await ctx.reply(
-				`Команда доступна только администраторам канала @${ctx.session.channelName} `
-			);
 
 		await getKeyboard(
 			ctx,

@@ -6,11 +6,8 @@ import { Location } from '../model/Location.js';
 
 export async function editLocationsWeather(ctx) {
 	try {
-		await chatsMember(ctx);
-		if (!ctx.session.isAdmin)
-			return await ctx.reply(
-				`Команда доступна только администраторам канала @${ctx.session.channelName} `
-			);
+		const isAdmin = await chatsMember(ctx, 'isAdmin');
+		if (!isAdmin) return;
 
 		ctx.session.messageDel = [];
 

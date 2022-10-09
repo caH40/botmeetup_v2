@@ -1,7 +1,7 @@
 // определение в какой канал постить объявление боту от пользователя. Бот постит в тот канал в котором пользователь состоит. Пользователю нельзя находится сразу в нескольких каналах в которых работает данный бот.
 import { BotSetup } from '../model/BotSetup.js';
 
-export async function chatsMember(ctx) {
+export async function chatsMember(ctx, checkedTarget) {
 	const userId = ctx.message.from.id;
 	const botsSetupDB = await BotSetup.find();
 	let chatMember;
@@ -48,6 +48,15 @@ export async function chatsMember(ctx) {
 	ctx.session.channelId = members[0].channelId;
 	ctx.session.channelName = members[0].channelName;
 	ctx.session.isAdmin = members[0].isAdmin;
+
+	if (checkedTarget === 'isAdmin') {
+		if (!members[0].isAdmin) {
+			await ctx.reply(
+				`Команда доступна только администраторам канала @${ctx.session.channelName} `
+			);
+			return false;
+		}
+	}
 
 	return true;
 }

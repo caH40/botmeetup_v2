@@ -1,16 +1,11 @@
 import { chatsMember } from '../app_modules/chat-member.js';
-import { formFinalPost } from '../app_modules/forms.js';
 import { posted } from '../app_modules/texts.js';
 import { Post } from '../model/Post.js';
 
 export async function getTestPost(ctx) {
 	try {
-		await chatsMember(ctx);
-
-		if (!ctx.session.isAdmin)
-			return await ctx.reply(
-				`Команда доступна только администраторам канала @${ctx.session.channelName} `
-			);
+		const isAdmin = await chatsMember(ctx, 'isAdmin');
+		if (!isAdmin) return;
 
 		const userName = ctx.update.message.from.username;
 		const userId = ctx.update.message.from.id;

@@ -5,7 +5,6 @@ import { keyboardBack } from '../keyboards/keyboards.js';
 import { posted } from './texts.js';
 import { updatePhoto } from './update-post.js';
 import { weatherUpdate } from '../weather/weather-update.js';
-import { chatsMember } from './chat-member.js';
 
 export async function sendFinalPost(ctx) {
 	try {

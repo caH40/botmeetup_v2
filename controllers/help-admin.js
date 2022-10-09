@@ -3,12 +3,8 @@ import { commandsMessageAdmin } from '../app_modules/texts.js';
 
 export async function helpAdmin(ctx) {
 	try {
-		await chatsMember(ctx);
-
-		if (!ctx.session.isAdmin)
-			return await ctx.reply(
-				`Команда доступна только администраторам канала @${ctx.session.channelName} `
-			);
+		const isAdmin = await chatsMember(ctx, 'isAdmin');
+		if (!isAdmin) return;
 
 		await ctx.reply(commandsMessageAdmin);
 	} catch (error) {
