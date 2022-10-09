@@ -6,7 +6,7 @@ const { Schema, model } = pkg;
 
 const pollSchema = new Schema({
 	postId: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' },
-	pollId: { type: String },
+	poll: { type: Object },
 	//кто проголосовал за ответ "ДА"
 	pollUsers: [{ type: Object }],
 	pollQuantity: { type: Number, default: 0 },

@@ -22,6 +22,7 @@ import { getMyId } from './controllers/my-id.js';
 import { getConfiguration } from './controllers/configuration.js';
 import { helpAdmin } from './controllers/help-admin.js';
 import { ticket } from './controllers/ticket.js';
+import { getTestPost } from './controllers/testpost.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -50,6 +51,7 @@ bot.command('setup', async ctx => await setup(ctx));
 bot.command('updategroup', async ctx => await updateGroup(ctx));
 bot.command('updatechannel', async ctx => await updateChannel(ctx));
 bot.command('config', async ctx => await getConfiguration(ctx));
+bot.command('testpost', async ctx => await getTestPost(ctx));
 bot.on('poll_answer', async ctx => await poll(ctx));
 bot.on('message', async ctx => await controlMessage(ctx));
 

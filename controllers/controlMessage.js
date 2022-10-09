@@ -27,14 +27,15 @@ export async function controlMessage(ctx) {
 			ctx.telegram
 				.sendPoll(groupId, 'Кто участвует в заезде?', pollAnswers, optionalOptions)
 				.then(data => {
-					console.log(data.poll);
 					return data;
 				})
 				.then(data => {
 					const poll = new Poll({
 						postId: _id,
-						pollId: data.poll.id,
+						poll: data.poll,
 					});
+					console.log('==============================================================');
+					console.log(poll);
 					poll.save();
 				});
 
