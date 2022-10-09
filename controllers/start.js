@@ -4,10 +4,10 @@ import { BotSetup } from '../model/BotSetup.js';
 
 export async function start(ctx) {
 	try {
-		const channelId = await chatsMember(ctx);
-		if (!channelId) return;
+		const isMember = await chatsMember(ctx);
+		if (!isMember) return;
 
-		const { channelName } = await BotSetup.findOne({ channelId });
+		const { channelName } = await BotSetup.findOne({ channelId: ctx.session.channelId });
 		const userName = ctx.message.from.username;
 
 		ctx.reply(`Привет ${userName ? userName : 'незнакомец'} ! ${startMessage(channelName)}`, {
