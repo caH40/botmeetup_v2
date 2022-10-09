@@ -31,6 +31,7 @@ export async function chatsMember(ctx) {
 		);
 		return false;
 	}
-
-	return channels[0];
+	ctx.session.botId = channels[0]._id;
+	ctx.session.channelId = channels[0].channelId;
+	return true;
 }
