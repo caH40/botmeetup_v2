@@ -7,8 +7,8 @@ import { Post } from '../model/Post.js';
 
 export async function editPost(ctx) {
 	try {
-		const channelId = await chatsMember(ctx);
-		if (!channelId) return;
+		const isMember = await chatsMember(ctx);
+		if (!isMember) return;
 
 		const response = await ctx.reply(editPostText);
 		ctx.session.messageDel = [];
@@ -16,7 +16,7 @@ export async function editPost(ctx) {
 
 		const userId = ctx.update.message.from.id;
 		//сделать проверку
-		const postsDB = await Post.find({ userId, isLastUpdated: false });
+		const postsDB = await Post.find({ botId: ctx.session.botId, userId, isLastUpdated: false });
 
 		if (postsDB.length == 0) await ctx.reply('У вас нет объявлений для редактирования/удаления!');
 
