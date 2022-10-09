@@ -1,4 +1,5 @@
 //итоговое объявление о заезде
+import { Poll } from '../model/Poll.js';
 import { isActualDate, timeLeft } from '../utility/utilites.js';
 
 export function formFinalPost(ctx) {
@@ -20,7 +21,7 @@ export function formFinalPost(ctx) {
 		console.log(error);
 	}
 }
-export function formFinalPostUpdate(post) {
+export function formFinalPostUpdate(post, pollQuantity) {
 	try {
 		const {
 			description,
@@ -33,7 +34,6 @@ export function formFinalPostUpdate(post) {
 			tempDay,
 			humidity,
 			descriptionWeather,
-			pollQuantity,
 			leader,
 		} = post;
 
@@ -42,8 +42,9 @@ export function formFinalPostUpdate(post) {
 		if (!isActualDate(date, time)) timeLeftStr = '<u>СТАРТ УЖЕ БЫЛ!!!</u>';
 
 		//если нет данных о голосовании, то не показывать количество участников на главной странице
+
 		let pollQuantityStr;
-		if (post.poll) {
+		if (pollQuantity) {
 			pollQuantityStr = `\n<b>Количество участников:</b> ${pollQuantity}`;
 		} else {
 			pollQuantityStr = '';

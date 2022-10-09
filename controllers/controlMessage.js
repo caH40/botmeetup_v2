@@ -34,8 +34,6 @@ export async function controlMessage(ctx) {
 						postId: _id,
 						poll: data.poll,
 					});
-					console.log('==============================================================');
-					console.log(poll);
 					poll.save();
 				});
 
