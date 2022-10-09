@@ -1,12 +1,17 @@
+import { chatsMember } from '../app_modules/chat-member.js';
 import { formConfig } from '../app_modules/forms.js';
-import { ownerVerify } from '../app_modules/owner-verify.js';
 import { BotSetup } from '../model/BotSetup.js';
 
 export async function getConfiguration(ctx) {
 	try {
-		const isOwner = await ownerVerify(ctx);
-		if (!isOwner) return;
-		const configFromDB = await BotSetup.findOne();
+		await chatsMember(ctx);
+
+		if (!ctx.session.isAdmin)
+			return await ctx.reply(
+				`Команда доступна только администраторам канала @${ctx.session.channelName} `
+			);
+
+		const configFromDB = await BotSetup.findOne({ _id: ctx.session.botId });
 		if (!configFromDB) return await ctx.reply('Конфигурация бота не найдена');
 
 		await ctx.reply(formConfig(configFromDB), { parse_mode: 'html' });

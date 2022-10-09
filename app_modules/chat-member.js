@@ -13,6 +13,7 @@ export async function chatsMember(ctx) {
 		if (chatMember.status === 'member')
 			members.push({
 				channelId: botsSetupDB[index].channelId,
+				channelName: botsSetupDB[index].channelName,
 				botId: botsSetupDB[index]._id,
 				isAdmin: false,
 			});
@@ -20,6 +21,7 @@ export async function chatsMember(ctx) {
 		if (chatMember.status === 'creator' || chatMember.status === 'administrator')
 			members.push({
 				channelId: botsSetupDB[index].channelId,
+				channelName: botsSetupDB[index].channelName,
 				botId: botsSetupDB[index]._id,
 				isAdmin: true,
 			});
@@ -44,6 +46,7 @@ export async function chatsMember(ctx) {
 
 	ctx.session.botId = members[0].botId;
 	ctx.session.channelId = members[0].channelId;
+	ctx.session.channelName = members[0].channelName;
 	ctx.session.isAdmin = members[0].isAdmin;
 
 	return true;
