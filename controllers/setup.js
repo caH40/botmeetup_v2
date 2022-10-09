@@ -1,10 +1,13 @@
-import { apiWeather } from '../app_modules/api-weather.js';
-import { ownerVerify } from '../app_modules/owner-verify.js';
+import { chatsMember } from '../app_modules/chat-member.js';
 
 export async function setup(ctx) {
 	try {
-		const isOwner = await ownerVerify(ctx);
-		if (!isOwner) return await ctx.reply('Команда доступна только владельцу канала.');
+		await chatsMember(ctx);
+
+		if (!ctx.session.isAdmin)
+			return await ctx.reply(
+				`Команда доступна только администраторам канала @${ctx.session.channelName} `
+			);
 
 		ctx.scene.enter('setup');
 	} catch (error) {
