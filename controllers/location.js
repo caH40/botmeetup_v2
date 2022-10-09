@@ -1,8 +1,8 @@
+//This is a scene for editing an array of cities
 import { chatsMember } from '../app_modules/chat-member.js';
 import { getKeyboard } from '../keyboards/keyboard-get.js';
 import { keyboardAddOrDel } from '../keyboards/keyboards.js';
-import { BotSetup } from '../model/BotSetup.js';
-//This is a scene for editing an array of cities
+
 export async function editLocations(ctx) {
 	try {
 		await chatsMember(ctx);
