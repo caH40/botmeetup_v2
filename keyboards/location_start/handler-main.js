@@ -8,10 +8,8 @@ export async function handlerMainMenuLocation(ctx, cbqData) {
 	try {
 		//обработка меню добавление/удаление городов
 		if (cbqData === 'addLocation') {
-			//можно не делать проверку, так как только что получили данные с прошлого шага
-			const { _id } = await BotSetup.findOne({ channelId: ctx.session.channelId });
+			const locationsDB = await Location.find({ botId: ctx.session.botId });
 
-			const locationsDB = await Location.find({ botId: _id });
 			//массив с именами мест старта из БД
 			const locationsName = [];
 			// убираются города из клавиатуры которые есть в ДБ BotSetup
@@ -29,8 +27,9 @@ export async function handlerMainMenuLocation(ctx, cbqData) {
 			const title = 'Выберите место старта для добавления в inline-клавиатуру';
 			getKeyboard(ctx, title, keyboardLocation(filteredLocationsName, 'addLocationNew_'));
 		}
+
 		if (cbqData === 'removeLocation') {
-			const locationsDB = await Location.find();
+			const locationsDB = await Location.find({ botId: ctx.session.botId });
 
 			if (locationsDB.length == 0) {
 				await ctx.reply('Вы удалили все места старта из настройки бота. Больше нечего удалять.');

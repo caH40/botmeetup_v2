@@ -7,9 +7,7 @@ import { handlerMainMenuWeather } from '../keyboards/location_weather/handler-ma
 export async function callbackQuery(ctx) {
 	try {
 		const messageForDel = ctx.session.messageDel;
-		//если не был запущен rideon, то возврат
-		if (!messageForDel)
-			return await ctx.reply('Что то пошло не так, попробуйте заново запустить /rideon');
+		if (!messageForDel) return await ctx.reply('Что то пошло не так...');
 
 		messageForDel.forEach(async messageId => {
 			await ctx

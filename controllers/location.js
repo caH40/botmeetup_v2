@@ -5,14 +5,14 @@ import { BotSetup } from '../model/BotSetup.js';
 //This is a scene for editing an array of cities
 export async function editLocations(ctx) {
 	try {
+		await chatsMember(ctx);
+
 		ctx.session.messageDel = [];
 
-		const userId = ctx.message.from.id;
-		const botSetupDB = await BotSetup.findOne({ ownerId: userId });
-		if (!botSetupDB) return await ctx.reply('Команда доступна только владельцу канала.');
-
-		ctx.session.channelId = botSetupDB.channelId;
-		ctx.session.botId = botSetupDB._id;
+		if (!ctx.session.isAdmin)
+			return await ctx.reply(
+				`Команда доступна только администраторам канала @${ctx.session.channelName} `
+			);
 
 		await getKeyboard(
 			ctx,
