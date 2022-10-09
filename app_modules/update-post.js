@@ -3,12 +3,12 @@ import { formFinalPostUpdate } from './forms.js';
 import { isActualDate } from '../utility/utilites.js';
 import { BotSetup } from '../model/BotSetup.js';
 
-export async function updatePost(bot, postId, pollQuantity) {
+export async function updatePost(bot, postId) {
 	try {
 		//если необходимо обновить конкретный Пост, а не все Посты
 		if (postId) {
 			const postDB = await Post.findOne({ _id: postId });
-			await editMessageTelegram(bot, postDB, pollQuantity);
+			await editMessageTelegram(bot, postDB);
 
 			return;
 		}
@@ -16,7 +16,7 @@ export async function updatePost(bot, postId, pollQuantity) {
 		const postsDB = await Post.find({ isLastUpdated: false });
 
 		for (let index = 0; index < postsDB.length; index++) {
-			await editMessageTelegram(bot, postsDB[index], pollQuantity);
+			await editMessageTelegram(bot, postsDB[index]);
 		}
 	} catch (error) {
 		console.log(error);
@@ -44,9 +44,9 @@ export async function updatePhoto(bot, post) {
 	}
 }
 
-async function editMessageTelegram(bot, post, pollQuantity) {
+async function editMessageTelegram(bot, post) {
 	try {
-		const formPostString = formFinalPostUpdate(post, pollQuantity);
+		const formPostString = await formFinalPostUpdate(post);
 
 		const botSetupDB = await BotSetup.findOne({ _id: post.botId });
 		if (!botSetupDB)

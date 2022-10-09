@@ -21,9 +21,10 @@ export function formFinalPost(ctx) {
 		console.log(error);
 	}
 }
-export function formFinalPostUpdate(post, pollQuantity) {
+export async function formFinalPostUpdate(post) {
 	try {
 		const {
+			_id,
 			description,
 			locationStart,
 			locationWeather,
@@ -43,9 +44,10 @@ export function formFinalPostUpdate(post, pollQuantity) {
 
 		//если нет данных о голосовании, то не показывать количество участников на главной странице
 
+		const pollDB = await Poll.findOne({ postId: _id });
 		let pollQuantityStr;
-		if (pollQuantity) {
-			pollQuantityStr = `\n<b>Количество участников:</b> ${pollQuantity}`;
+		if (pollDB.poll) {
+			pollQuantityStr = `\n<b>Количество участников:</b> ${pollDB.pollQuantity}`;
 		} else {
 			pollQuantityStr = '';
 		}

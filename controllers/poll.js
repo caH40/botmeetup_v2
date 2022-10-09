@@ -59,7 +59,7 @@ export async function poll(ctx) {
 			{ $set: { pollUsers, pollQuantity } }
 		);
 		// обновление постов
-		await updatePost(ctx, response.postId, pollQuantity);
+		await updatePost(ctx, response.postId);
 	} catch (error) {
 		console.log(error);
 	}
