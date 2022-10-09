@@ -42,14 +42,17 @@ export async function formFinalPostUpdate(post) {
 
 		if (!isActualDate(date, time)) timeLeftStr = '<u>СТАРТ УЖЕ БЫЛ!!!</u>';
 
-		//если нет данных о голосовании, то не показывать количество участников на главной странице
-
+		//иногда не успевает сохраниться документ с голосованием в БД до его запроса из БД
 		const pollDB = await Poll.findOne({ postId: _id });
 		let pollQuantityStr;
-		if (pollDB.poll) {
-			pollQuantityStr = `\n<b>Количество участников:</b> ${pollDB.pollQuantity}`;
+		if (!pollDB) {
+			pollQuantityStr = `\n<b>Количество участников:</b> 0`;
 		} else {
-			pollQuantityStr = '';
+			if (pollDB.poll) {
+				pollQuantityStr = `\n<b>Количество участников:</b> ${pollDB.pollQuantity}`;
+			} else {
+				pollQuantityStr = '';
+			}
 		}
 
 		//строка о погоде
