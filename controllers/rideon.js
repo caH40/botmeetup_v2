@@ -8,12 +8,10 @@ export async function rideOn(ctx) {
 
 		if (!userName)
 			return await ctx.reply('Пользователи с приватным аккаунтом не могут создавать объявления');
-		// обнуление сессии
-		ctx.session = {};
 
-		const channelId = await chatsMember(ctx);
-		if (!channelId) return;
-		ctx.session.channelId = channelId;
+		const isMember = await chatsMember(ctx);
+		if (!isMember) return;
+
 		//при замене значения из модуля на keyboardMain, смешиваются ответы из разных сессий!!
 		ctx.session.messageDel = [];
 		ctx.session.start = [
