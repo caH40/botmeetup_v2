@@ -19,10 +19,6 @@ const postSchema = new Schema({
 	messageId: { type: Number },
 	messageIdGroup: { type: Number },
 	messageIdWeather: { type: Number },
-	poll: { type: Object },
-	//кто проголосовал за ответ "ДА"
-	pollUsers: [{ type: Object }],
-	pollQuantity: { type: Number, default: 0 },
 	//погода: температура днем, влажность, описание
 	tempDay: { type: String },
 	humidity: { type: String },

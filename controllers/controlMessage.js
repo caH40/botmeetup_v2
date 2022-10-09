@@ -1,4 +1,4 @@
-import { BotSetup } from '../model/BotSetup.js';
+import { Poll } from '../model/Poll.js';
 import { Post } from '../model/Post.js';
 import { getWeather } from '../weather/weather-get.js';
 
@@ -14,6 +14,7 @@ export async function controlMessage(ctx) {
 			const postDB = await Post.findOneAndUpdate({ messageId }, { $set: { messageIdGroup } });
 			if (!postDB) return;
 			const { date, locationWeather, _id } = postDB;
+
 			// отправляем голосование в группу дискуссий "прикрепляя" его к переадресованному сообщению reply_to_message_id
 			const pollAnswers = ['Участвую!', 'Не участвую!', 'Ищу возможность!'];
 			const optionalOptions = {
@@ -23,15 +24,19 @@ export async function controlMessage(ctx) {
 			};
 
 			// добавление голосования кто участвует в заезде в дискуссию о заезде
-			const messagePoll = await ctx.telegram.sendPoll(
-				groupId,
-				'Кто участвует в заезде?',
-				pollAnswers,
-				optionalOptions
-			);
-
-			const poll = messagePoll.poll;
-			await Post.findOneAndUpdate({ messageId }, { $set: { poll } });
+			ctx.telegram
+				.sendPoll(groupId, 'Кто участвует в заезде?', pollAnswers, optionalOptions)
+				.then(data => {
+					console.log(data.poll);
+					return data;
+				})
+				.then(data => {
+					const poll = new Poll({
+						postId: _id,
+						pollId: data.poll.id,
+					});
+					poll.save();
+				});
 
 			// добавление сообщения о погоде в дискуссию о заезде
 			let dateClear = date.slice(-10);
