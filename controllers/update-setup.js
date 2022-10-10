@@ -14,7 +14,7 @@ export async function updateGroup(ctx) {
 			const chatId = ctx.message.chat.id;
 			return await ctx.telegram.sendMessage(
 				chatId,
-				'Данную команду необходимо запускать в <b>Channel</b>',
+				'Данную команду необходимо запускать в <b>Group</b>',
 				{
 					parse_mode: 'html',
 				}

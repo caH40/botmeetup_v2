@@ -23,7 +23,7 @@ export async function updatePost(bot, postId) {
 	}
 }
 
-export async function updatePhoto(bot, post) {
+export async function updatePhoto(ctx, post) {
 	try {
 		const botSetupDB = await BotSetup.findOne({ ownerId: post.userId });
 		if (!botSetupDB)
@@ -33,7 +33,7 @@ export async function updatePhoto(bot, post) {
 		const formPostString = await formFinalPostUpdate(post);
 		const messageId = post.messageId;
 		const photoId = post.photoId;
-		await bot.telegram.editMessageMedia(
+		await ctx.telegram.editMessageMedia(
 			channelId,
 			messageId,
 			{},
