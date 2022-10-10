@@ -30,7 +30,7 @@ export async function updatePhoto(bot, post) {
 			return await ctx.reply('Не нашел настроек бота, обратитесь к админу @Aleksandr_BV');
 		const { channelId } = botSetupDB;
 
-		const formPostString = formFinalPostUpdate(post);
+		const formPostString = await formFinalPostUpdate(post);
 		const messageId = post.messageId;
 		const photoId = post.photoId;
 		await bot.telegram.editMessageMedia(
