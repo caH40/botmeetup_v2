@@ -44,7 +44,7 @@ bot.command('rideon', async ctx => await rideOn(ctx));
 bot.command('/edit', async ctx => await editPost(ctx));
 bot.command('/myid', async ctx => await getMyId(ctx));
 bot.command('location', async ctx => await editLocations(ctx));
-bot.command('buyTicket', async ctx => await ticket(ctx));
+bot.command('buyticket', async ctx => await ticket(ctx));
 bot.command('weather', async ctx => await editLocationsWeather(ctx));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 bot.command('setup', async ctx => await setup(ctx));
@@ -56,7 +56,7 @@ bot.on('poll_answer', async ctx => await poll(ctx));
 bot.on('message', async ctx => await controlMessage(ctx));
 
 bot.launch().then(() => {
-	bot.telegram.sendMessage(process.env.MY_TELEGRAM_ID, 'restart...');
+	// bot.telegram.sendMessage(process.env.MY_TELEGRAM_ID, 'restart...');
 	setInterval(async () => {
 		//запуск таймера обновления данных о погоде в день старта заезда
 		await weatherFromApi();
