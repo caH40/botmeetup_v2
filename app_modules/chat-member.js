@@ -28,6 +28,8 @@ export async function chatsMember(ctx, checkedTarget) {
 	}
 
 	if (members.length == 0) {
+		const isCreator = await firstStart(ctx);
+		if (isCreator) return true;
 		await ctx.reply(
 			'Для выполнения команд необходимо состоять в соответствующем канале объявлений.'
 		);
@@ -59,4 +61,16 @@ export async function chatsMember(ctx, checkedTarget) {
 	}
 
 	return true;
+}
+
+export async function firstStart(ctx) {
+	try {
+		const userId = ctx.message.from.id;
+		const chatId = ctx.message.chat.id;
+		const chatMember = await ctx.telegram.getChatMember(chatId, userId);
+		if (chatMember.status === 'creator') return true;
+		return false;
+	} catch (error) {
+		console.log(error);
+	}
 }

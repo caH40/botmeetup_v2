@@ -26,7 +26,10 @@ export async function updateGroup(ctx) {
 		const groupTitle = ctx.message.chat.title;
 
 		const ticketDB = await Ticket.findOne({ ownerId: userId });
-		if (!ticketDB) await ctx.reply('У вас нет тикетов для использования бота!');
+		if (!ticketDB) {
+			await ctx.reply('У вас нет тикетов для использования бота!');
+			return;
+		}
 		if (!ticketDB.isActive)
 			await ctx.reply(`Оплаченный период тикета закончился ${dateExpired(ticketDB)}`);
 
@@ -72,7 +75,7 @@ export async function updateChannel(ctx) {
 			const groupId = ctx.message.chat.id;
 			return await ctx.telegram.sendMessage(
 				groupId,
-				'Данную команду необходимо запускать в <b>Group</b>',
+				'Данную команду необходимо запускать в <b>Channel</b>',
 				{
 					parse_mode: 'html',
 				}
