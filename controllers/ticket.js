@@ -4,6 +4,7 @@ import { titleMenu } from '../keyboards/ticket/title.js';
 
 export async function ticket(ctx) {
 	try {
+		ctx.session.messageDel = [];
 		const userId = ctx.message.from.id;
 		const title = await titleMenu(userId);
 
