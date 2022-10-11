@@ -23,6 +23,7 @@ import { getConfiguration } from './controllers/configuration.js';
 import { helpAdmin } from './controllers/help-admin.js';
 import { ticket } from './controllers/ticket.js';
 import { getTestPost } from './controllers/testpost.js';
+import { updateTickets } from './app_modules/update-ticket.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -60,6 +61,7 @@ bot.launch().then(() => {
 	setInterval(async () => {
 		//запуск таймера обновления данных о погоде в день старта заезда
 		await weatherFromApi();
+		updateTickets();
 		//получение данных о погоде
 		await weatherUpdate(bot);
 	}, 3600000);
