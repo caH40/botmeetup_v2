@@ -1,22 +1,13 @@
-import { Ticket } from '../model/Ticket.js';
+import { getKeyboard } from '../keyboards/keyboard-get.js';
+import { keyboardTicket } from '../keyboards/keyboards.js';
+import { titleMenu } from '../keyboards/ticket/title.js';
 
 export async function ticket(ctx) {
 	try {
-		// console.log(ctx.message); // ❗❗❗ for dev
 		const userId = ctx.message.from.id;
-		//for testing
-		const millisecondsInOneDay = 86400000;
-		const today = new Date().getTime();
-		const ticket = new Ticket({
-			ownerId: userId,
-			datePurchase: today,
-			duration: millisecondsInOneDay,
-			isActive: true,
-		});
-		const response = await ticket.save();
+		const title = await titleMenu(userId);
 
-		const lastValidDay = new Date(today + millisecondsInOneDay).toLocaleString();
-		await ctx.reply('Вы приобрели подписку на BotMeetUp, она действительна до ' + lastValidDay);
+		await getKeyboard(ctx, title, keyboardTicket);
 	} catch (error) {
 		console.log(error);
 	}

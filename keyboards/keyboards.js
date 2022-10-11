@@ -216,3 +216,15 @@ export function getKeyboardForDelPost(messageFromDb) {
 		console.log(error);
 	}
 }
+
+export const keyboardTicket = [
+	[
+		{ text: 'Купить месяц (300р)', callback_data: 'ticket_addMonth' },
+		{ text: 'Купить год (3000р)', callback_data: 'ticket_addYear' },
+	],
+	[
+		{ text: 'Пробный 2 недели', callback_data: 'ticket_testWeek' },
+		{ text: 'Описание сервиса', callback_data: 'ticket_description' },
+	],
+	[{ text: 'Выход из меню', callback_data: 'ticket_back' }],
+];

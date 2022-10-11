@@ -3,6 +3,7 @@ import { handlerSubMenu } from '../keyboards/handler-sub.js';
 import { handlerMainMenuLocation } from '../keyboards/location_start/handler-main.js';
 import { handlerSubMenuLocation } from '../keyboards/location_start/handler-sub.js';
 import { handlerMainMenuWeather } from '../keyboards/location_weather/handler-main.js';
+import { handlerMainMenuTicket } from '../keyboards/ticket/handler-main.js';
 
 export async function callbackQuery(ctx) {
 	try {
@@ -42,6 +43,7 @@ export async function callbackQuery(ctx) {
 		await handlerSubMenuLocation(ctx, cbqData);
 		//обработчики меню редактирования мест погоды
 		await handlerMainMenuWeather(ctx, cbqData);
+		await handlerMainMenuTicket(ctx, cbqData);
 	} catch (error) {
 		console.log(error);
 	}
