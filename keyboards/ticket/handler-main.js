@@ -5,11 +5,7 @@ export async function handlerMainMenuTicket(ctx, cbqData) {
 		if (!cbqData.includes('ticket_')) return;
 		const messageId = ctx.update.callback_query.message.message_id;
 		ctx.session.messageDel.push(messageId);
-		if (
-			cbqData === 'ticket_addMonth' ||
-			cbqData === 'ticket_addYear' ||
-			cbqData === 'ticket_testWeek'
-		) {
+		if (cbqData === 'ticket_Month' || cbqData === 'ticket_Year' || cbqData === 'ticket_testWeek') {
 			const period = cbqData;
 			await buyTicket(ctx, period);
 			return;

@@ -9,6 +9,7 @@ const ticketSchema = new Schema({
 	duration: { type: Number },
 	isActive: { type: Boolean, default: false },
 	isUsedTestPeriod: { type: Boolean, default: false },
+	purchase: [{ type: Object }],
 });
 
 export const Ticket = model('Ticket', ticketSchema);
