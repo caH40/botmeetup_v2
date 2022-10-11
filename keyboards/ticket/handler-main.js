@@ -1,4 +1,5 @@
-import { buyTicket } from '../../app_modules/ticket-buy.js';
+import { buyTicket } from '../small_handlers/ticket-buy.js';
+import { ticketDescription } from '../small_handlers/ticket-description.js';
 
 export async function handlerMainMenuTicket(ctx, cbqData) {
 	try {
@@ -11,7 +12,10 @@ export async function handlerMainMenuTicket(ctx, cbqData) {
 			return;
 		}
 
-		if (cbqData === 'ticket_description') return;
+		if (cbqData === 'ticket_description') {
+			await ticketDescription(ctx);
+			return;
+		}
 	} catch (error) {
 		console.log(error);
 	}

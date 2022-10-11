@@ -1,4 +1,4 @@
-import { Ticket } from '../model/Ticket.js';
+import { Ticket } from '../../model/Ticket.js';
 
 export async function buyTicket(ctx, period) {
 	try {
@@ -47,7 +47,7 @@ export async function buyTicket(ctx, period) {
 			await Ticket.findOneAndUpdate(
 				{ ownerId: userId },
 				{
-					$set: { duration: durationInMilliseconds, isUsedTestPeriod },
+					$set: { duration: durationInMilliseconds, isUsedTestPeriod, isActive: true },
 					$addToSet: { purchase: { date: today, period: periodClean } },
 				}
 			);
