@@ -219,8 +219,8 @@ export function getKeyboardForDelPost(messageFromDb) {
 
 export const keyboardTicket = [
 	[
-		{ text: 'Купить месяц (300р)', callback_data: 'ticket_Month' },
-		{ text: 'Купить год (3000р)', callback_data: 'ticket_Year' },
+		{ text: 'Купить на месяц', callback_data: 'ticket_Month' },
+		{ text: 'Купить на год', callback_data: 'ticket_Year' },
 	],
 	[
 		{ text: 'Пробный 2 недели', callback_data: 'ticket_testWeek' },

@@ -53,9 +53,9 @@ export async function buyTicket(ctx, period) {
 			);
 		}
 
-		const lastValidDay = new Date(today + durationInMilliseconds).toLocaleString();
+		const lastValidDay = new Date(today + durationInMilliseconds).toLocaleDateString();
 		await ctx.reply(
-			`Вы приобрели ${testStr}подписку на BotMeetUp, она действительна до ${lastValidDay}`,
+			`Вы приобрели ${testStr}подписку на BotMeetUp. Период использования бота заканчивается <b>${lastValidDay}</b>`,
 			{ parse_mode: 'html' }
 		);
 	} catch (error) {
