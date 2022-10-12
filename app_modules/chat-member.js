@@ -30,8 +30,10 @@ export async function chatsMember(ctx, checkedTarget) {
 	}
 
 	if (members.length == 0) {
+		//первая проверка, когда бот не настроен для определенного канала
 		const isCreator = await firstStart(ctx);
 		if (isCreator) return true;
+
 		await ctx.reply(
 			'Для выполнения команд необходимо состоять в соответствующем канале объявлений.'
 		);
