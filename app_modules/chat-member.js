@@ -55,8 +55,11 @@ export async function chatsMember(ctx, checkedTarget) {
 	ctx.session.channelName = members[0].channelName;
 	ctx.session.isAdmin = members[0].isAdmin;
 
-	const isActive = await ticketVerify(ctx);
-	if (!isActive) return;
+	// Спец. команды для админа доступны без оплаченного тикета
+	if (!(checkedTarget === 'isAdmin')) {
+		const isActive = await ticketVerify(ctx);
+		if (!isActive) return;
+	}
 
 	if (checkedTarget === 'isAdmin') {
 		if (!members[0].isAdmin) {

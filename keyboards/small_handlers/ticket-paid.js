@@ -1,15 +1,15 @@
 import { Ticket } from '../../model/Ticket.js';
 
-export async function paidTicket(ctx, successfulPayment) {
+export async function paidTicket(ctx) {
 	try {
-		const ownerId = JSON.parse(successfulPayment.invoice_payload).unique_id;
-		const amount = successfulPayment.total_amount / 100;
-		const period = JSON.parse(successfulPayment.invoice_payload).period;
-		const email = successfulPayment.order_info.email;
+		const ownerId = JSON.parse(ctx.message.successful_payment.invoice_payload).unique_id;
+		const amount = ctx.message.successful_payment.total_amount / 100;
+		const period = JSON.parse(ctx.message.successful_payment.invoice_payload).period;
+		const email = ctx.message.successful_payment.order_info.email;
 
+		const datePaid = new Date().getTime();
 		let durationInMilliseconds;
 		let isUsedTestPeriod;
-		const today = new Date().getTime();
 		let testStr = '';
 
 		if (period === 'testWeek') {
@@ -38,11 +38,11 @@ export async function paidTicket(ctx, successfulPayment) {
 		if (!ticketDB) {
 			const ticket = new Ticket({
 				ownerId: ownerId,
-				datePurchase: today,
+				datePurchase: datePaid,
 				duration: durationInMilliseconds,
 				isActive: true,
 				isUsedTestPeriod,
-				purchase: [{ date: today, period, amount, email }],
+				purchase: [{ date: datePaid, period, amount, email }],
 			});
 			await ticket.save();
 		} else {
@@ -51,12 +51,12 @@ export async function paidTicket(ctx, successfulPayment) {
 				{ ownerId: ownerId },
 				{
 					$set: { duration: durationInMilliseconds, isUsedTestPeriod, isActive: true },
-					$addToSet: { purchase: { date: today, period, amount, email } },
+					$addToSet: { purchase: { date: datePaid, period, amount, email } },
 				}
 			);
 		}
 
-		const lastValidDay = new Date(today + durationInMilliseconds).toLocaleDateString();
+		const lastValidDay = new Date(datePaid + durationInMilliseconds).toLocaleDateString();
 		await ctx.reply(
 			`Вы приобрели ${testStr}подписку на BotMeetUp. Период использования бота заканчивается <b>${lastValidDay}</b>`,
 			{ parse_mode: 'html' }

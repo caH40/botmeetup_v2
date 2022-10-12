@@ -38,14 +38,12 @@ const stage = new Scenes.Stage([setupScene(), photoWizard(), descriptionWizard()
 
 bot.use(session());
 bot.use(stage.middleware());
+
 bot.hears('pay', ctx => {
 	return ctx.replyWithInvoice(getInvoice(ctx.from.id));
 });
-bot.on('pre_checkout_query', ctx => ctx.answerPreCheckoutQuery(true)); // ответ на предварительный запрос по оплате
-
-bot.on('successful_payment', async (ctx, next) => {
-	await paidTicket(ctx, ctx.message.successful_payment);
-});
+bot.on('pre_checkout_query', ctx => ctx.answerPreCheckoutQuery(true));
+bot.on('successful_payment', async ctx => await paidTicket(ctx));
 bot.command('start', async ctx => await start(ctx));
 bot.command('help', async ctx => await help(ctx));
 bot.command('helpA', async ctx => await helpAdmin(ctx));

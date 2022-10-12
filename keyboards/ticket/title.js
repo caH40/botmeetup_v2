@@ -9,5 +9,5 @@ export async function titleMenu(ownerId) {
 	if (!ticketDB) return `${testStr}У вас нет оплаченного тикета.`;
 	if (ticketDB.isActive) return `${testStr}Ваш тикет действителен до: ${dateExpired(ticketDB)}`;
 	if (!ticketDB.isActive)
-		return `${testStr}Оплаченный период тикета закончился: ${dateExpired(ticketDB)}`;
+		return `${testStr}Оплаченный период тикета <u>закончился</u>: ${dateExpired(ticketDB)}`;
 }

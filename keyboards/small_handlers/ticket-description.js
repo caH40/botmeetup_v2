@@ -9,8 +9,8 @@ export async function ticketDescription(ctx) {
 		if (ticketDB) {
 			const lastValidDay = new Date(ticketDB.datePurchase + ticketDB.duration).toLocaleDateString();
 			finalStr = ticketDB.isActive
-				? `Ваш период использования бота заканчивается <b>${lastValidDay}</b>`
-				: `Ваш период использования бота закончился <b>${lastValidDay}</b>`;
+				? `Оплаченный период тикета заканчивается: <b>${lastValidDay}</b>`
+				: `Оплаченный период тикета <u>закончился</u>: <b>${lastValidDay}</b>`;
 		}
 
 		await ctx.reply(
