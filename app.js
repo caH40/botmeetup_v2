@@ -8,7 +8,7 @@ import { start } from './controllers/start.js';
 import { help } from './controllers/help.js';
 import { rideOn } from './controllers/rideon.js';
 import { callbackQuery } from './controllers/callback-query.js';
-import { setupScene } from './app_modules/scene.js';
+import { cityScene, setupScene } from './app_modules/scene.js';
 import { photoWizard, descriptionWizard } from './app_modules/wizard-scene.js';
 import { controlMessage } from './controllers/controlMessage.js';
 import { poll } from './controllers/poll.js';
@@ -25,7 +25,7 @@ import { ticket } from './controllers/ticket.js';
 import { getTestPost } from './controllers/testpost.js';
 import { updateTickets } from './app_modules/update-ticket.js';
 import { paidTicket } from './keyboards/small_handlers/ticket-paid.js';
-import { addCityList } from './controllers/city-list.js';
+import { addCityList } from './controllers/citylist-add.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -34,7 +34,7 @@ await mongoose
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const stage = new Scenes.Stage([setupScene(), photoWizard(), descriptionWizard()]);
+const stage = new Scenes.Stage([setupScene(), photoWizard(), descriptionWizard(), cityScene()]);
 
 bot.use(session());
 bot.use(stage.middleware());
@@ -56,6 +56,7 @@ bot.command('updategroup', async ctx => await updateGroup(ctx));
 bot.command('updatechannel', async ctx => await updateChannel(ctx));
 bot.command('config', async ctx => await getConfiguration(ctx));
 bot.command('addcitylist', async ctx => await addCityList(ctx));
+bot.command('meetlocation', async ctx => await ctx.scene.enter('city'));
 bot.command('testpost', async ctx => await getTestPost(ctx));
 bot.on('poll_answer', async ctx => await poll(ctx));
 bot.on('message', async ctx => await controlMessage(ctx));
