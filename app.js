@@ -24,7 +24,6 @@ import { helpAdmin } from './controllers/help-admin.js';
 import { ticket } from './controllers/ticket.js';
 import { getTestPost } from './controllers/testpost.js';
 import { updateTickets } from './app_modules/update-ticket.js';
-import { getInvoice } from './app_modules/invoice.js';
 import { paidTicket } from './keyboards/small_handlers/ticket-paid.js';
 
 await mongoose
@@ -45,7 +44,6 @@ bot.command('start', async ctx => await start(ctx));
 bot.command('help', async ctx => await help(ctx));
 bot.command('helpA', async ctx => await helpAdmin(ctx));
 bot.command('rideon', async ctx => await rideOn(ctx));
-// bot.command('/rating', async ctx => await rating(ctx));
 bot.command('/edit', async ctx => await editPost(ctx));
 bot.command('/myid', async ctx => await getMyId(ctx));
 bot.command('location', async ctx => await editLocations(ctx));
