@@ -1,6 +1,6 @@
 // определение в какой канал постить объявление боту от пользователя. Бот постит в тот канал в котором пользователь состоит. Пользователю нельзя находится сразу в нескольких каналах в которых работает данный бот.
 import { BotSetup } from '../model/BotSetup.js';
-import { ownerVerify } from './owner-verify.js';
+import { creatorVerify } from './creator-verify.js';
 
 export async function chatsMember(ctx, checkedTarget) {
 	const userId = ctx.message.from.id;
@@ -31,7 +31,7 @@ export async function chatsMember(ctx, checkedTarget) {
 
 	if (members.length == 0) {
 		//первая проверка, когда бот не настроен для определенного канала
-		const isCreator = await ownerVerify(ctx);
+		const isCreator = await creatorVerify(ctx);
 		if (isCreator) return true;
 
 		await ctx.reply(
