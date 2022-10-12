@@ -25,6 +25,7 @@ import { ticket } from './controllers/ticket.js';
 import { getTestPost } from './controllers/testpost.js';
 import { updateTickets } from './app_modules/update-ticket.js';
 import { paidTicket } from './keyboards/small_handlers/ticket-paid.js';
+import { addCityList } from './controllers/city-list.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -54,6 +55,7 @@ bot.command('setup', async ctx => await setup(ctx));
 bot.command('updategroup', async ctx => await updateGroup(ctx));
 bot.command('updatechannel', async ctx => await updateChannel(ctx));
 bot.command('config', async ctx => await getConfiguration(ctx));
+bot.command('addcitylist', async ctx => await addCityList(ctx));
 bot.command('testpost', async ctx => await getTestPost(ctx));
 bot.on('poll_answer', async ctx => await poll(ctx));
 bot.on('message', async ctx => await controlMessage(ctx));
