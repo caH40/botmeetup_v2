@@ -1,4 +1,5 @@
 import { chatsMember } from '../app_modules/chat-member.js';
+import { ticketVerify } from '../app_modules/ticked-verify.js';
 
 export async function rideOn(ctx) {
 	try {
@@ -11,6 +12,9 @@ export async function rideOn(ctx) {
 
 		const isMember = await chatsMember(ctx);
 		if (!isMember) return;
+
+		const isActive = await ticketVerify(ctx);
+		if (!isActive) return;
 
 		//при замене значения из модуля на keyboardMain, смешиваются ответы из разных сессий!!
 		ctx.session.messageDel = [];

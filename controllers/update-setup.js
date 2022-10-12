@@ -2,8 +2,6 @@ import 'dotenv/config';
 import { chatsMember } from '../app_modules/chat-member.js';
 
 import { BotSetup } from '../model/BotSetup.js';
-import { Ticket } from '../model/Ticket.js';
-import { dateExpired } from '../utility/utilites.js';
 
 export async function updateGroup(ctx) {
 	try {
@@ -24,14 +22,6 @@ export async function updateGroup(ctx) {
 		const userId = ctx.message.from.id;
 		const groupId = ctx.message.chat.id;
 		const groupTitle = ctx.message.chat.title;
-
-		const ticketDB = await Ticket.findOne({ ownerId: userId });
-		if (!ticketDB) {
-			await ctx.reply('У вас нет тикетов для использования бота!');
-			return;
-		}
-		if (!ticketDB.isActive)
-			await ctx.reply(`Оплаченный период тикета закончился ${dateExpired(ticketDB)}`);
 
 		//проверка наличия конфигурации Бота с данным groupId, для исключения дублирования настроек ботов
 		//если есть, вторым шагом сверить userId === ownerId, если да ==> обновить, если нет, то уже есть бот для этого канала, обратиться к администратору

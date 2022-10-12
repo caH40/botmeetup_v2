@@ -1,6 +1,7 @@
 import { chatsMember } from '../app_modules/chat-member.js';
 import { formPattern } from '../app_modules/forms.js';
 import { editPostText } from '../app_modules/texts.js';
+import { ticketVerify } from '../app_modules/ticked-verify.js';
 import { getKeyboard } from '../keyboards/keyboard-get.js';
 import { keyboardBack, keyboardEdit } from '../keyboards/keyboards.js';
 import { Post } from '../model/Post.js';
@@ -9,6 +10,9 @@ export async function editPost(ctx) {
 	try {
 		const isMember = await chatsMember(ctx);
 		if (!isMember) return;
+
+		const isActive = await ticketVerify(ctx);
+		if (!isActive) return;
 
 		const response = await ctx.reply(editPostText);
 		ctx.session.messageDel = [];

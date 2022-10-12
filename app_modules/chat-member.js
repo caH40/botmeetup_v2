@@ -1,6 +1,5 @@
 // определение в какой канал постить объявление боту от пользователя. Бот постит в тот канал в котором пользователь состоит. Пользователю нельзя находится сразу в нескольких каналах в которых работает данный бот.
 import { BotSetup } from '../model/BotSetup.js';
-import { ticketVerify } from './ticked-verify.js';
 
 export async function chatsMember(ctx, checkedTarget) {
 	const userId = ctx.message.from.id;
@@ -54,12 +53,6 @@ export async function chatsMember(ctx, checkedTarget) {
 	ctx.session.channelId = members[0].channelId;
 	ctx.session.channelName = members[0].channelName;
 	ctx.session.isAdmin = members[0].isAdmin;
-
-	// Спец. команды для админа доступны без оплаченного тикета
-	if (!(checkedTarget === 'isAdmin')) {
-		const isActive = await ticketVerify(ctx);
-		if (!isActive) return;
-	}
 
 	if (checkedTarget === 'isAdmin') {
 		if (!members[0].isAdmin) {
