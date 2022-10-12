@@ -1,4 +1,5 @@
 import { BotSetup } from '../../model/BotSetup.js';
+import { Poll } from '../../model/Poll.js';
 import { Post } from '../../model/Post.js';
 import { keyboardMain } from '../keyboards.js';
 import { mainMenu } from '../mainmenu.js';
@@ -44,6 +45,8 @@ export async function postDelete(ctx, cbqData) {
 		await ctx.reply('Объявление удалено с БД!');
 
 		const { botId, messageId } = postDB;
+
+		await Poll.findOneAndDelete({ postId: _id });
 
 		const botSetupDB = await BotSetup.findOne({ _id: botId });
 		if (!botSetupDB)
