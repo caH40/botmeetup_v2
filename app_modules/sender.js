@@ -5,6 +5,7 @@ import { keyboardBack } from '../keyboards/keyboards.js';
 import { posted } from './texts.js';
 import { updatePhoto } from './update-post.js';
 import { weatherUpdate } from '../weather/weather-update.js';
+import { weatherFromApi } from '../weather/weather-api.js';
 
 export async function sendFinalPost(ctx) {
 	try {
@@ -36,6 +37,7 @@ export async function sendFinalPost(ctx) {
 					{ returnDocument: 'after' }
 				);
 				await updatePhoto(ctx, postDB).catch(error => console.log(error));
+				await weatherFromApi(ctx);
 				await weatherUpdate(ctx);
 				return;
 			}
@@ -74,6 +76,8 @@ export async function sendFinalPost(ctx) {
 			});
 
 			await post.save();
+			await weatherFromApi(ctx);
+			await weatherUpdate(ctx);
 		}
 	} catch (error) {
 		console.log(error);

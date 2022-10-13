@@ -9,7 +9,6 @@ export async function createLocationsWeather() {
 		postsDB.forEach(post => {
 			locationsWeather = [...locationsWeather, post.locationWeather];
 		});
-		console.log('locationsWeather', locationsWeather);
 
 		let result = [];
 
