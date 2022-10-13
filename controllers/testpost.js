@@ -14,7 +14,7 @@ export async function getTestPost(ctx) {
 		ctx.session.leader = '@' + userName;
 		ctx.session.userId = userId;
 		ctx.session.botId = ctx.session.botId;
-		ctx.session.date = 'Воскресенье, 20.10.2022';
+		ctx.session.date = 'Воскресенье, 28.10.2022';
 		ctx.session.time = '12:30';
 		ctx.session.leader = '@moon_darklight';
 		ctx.session.userId = '5085956560';
