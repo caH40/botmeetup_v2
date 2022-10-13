@@ -110,24 +110,6 @@ export function keyboardLocation(cityList, extendData) {
 	}
 }
 
-export function keyboardWeathers(cityList, extendData) {
-	try {
-		const keyboardLocations = [];
-		for (let i = 0; i < cityList.length; i = i + 2) {
-			if (!cityList[i + 1]) {
-				cityList[i + 1] = '***';
-			}
-			keyboardLocations.push([
-				{ text: cityList[i], callback_data: extendData + cityList[i] },
-				{ text: cityList[i + 1], callback_data: extendData + cityList[i + 1] },
-			]);
-		}
-		return keyboardLocations;
-	} catch (error) {
-		console.log(error);
-	}
-}
-
 // ❗ универсальная клавиатура
 export function keyboardAddOrDel(action, extendData = '') {
 	try {

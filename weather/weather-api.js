@@ -1,9 +1,9 @@
 import 'dotenv/config';
 import fetch from 'node-fetch';
-import { WeatherWeek } from '../model/WeatherWeek.js';
 import { BotSetup } from '../model/BotSetup.js';
-import { cityList } from './city-mylist.js';
 import { createLocationsWeather } from '../app_modules/weather-array.js';
+import { conversionDays } from '../utility/utilites.js';
+import { getWeatherWeek } from './weatherweek-get.js';
 
 export async function weatherFromApi() {
 	try {
@@ -31,16 +31,6 @@ export async function weatherFromApi() {
 				const dayWeather = new Date(data.daily[indexDay].dt * 1000).getDay();
 				const dateUpdate = new Date().toLocaleString();
 
-				const conversionDays = {
-					1: 'Понедельник',
-					2: 'Вторник',
-					3: 'Среда',
-					4: 'Четверг',
-					5: 'Пятница',
-					6: 'Суббота',
-					0: 'Воскресенье',
-				};
-
 				const dayWeatherForDB = {
 					dateUpdate: dateUpdate,
 					date: weatherDate,
@@ -58,17 +48,7 @@ export async function weatherFromApi() {
 			}
 		}
 		//обновление данных о погоде в базе данных, если нет, то создает новую коллекцию
-		await getWeatherWeek();
-
-		async function getWeatherWeek() {
-			const savedWeather = await WeatherWeek.findOne();
-			if (savedWeather) {
-				await WeatherWeek.findByIdAndUpdate(savedWeather.id, { list: arrayWeather });
-			} else {
-				const weatherWeek = new WeatherWeek({ list: arrayWeather });
-				await weatherWeek.save();
-			}
-		}
+		await getWeatherWeek(arrayWeather);
 	} catch (error) {
 		console.log(error);
 	}

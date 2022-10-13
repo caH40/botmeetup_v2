@@ -1,6 +1,6 @@
 import { City } from '../../model/City.js';
 import { getKeyboard } from '../keyboard-get.js';
-import { keyboardBack, keyboardLocation } from '../keyboards.js';
+import { keyboardLocation } from '../keyboards.js';
 
 export async function meetWeather_v2(ctx) {
 	try {

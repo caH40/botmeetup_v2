@@ -8,10 +8,7 @@ import {
 	keyboardSummary,
 } from './keyboards.js';
 import { sendFinalPost } from '../app_modules/sender.js';
-import { meetWeather } from './small_handlers/meet-weather.js';
-import { meetLocations } from './small_handlers/meet-location.js';
 import { patternPost } from './small_handlers/pattern.js';
-import { meetLocations_v2 } from './small_handlers/meet-location_v2.js';
 
 export async function handlerMainMenu(ctx, cbqData) {
 	try {

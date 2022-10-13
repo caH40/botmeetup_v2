@@ -1,8 +1,5 @@
 import { handlerMainMenu } from '../keyboards/handler-main.js';
 import { handlerSubMenu } from '../keyboards/handler-sub.js';
-import { handlerMainMenuLocation } from '../keyboards/location_start/handler-main.js';
-import { handlerSubMenuLocation } from '../keyboards/location_start/handler-sub.js';
-import { handlerMainMenuWeather } from '../keyboards/location_weather/handler-main.js';
 import { handlerMainMenuTicket } from '../keyboards/ticket/handler-main.js';
 
 export async function callbackQuery(ctx) {
@@ -38,11 +35,7 @@ export async function callbackQuery(ctx) {
 		//обработчики меню создания объявления о заезде(поста)
 		await handlerMainMenu(ctx, cbqData);
 		await handlerSubMenu(ctx, cbqData);
-		//обработчики меню редактирования мест старта
-		await handlerMainMenuLocation(ctx, cbqData);
-		await handlerSubMenuLocation(ctx, cbqData);
-		//обработчики меню редактирования мест погоды
-		await handlerMainMenuWeather(ctx, cbqData);
+
 		await handlerMainMenuTicket(ctx, cbqData);
 	} catch (error) {
 		console.log(error);
