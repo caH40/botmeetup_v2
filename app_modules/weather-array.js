@@ -7,9 +7,11 @@ export async function createLocationsWeather() {
 		let locationsWeather = [];
 		const postsDB = await Post.find();
 		postsDB.forEach(post => {
-			locationsWeather = [...locationsWeather, post.locationWeather];
+			if (!locationsWeather.includes(post.locationWeather))
+				locationsWeather.push(post.locationWeather);
 		});
 
+		console.log('locationsWeather', locationsWeather);
 		let result = [];
 
 		for (let index = 0; index < locationsWeather.length; index++) {
