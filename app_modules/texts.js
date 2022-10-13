@@ -13,6 +13,7 @@ export const commandsMessageAdmin = `
 /config - просмотр всех настроек бота, сохраненных в БД ⚙️
 /updategroup - добавление данных группы в БД' ❗
 /updatechannel - добавление данных канала в БД' ❗
+/myid - узнать свой ID пользователя телеграм ❓ 
 
 `;
 export function startMessage(channelName) {
