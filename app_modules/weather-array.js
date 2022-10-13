@@ -5,7 +5,7 @@ export async function createLocationsWeather() {
 	try {
 		// выборка из каждого поста города мониторинга погоды и пушинг в массив
 		let locationsWeather = [];
-		const postsDB = await Post.find();
+		const postsDB = await Post.find({ isLastUpdated: false });
 		postsDB.forEach(post => {
 			if (!locationsWeather.includes(post.locationWeather))
 				locationsWeather.push(post.locationWeather);
