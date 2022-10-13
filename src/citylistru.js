@@ -1686,11 +1686,6 @@ export const cityList = [
 		lat: 55.066669,
 	},
 	{
-		name: 'Yaroslavskaya Oblast’',
-		lon: 39.5,
-		lat: 58,
-	},
-	{
 		name: 'Yaroslavskaya',
 		lon: 40.464169,
 		lat: 44.610561,
@@ -2395,11 +2390,7 @@ export const cityList = [
 		lon: 41.427776,
 		lat: 56.522499,
 	},
-	{
-		name: 'Voronezhskaya Oblast’',
-		lon: 40.5,
-		lat: 51,
-	},
+
 	{
 		name: 'Voronezhskaya',
 		lon: 39.566666,
@@ -2545,11 +2536,7 @@ export const cityList = [
 		lon: 30.316668,
 		lat: 59.866669,
 	},
-	{
-		name: 'Vologodskaya Oblast’',
-		lon: 42,
-		lat: 60,
-	},
+
 	{
 		name: 'Vologda',
 		lon: 39.888599,
@@ -2630,11 +2617,7 @@ export const cityList = [
 		lon: 47.91869,
 		lat: 46.20306,
 	},
-	{
-		name: 'Volgogradskaya Oblast’',
-		lon: 44,
-		lat: 49,
-	},
+
 	{
 		name: 'Volgograd',
 		lon: 44.501839,
@@ -4350,11 +4333,7 @@ export const cityList = [
 		lon: 37.29607,
 		lat: 54.72517,
 	},
-	{
-		name: 'Tverskaya Oblast’',
-		lon: 35.004879,
-		lat: 57.009644,
-	},
+
 	{
 		name: 'Tverskaya',
 		lon: 39.614723,
@@ -4450,11 +4429,7 @@ export const cityList = [
 		lon: 40.553741,
 		lat: 55.14798,
 	},
-	{
-		name: 'Tul’skaya Oblast’',
-		lon: 37.5,
-		lat: 54,
-	},
+
 	{
 		name: 'Tula',
 		lon: 37.611111,
@@ -5395,11 +5370,7 @@ export const cityList = [
 		lon: 38.963612,
 		lat: 55.347778,
 	},
-	{
-		name: 'Tambovskaya Oblast’',
-		lon: 41.5,
-		lat: 52.75,
-	},
+
 	{
 		name: 'Tambovka',
 		lon: 47.377731,
@@ -7220,11 +7191,7 @@ export const cityList = [
 		lon: 38.6675,
 		lat: 55.580002,
 	},
-	{
-		name: 'Smolenskaya Oblast’',
-		lon: 33,
-		lat: 55,
-	},
+
 	{
 		name: 'Smolenskaya',
 		lon: 38.801811,
@@ -9080,11 +9047,7 @@ export const cityList = [
 		lon: 39.681389,
 		lat: 46.933613,
 	},
-	{
-		name: 'Samarskaya Oblast’',
-		lon: 50,
-		lat: 53,
-	},
+
 	{
 		name: 'Samara',
 		lon: 50.150002,
@@ -9340,11 +9303,7 @@ export const cityList = [
 		lon: 38.5,
 		lat: 56.150002,
 	},
-	{
-		name: 'Ryazanskaya Oblast’',
-		lon: 40.5,
-		lat: 54.25,
-	},
+
 	{
 		name: 'Ryazanskaya',
 		lon: 39.58894,
@@ -9575,11 +9534,7 @@ export const cityList = [
 		lon: 46.050861,
 		lat: 50.776501,
 	},
-	{
-		name: 'Rostovskaya Oblast’',
-		lon: 42,
-		lat: 47,
-	},
+
 	{
 		name: 'Rostovskaya',
 		lon: 41.64209,
@@ -10345,11 +10300,7 @@ export const cityList = [
 		lon: 43.79361,
 		lat: 43.419441,
 	},
-	{
-		name: 'Pskovskaya Oblast’',
-		lon: 29,
-		lat: 57.5,
-	},
+
 	{
 		name: 'Pskov',
 		lon: 28.3496,
@@ -12155,11 +12106,7 @@ export const cityList = [
 		lon: 37.358612,
 		lat: 55.641109,
 	},
-	{
-		name: 'Penzenskaya Oblast’',
-		lon: 44.5,
-		lat: 53,
-	},
+
 	{
 		name: 'Penza',
 		lon: 45.004639,
@@ -12855,11 +12802,7 @@ export const cityList = [
 		lon: 42.059166,
 		lat: 46.871387,
 	},
-	{
-		name: 'Orlovskaya Oblast’',
-		lon: 36.25,
-		lat: 53,
-	},
+
 	{
 		name: 'Orlovo',
 		lon: 38.099998,
@@ -12905,11 +12848,7 @@ export const cityList = [
 		lon: 40.614899,
 		lat: 56.183201,
 	},
-	{
-		name: 'Orenburgskaya Oblast’',
-		lon: 56,
-		lat: 52,
-	},
+
 	{
 		name: 'Orenburg',
 		lon: 55.098801,
@@ -14080,11 +14019,7 @@ export const cityList = [
 		lon: 37.652126,
 		lat: 54.981937,
 	},
-	{
-		name: 'Novgorodskaya Oblast’',
-		lon: 32.5,
-		lat: 58.5,
-	},
+
 	{
 		name: 'Velikiy Novgorod',
 		lon: 31.283331,
@@ -15215,11 +15150,7 @@ export const cityList = [
 		lon: 32.81147,
 		lat: 68.815422,
 	},
-	{
-		name: 'Murmanskaya Oblast’',
-		lon: 34,
-		lat: 68,
-	},
+
 	{
 		name: 'Murmansk',
 		lon: 33.09251,
@@ -17745,11 +17676,7 @@ export const cityList = [
 		lon: 37.97628,
 		lat: 60.26215,
 	},
-	{
-		name: 'Lipetskaya Oblast’',
-		lon: 39,
-		lat: 52.5,
-	},
+
 	{
 		name: 'Lipetsk',
 		lon: 39.570759,
@@ -18110,11 +18037,7 @@ export const cityList = [
 		lon: 47.35202,
 		lat: 42.968948,
 	},
-	{
-		name: 'Leningradskaya Oblast’',
-		lon: 32,
-		lat: 60,
-	},
+
 	{
 		name: 'Leningradskaya',
 		lon: 39.387699,
@@ -18640,11 +18563,7 @@ export const cityList = [
 		lon: 36.900002,
 		lat: 55.983334,
 	},
-	{
-		name: 'Kurskaya Oblast’',
-		lon: 36,
-		lat: 51.5,
-	},
+
 	{
 		name: 'Kurskaya',
 		lon: 44.450001,
@@ -20050,11 +19969,7 @@ export const cityList = [
 		lon: 36.694908,
 		lat: 55.894291,
 	},
-	{
-		name: 'Kostromskaya Oblast’',
-		lon: 44,
-		lat: 58.5,
-	},
+
 	{
 		name: 'Kostromskaya',
 		lon: 40.58889,
@@ -21205,11 +21120,7 @@ export const cityList = [
 		lon: 48.124722,
 		lat: 45.84639,
 	},
-	{
-		name: 'Kirovskaya Oblast’',
-		lon: 50,
-		lat: 58,
-	},
+
 	{
 		name: 'Kirovskaya',
 		lon: 40.040199,
@@ -22480,11 +22391,7 @@ export const cityList = [
 		lon: 37.84333,
 		lat: 57.24028,
 	},
-	{
-		name: 'Kaluzhskaya Oblast’',
-		lon: 35.5,
-		lat: 54.5,
-	},
+
 	{
 		name: 'Kaluzhskaya',
 		lon: 38.973888,
@@ -22575,11 +22482,7 @@ export const cityList = [
 		lon: 39.020279,
 		lat: 45.094444,
 	},
-	{
-		name: 'Kaliningradskaya Oblast’',
-		lon: 21.5,
-		lat: 54.75,
-	},
+
 	{
 		name: 'Korolev',
 		lon: 37.825562,
@@ -22704,11 +22607,6 @@ export const cityList = [
 		name: 'Kablukovo',
 		lon: 38.166668,
 		lat: 56.033333,
-	},
-	{
-		name: 'Kabardino-Balkarskaya Respublika',
-		lon: 43.5,
-		lat: 43.5,
 	},
 	{
 		name: 'Kabardinka',
@@ -22895,11 +22793,7 @@ export const cityList = [
 		lon: 41.8764,
 		lat: 44.579498,
 	},
-	{
-		name: 'Ivanovskaya Oblast’',
-		lon: 41.716667,
-		lat: 57.000557,
-	},
+
 	{
 		name: 'Ivanovskaya',
 		lon: 39.116669,
@@ -23195,11 +23089,7 @@ export const cityList = [
 		lon: 44.333332,
 		lat: 48.683334,
 	},
-	{
-		name: 'Imeni Vladimira Il’icha Lenina',
-		lon: 46.980099,
-		lat: 53.56422,
-	},
+
 	{
 		name: 'Imeni Tsyurupy',
 		lon: 38.650639,
@@ -23990,11 +23880,7 @@ export const cityList = [
 		lon: 44.401112,
 		lat: 48.688332,
 	},
-	{
-		name: 'Nizhegorodskaya Oblast’',
-		lon: 45,
-		lat: 56,
-	},
+
 	{
 		name: 'Gorki Vtoryye',
 		lon: 37.163502,
@@ -26920,11 +26806,7 @@ export const cityList = [
 		lon: 40.849998,
 		lat: 54.700001,
 	},
-	{
-		name: 'Bryanskaya Oblast’',
-		lon: 33.5,
-		lat: 53,
-	},
+
 	{
 		name: 'Bryansk',
 		lon: 34.380562,
@@ -28060,11 +27942,7 @@ export const cityList = [
 		lon: 37.66,
 		lat: 55.650002,
 	},
-	{
-		name: 'Belyayevo-Bogorodskoye Severnoye',
-		lon: 37.509998,
-		lat: 55.650002,
-	},
+
 	{
 		name: 'Belyayevo',
 		lon: 43.77,
@@ -28185,11 +28063,7 @@ export const cityList = [
 		lon: 37.966381,
 		lat: 45.484692,
 	},
-	{
-		name: 'Belgorodskaya Oblast’',
-		lon: 37.5,
-		lat: 50.75,
-	},
+
 	{
 		name: 'Belgorod',
 		lon: 36.580002,
@@ -28866,11 +28740,7 @@ export const cityList = [
 		lon: 37.41,
 		lat: 56.299999,
 	},
-	{
-		name: 'Astrakhanskaya Oblast’',
-		lon: 48,
-		lat: 47,
-	},
+
 	{
 		name: 'Astrakhan',
 		lon: 48.04076,
@@ -29066,11 +28936,7 @@ export const cityList = [
 		lon: 37.32,
 		lat: 52.669998,
 	},
-	{
-		name: 'Arkhangel’skaya Oblast’',
-		lon: 44,
-		lat: 64,
-	},
+
 	{
 		name: 'Arkhangel’sk',
 		lon: 40.543301,
@@ -31887,11 +31753,6 @@ export const cityList = [
 		lat: 54.920555,
 	},
 	{
-		name: 'Vladimirskaya Oblast’',
-		lon: 40.5,
-		lat: 56,
-	},
-	{
 		name: 'Inzhenernyy',
 		lon: 42.813057,
 		lat: 56.267502,
@@ -33261,11 +33122,7 @@ export const cityList = [
 		lon: 82.5989,
 		lat: 54.805599,
 	},
-	{
-		name: 'Yamalo-Nenetskiy Avtonomnyy Okrug',
-		lon: 76,
-		lat: 66,
-	},
+
 	{
 		name: 'Yalutorovsk',
 		lon: 66.300583,
@@ -33567,11 +33424,6 @@ export const cityList = [
 		lat: 53.322399,
 	},
 	{
-		name: 'Tyumenskaya Oblast’',
-		lon: 68.5,
-		lat: 57.333332,
-	},
-	{
 		name: 'Tyumen',
 		lon: 65.527222,
 		lat: 57.152222,
@@ -33705,11 +33557,6 @@ export const cityList = [
 		name: 'Toora-Khem',
 		lon: 96.110001,
 		lat: 52.467499,
-	},
-	{
-		name: 'Tomskaya Oblast’',
-		lon: 82.5,
-		lat: 58.5,
 	},
 	{
 		name: 'Tomskaya',
@@ -33920,11 +33767,6 @@ export const cityList = [
 		name: 'Svetlogorsk',
 		lon: 88.349998,
 		lat: 66.916672,
-	},
-	{
-		name: 'Sverdlovskaya Oblast’',
-		lon: 62,
-		lat: 58,
 	},
 	{
 		name: 'Suzun',
@@ -34781,11 +34623,7 @@ export const cityList = [
 		lon: 67.670868,
 		lat: 56.474529,
 	},
-	{
-		name: 'Omskaya Oblast’',
-		lon: 73,
-		lat: 56,
-	},
+
 	{
 		name: 'Omsk',
 		lon: 73.400002,
@@ -34850,11 +34688,6 @@ export const cityList = [
 		name: 'Novosilikatnyy',
 		lon: 83.623894,
 		lat: 53.309719,
-	},
-	{
-		name: 'Novosibirskaya Oblast’',
-		lon: 80,
-		lat: 55,
 	},
 	{
 		name: 'Novosibirsk',
@@ -35437,11 +35270,6 @@ export const cityList = [
 		lat: 56.917099,
 	},
 	{
-		name: 'Kurganskaya Oblast’',
-		lon: 64,
-		lat: 55.5,
-	},
-	{
 		name: 'Kurganovo',
 		lon: 60.385448,
 		lat: 56.629421,
@@ -35786,11 +35614,7 @@ export const cityList = [
 		lon: 69.001938,
 		lat: 61.004169,
 	},
-	{
-		name: 'Khanty-Mansiyskiy Avtonomnyy Okrug-Yugra',
-		lon: 72,
-		lat: 62,
-	},
+
 	{
 		name: 'Khandagayty',
 		lon: 92.050003,
@@ -35815,11 +35639,6 @@ export const cityList = [
 		name: 'Kenga',
 		lon: 80.995827,
 		lat: 57.429722,
-	},
-	{
-		name: 'Kemerovskaya Oblast’',
-		lon: 86,
-		lat: 55,
 	},
 	{
 		name: 'Kemerovo',
@@ -36366,11 +36185,7 @@ export const cityList = [
 		lon: 86.004997,
 		lat: 51.41111,
 	},
-	{
-		name: 'Chelyabinskaya Oblast’',
-		lon: 60.5,
-		lat: 54,
-	},
+
 	{
 		name: 'Chelyabinsk',
 		lon: 61.429722,
@@ -39427,11 +39242,6 @@ export const cityList = [
 		lat: 52.09528,
 	},
 	{
-		name: 'Irkutskaya Oblast’',
-		lon: 106,
-		lat: 56,
-	},
-	{
 		name: 'Irkutsk',
 		lon: 104.296387,
 		lat: 52.297779,
@@ -39827,11 +39637,6 @@ export const cityList = [
 		lat: 51.97139,
 	},
 	{
-		name: 'Bol’shaya Barguzinskaya Stepnaya Duma',
-		lon: 109.933327,
-		lat: 53.833328,
-	},
-	{
 		name: 'Bokhan',
 		lon: 103.7714,
 		lat: 53.153,
@@ -39846,11 +39651,7 @@ export const cityList = [
 		lon: 127.533333,
 		lat: 50.26667,
 	},
-	{
-		name: 'Yevreyskaya Avtonomnaya Oblast’',
-		lon: 132,
-		lat: 48.5,
-	},
+
 	{
 		name: 'Birobidzhan',
 		lon: 132.949997,
@@ -40106,11 +39907,7 @@ export const cityList = [
 		lon: 131.098053,
 		lat: 47.696671,
 	},
-	{
-		name: 'Amurskaya Oblast’',
-		lon: 128,
-		lat: 54,
-	},
+
 	{
 		name: 'Amursk',
 		lon: 136.899445,
@@ -40607,11 +40404,6 @@ export const cityList = [
 		lat: 50.67889,
 	},
 	{
-		name: 'Sakhalinskaya Oblast’',
-		lon: 143,
-		lat: 50,
-	},
-	{
 		name: 'Rechnaya Matuga',
 		lon: 160.366669,
 		lat: 61.683331,
@@ -40756,11 +40548,7 @@ export const cityList = [
 		lon: 140.18222,
 		lat: 53.251389,
 	},
-	{
-		name: 'Magadanskaya Oblast’',
-		lon: 154,
-		lat: 63,
-	},
+
 	{
 		name: 'Magadan',
 		lon: 150.800003,
@@ -41530,11 +41318,6 @@ export const cityList = [
 		name: 'Novosëlki',
 		lon: 37.603889,
 		lat: 55.339169,
-	},
-	{
-		name: 'Posëlok Sanatoriya Podmoskov’ye',
-		lon: 37.765835,
-		lat: 55.377499,
 	},
 	{
 		name: 'Shchipchinki',
@@ -43690,11 +43473,6 @@ export const cityList = [
 		name: 'Staryy Potash',
 		lon: 42.254299,
 		lat: 55.9352,
-	},
-	{
-		name: 'Posëlok Fabriki Imeni Voykova',
-		lon: 42.031502,
-		lat: 55.615101,
 	},
 	{
 		name: 'Shkol’nyy',

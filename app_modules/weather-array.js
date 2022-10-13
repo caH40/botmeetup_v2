@@ -11,7 +11,6 @@ export async function createLocationsWeather() {
 				locationsWeather.push(post.locationWeather);
 		});
 
-		console.log('locationsWeather', locationsWeather);
 		let result = [];
 
 		for (let index = 0; index < locationsWeather.length; index++) {
