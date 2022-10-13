@@ -11,6 +11,7 @@ import { sendFinalPost } from '../app_modules/sender.js';
 import { meetWeather } from './small_handlers/meet-weather.js';
 import { meetLocations } from './small_handlers/meet-location.js';
 import { patternPost } from './small_handlers/pattern.js';
+import { meetLocations_v2 } from './small_handlers/meet-location_v2.js';
 
 export async function handlerMainMenu(ctx, cbqData) {
 	try {
@@ -22,17 +23,14 @@ export async function handlerMainMenu(ctx, cbqData) {
 			await getKeyboard(ctx, 'Дата запланированного заезда', getKeyboardDays());
 
 		// меню места
-		if (cbqData === 'meetLocation') await meetLocations(ctx, cbqData);
+		if (cbqData === 'meetLocation') await ctx.scene.enter('city');
+		// меню погода
+		if (cbqData === 'meetWeather') await ctx.scene.enter('weather');
 		// меню дистанций
 		if (cbqData === 'meetDistance') await getKeyboard(ctx, 'Дистанция заезда', keyboardDistances());
-
 		// меню скорости
 		if (cbqData === 'meetSpeed')
 			await getKeyboard(ctx, 'Средняя скорость заезда, км/ч', keyboardSpeed);
-
-		// меню погода
-		if (cbqData === 'meetWeather') await meetWeather(ctx, cbqData);
-
 		// меню загрузки картинки
 		if (cbqData === 'meetCover') await ctx.scene.enter('getPhoto');
 

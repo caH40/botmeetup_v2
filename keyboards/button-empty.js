@@ -42,29 +42,23 @@ export default {
 		}
 	},
 
-	async meetLocation(ctx, cbqData) {
+	async meetLocation(ctx) {
 		try {
-			const locationsDB = await Location.find();
-			await getKeyboard(
-				ctx,
-				'Это была пустая кнопка, а не место старта.\nВыберите место старта:',
-				keyboardLocation(locationsDB, 'mainLocation_')
-			);
+			await ctx.reply('Это была пустая кнопка, а не место старта.');
+			ctx.scene.enter('city');
 		} catch (error) {
 			console.log(error);
 		}
 	},
 
-	async meetWeather(ctx, cbqData) {
+	async meetWeather(ctx) {
 		try {
-			const locationStart = ctx.session.locationStart;
-			const { weather } = await Location.findOne({ name: ctx.session.locationStart });
-			console.log(locationStart, weather);
-			await getKeyboard(
-				ctx,
-				'Это была пустая кнопка, а не место погоды.\nВыберите место погоды:',
-				keyboardWeathers(weather, 'weather_')
-			);
+			try {
+				await ctx.reply('Это была пустая кнопка, а не место старта.');
+				ctx.scene.enter('weather');
+			} catch (error) {
+				console.log(error);
+			}
 		} catch (error) {
 			console.log(error);
 		}

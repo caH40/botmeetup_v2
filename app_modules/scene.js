@@ -2,7 +2,10 @@ import { Scenes } from 'telegraf';
 
 import { setupMessage } from './texts.js';
 import { apiWeather } from './api-weather.js';
-import { meetLocation } from '../controllers/meetlocation.js';
+import { meetLocations_v2 } from '../keyboards/small_handlers/meet-location_v2.js';
+import { meetWeather_v2 } from '../keyboards/small_handlers/meet-weather_v2.js';
+import { getKeyboard } from '../keyboards/keyboard-get.js';
+import { keyboardBack } from '../keyboards/keyboards.js';
 
 const { leave } = Scenes.Stage;
 
@@ -23,16 +26,44 @@ export const setupScene = () => {
 };
 export const cityScene = () => {
 	try {
-		const citySceneConst = new Scenes.BaseScene('city');
-		citySceneConst.enter(
+		const cityScene = new Scenes.BaseScene('city');
+		cityScene.enter(
 			async ctx =>
-				await ctx.reply('Ведите первые буквы города для города поиска в БД. Для выхода /quit')
+				await ctx.reply(
+					`Выбор места старта заезда.\nВведите первые буквы города (на латинице). Сформируется список кнопок с городами, согласно заданному поиску.`
+				)
 		);
-		citySceneConst.leave(async ctx => await ctx.reply('До свидания!'));
-		// citySceneConst.leave(async ctx => await ctx.reply('До свидания!'));
-		citySceneConst.command('quit', leave('city'));
-		citySceneConst.on('text', async ctx => await meetLocation(ctx, ctx.message.text));
-		return citySceneConst;
+		cityScene.command('quit', leave('city'));
+		cityScene.on('text', async ctx => await meetLocations_v2(ctx));
+		return cityScene;
+	} catch (error) {
+		console.log(error);
+	}
+};
+export const weatherScene = () => {
+	try {
+		const weatherScene = new Scenes.BaseScene('weather');
+
+		weatherScene.enter(async ctx => {
+			const locationStart = ctx.session.locationStart;
+			if (!locationStart) {
+				await getKeyboard(
+					ctx,
+					'Сначала необходимо выбрать место старта.',
+					keyboardBack('Вернутся в главное меню', 'meetEdit_')
+				);
+				return;
+			}
+
+			await ctx.reply(
+				`Выбор места наблюдения за погодой при старте из <b>${locationStart}</b>. Ведите первые буквы города (английские названия). Сформируется список кнопок с городами, согласно заданному поиску.`,
+				{ parse_mode: 'html' }
+			);
+		});
+
+		weatherScene.command('quit', leave('weather'));
+		weatherScene.on('text', async ctx => await meetWeather_v2(ctx));
+		return weatherScene;
 	} catch (error) {
 		console.log(error);
 	}

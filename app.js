@@ -8,7 +8,7 @@ import { start } from './controllers/start.js';
 import { help } from './controllers/help.js';
 import { rideOn } from './controllers/rideon.js';
 import { callbackQuery } from './controllers/callback-query.js';
-import { cityScene, setupScene } from './app_modules/scene.js';
+import { cityScene, setupScene, weatherScene } from './app_modules/scene.js';
 import { photoWizard, descriptionWizard } from './app_modules/wizard-scene.js';
 import { controlMessage } from './controllers/controlMessage.js';
 import { poll } from './controllers/poll.js';
@@ -34,7 +34,13 @@ await mongoose
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const stage = new Scenes.Stage([setupScene(), photoWizard(), descriptionWizard(), cityScene()]);
+const stage = new Scenes.Stage([
+	setupScene(),
+	photoWizard(),
+	descriptionWizard(),
+	cityScene(),
+	weatherScene(),
+]);
 
 bot.use(session());
 bot.use(stage.middleware());
@@ -47,9 +53,9 @@ bot.command('helpA', async ctx => await helpAdmin(ctx));
 bot.command('rideon', async ctx => await rideOn(ctx));
 bot.command('/edit', async ctx => await editPost(ctx));
 bot.command('/myid', async ctx => await getMyId(ctx));
-bot.command('location', async ctx => await editLocations(ctx));
+// bot.command('location', async ctx => await editLocations(ctx));
 bot.command('ticket', async ctx => await ticket(ctx));
-bot.command('weather', async ctx => await editLocationsWeather(ctx));
+// bot.command('weather', async ctx => await editLocationsWeather(ctx));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 bot.command('setup', async ctx => await setup(ctx));
 bot.command('updategroup', async ctx => await updateGroup(ctx));
