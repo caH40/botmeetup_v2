@@ -1,6 +1,8 @@
 import { chatsMember } from '../app_modules/chat-member.js';
 import { posted } from '../app_modules/texts.js';
 import { Post } from '../model/Post.js';
+import { weatherFromApi } from '../weather/weather-api.js';
+import { weatherUpdate } from '../weather/weather-update.js';
 
 export async function getTestPost(ctx) {
 	try {
@@ -12,12 +14,12 @@ export async function getTestPost(ctx) {
 		ctx.session.leader = '@' + userName;
 		ctx.session.userId = userId;
 		ctx.session.botId = ctx.session.botId;
-		ctx.session.date = 'Воскресенье, 16.10.2022';
+		ctx.session.date = 'Воскресенье, 20.10.2022';
 		ctx.session.time = '12:30';
 		ctx.session.leader = '@moon_darklight';
 		ctx.session.userId = '5085956560';
-		ctx.session.locationStart = 'Минеральные Воды';
-		ctx.session.locationWeather = 'Гумбаши';
+		ctx.session.locationStart = 'Probuzhdeniye';
+		ctx.session.locationWeather = 'Probuzhdeniye';
 		ctx.session.distance = '200+км';
 		ctx.session.speed = '25км/ч';
 		ctx.session.photoId =
@@ -66,6 +68,8 @@ export async function getTestPost(ctx) {
 		});
 
 		await post.save();
+		await weatherFromApi();
+		await weatherUpdate(ctx);
 	} catch (error) {
 		console.log(error);
 	}
