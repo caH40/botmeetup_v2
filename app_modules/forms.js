@@ -89,7 +89,7 @@ export function formConfig(configFromDB) {
 
 export function formWeather(weatherCurrent) {
 	try {
-		return `Место мониторинга: ${weatherCurrent.city ?? '---'}\nТемпература утром: ${
+		return `Место мониторинга: ${weatherCurrent.city.name ?? '---'}\nТемпература утром: ${
 			weatherCurrent.tempMorn ?? '---'
 		}°C\nТемпература днём: ${weatherCurrent.tempDay ?? '---'}°C\nТемпература вечером: ${
 			weatherCurrent.tempEve ?? '---'

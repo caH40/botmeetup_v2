@@ -6,11 +6,10 @@ import { isActualDate } from '../utility/utilites.js';
 
 export async function weatherUpdate(bot) {
 	try {
-		const { groupId } = await BotSetup.findOne();
 		const postsDB = await Post.find();
 
 		postsDB.forEach(async elm => {
-			const location = elm.locationStart;
+			const location = elm.locationWeather;
 			const date = elm.date.slice(-10);
 			const time = elm.time;
 
@@ -36,6 +35,8 @@ export async function weatherUpdate(bot) {
 				}
 			).catch(error => console.log('ошибка в weather-update.js'));
 
+			//обновление поста в телеграм
+			const { groupId } = await BotSetup.findOne({ _id: elm.botId });
 			await bot.telegram
 				.editMessageText(
 					groupId,
