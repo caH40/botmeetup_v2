@@ -76,7 +76,7 @@ bot.launch().then(() => {
 		await updateTickets();
 		//получение данных о погоде
 		await weatherUpdate(bot);
-	}, 10000);
+	}, 3600000);
 	setInterval(() => {
 		//обновление постов на канале
 		updatePost(bot);
