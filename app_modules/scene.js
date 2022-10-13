@@ -24,6 +24,7 @@ export const setupScene = () => {
 		console.log(error);
 	}
 };
+
 export const cityScene = () => {
 	try {
 		const cityScene = new Scenes.BaseScene('city');
@@ -40,6 +41,7 @@ export const cityScene = () => {
 		console.log(error);
 	}
 };
+
 export const weatherScene = () => {
 	try {
 		const weatherScene = new Scenes.BaseScene('weather');

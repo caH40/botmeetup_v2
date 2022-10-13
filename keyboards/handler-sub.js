@@ -27,12 +27,14 @@ export async function handlerSubMenu(ctx, cbqData) {
 			const location = cbqData.slice(13);
 			ctx.session.locationStart = location;
 			ctx.session.start[1][0].text = 'Место старта ✔️';
+			ctx.scene.leave('city');
 			mainMenu(ctx);
 		}
 		if (cbqData.includes('weather_') && cbqData !== 'weather_***') {
 			const locationWeather = cbqData.slice(8);
 			ctx.session.locationWeather = locationWeather;
 			ctx.session.start[1][1].text = 'Погода ✔️';
+			ctx.scene.leave('weather');
 			mainMenu(ctx);
 		}
 		if (distanceArr.includes(cbqData)) {
