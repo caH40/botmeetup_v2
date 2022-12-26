@@ -9,7 +9,9 @@ export async function getWeather(date, location) {
 		//если нет данных в БД, то выход
 		if (!weatherDB) return {};
 
-		let weatherCurrent = weatherDB.list.find(elm => elm.date == date && elm.city.name === location);
+		let weatherCurrent = weatherDB.list.find(
+			elm => elm.date == date && elm.city.name === location
+		);
 		weatherCurrent ??= {};
 
 		//формирование строки для сообщения в телеге

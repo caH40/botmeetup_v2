@@ -14,7 +14,7 @@ export async function weatherUpdate(bot) {
 			const time = postsDB[i].time;
 
 			let isActual = isActualDate(date, time);
-			if (!isActual) return;
+			if (!isActual) continue;
 
 			const { formWeatherStr, weatherCurrent } = await getWeather(date, location);
 
