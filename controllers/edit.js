@@ -7,44 +7,45 @@ import { keyboardBack, keyboardEdit } from '../keyboards/keyboards.js';
 import { Post } from '../model/Post.js';
 
 export async function editPost(ctx) {
-	try {
-		const isMember = await chatsMember(ctx);
-		if (!isMember) return;
+  try {
+    const isMember = await chatsMember(ctx);
+    if (!isMember) return;
 
-		const isActive = await ticketVerify(ctx);
-		if (!isActive) return;
+    const isActive = await ticketVerify(ctx);
+    if (!isActive) return;
 
-		const response = await ctx.reply(editPostText);
-		ctx.session.messageDel = [];
-		ctx.session.messageDel.push(response.message_id);
+    const response = await ctx.reply(editPostText);
+    ctx.session.messageDel = [];
+    ctx.session.messageDel.push(response.message_id);
 
-		const userId = ctx.update.message.from.id;
-		//сделать проверку
-		const postsDB = await Post.find({ botId: ctx.session.botId, userId, isLastUpdated: false });
+    const userId = ctx.update.message.from.id;
+    //сделать проверку
+    const postsDB = await Post.find({ botId: ctx.session.botId, userId, isLastUpdated: false });
 
-		if (postsDB.length == 0) await ctx.reply('У вас нет объявлений для редактирования/удаления!');
+    if (postsDB.length == 0)
+      await ctx.reply('У вас нет объявлений для редактирования/удаления!');
 
-		for (let index = 0; index < postsDB.length; index++) {
-			if (index === postsDB.length - 1) {
-				let keyboard = [
-					...keyboardEdit(postsDB[index], index),
-					...keyboardBack('Выход из редактирования', 'meetEdit_edit_'),
-				];
+    for (let index = 0; index < postsDB.length; index++) {
+      if (index === postsDB.length - 1) {
+        let keyboard = [
+          ...keyboardEdit(postsDB[index], index),
+          ...keyboardBack('Выход из редактирования', 'meetEdit_edit_'),
+        ];
 
-				const response = await getKeyboard(ctx, formPattern(postsDB[index], index), keyboard);
+        const response = await getKeyboard(ctx, formPattern(postsDB[index], index), keyboard);
 
-				ctx.session.messageDel.push(response);
-				return;
-			}
+        ctx.session.messageDel.push(response);
+        return;
+      }
 
-			const response = await getKeyboard(
-				ctx,
-				formPattern(postsDB[index], index),
-				keyboardEdit(postsDB[index], index)
-			);
-			ctx.session.messageDel.push(response);
-		}
-	} catch (error) {
-		console.log(error);
-	}
+      const response = await getKeyboard(
+        ctx,
+        formPattern(postsDB[index], index),
+        keyboardEdit(postsDB[index], index)
+      );
+      ctx.session.messageDel.push(response);
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
