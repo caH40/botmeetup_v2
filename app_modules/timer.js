@@ -6,7 +6,7 @@ import { updateTickets } from './update-ticket.js';
 export function timers(bot) {
   try {
     const millisecondsInHour = 3600000;
-    const millisecondsIn10Minutes = 600000;
+    const millisecondsIMinute = 60000;
     // bot.telegram.sendMessage(process.env.MY_TELEGRAM_ID, 'restart...');
     setInterval(async () => {
       //запуск таймера обновления данных о погоде в день старта заезда
@@ -18,7 +18,7 @@ export function timers(bot) {
     setInterval(async () => {
       //обновление постов на канале
       await updatePost(bot);
-    }, millisecondsIn10Minutes);
+    }, millisecondsIMinute);
   } catch (error) {
     console.log(error);
   }
