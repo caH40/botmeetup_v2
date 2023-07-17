@@ -12,21 +12,19 @@ import { callbackQuery } from './controllers/callback-query.js';
 import { photoWizard, descriptionWizard } from './app_modules/wizard-scene.js';
 import { controlMessage } from './controllers/controlMessage.js';
 import { poll } from './controllers/poll.js';
-import { weatherFromApi } from './weather/weather-api.js';
-import { weatherUpdate } from './weather/weather-update.js';
-import { updatePost } from './app_modules/update-post.js';
 import { editPost } from './controllers/edit.js';
 import { getMyId } from './controllers/my-id.js';
 import { getConfiguration } from './controllers/configuration.js';
 import { helpAdmin } from './controllers/help-admin.js';
 import { ticket } from './controllers/ticket.js';
 import { getTestPost } from './controllers/testpost.js';
-import { updateTickets } from './app_modules/update-ticket.js';
+
 import { paidTicket } from './keyboards/small_handlers/ticket-paid.js';
 import { addCityList } from './controllers/citylist-add.js';
 import { setupScene } from './scenes/setup.js';
 import { cityScene } from './scenes/cities.js';
 import { weatherScene } from './scenes/weather.js';
+import { timers } from './app_modules/timer.js';
 
 mongoose.set('strictQuery', true); //в базе будут только данные которые есть в схеме
 mongoose
@@ -70,22 +68,8 @@ bot.command('testpost', async (ctx) => await getTestPost(ctx));
 bot.on('poll_answer', async (ctx) => await poll(ctx));
 bot.on('message', async (ctx) => await controlMessage(ctx));
 
-bot.launch().then(() => {
-  // bot.telegram.sendMessage(process.env.MY_TELEGRAM_ID, 'restart...');
-  setInterval(async () => {
-    updateTickets();
-    //запуск таймера обновления данных о погоде в день старта заезда
-    await weatherFromApi();
-    await updateTickets();
-    //получение данных о погоде
-    await weatherUpdate(bot);
-  }, 3600000);
-  setInterval(() => {
-    //обновление постов на канале
-    updatePost(bot);
-  }, 60000);
-});
-
+bot.launch();
+timers(bot);
 // Enable graceful stop
-process.once('SIGINT', () => bot.stop('SIGINT'));
-process.once('SIGTERM', () => bot.stop('SIGTERM'));
+// process.once('SIGINT', () => bot.stop('SIGINT'));
+// process.once('SIGTERM', () => bot.stop('SIGTERM'));
